@@ -1,8 +1,8 @@
 <template>
     <input
         class="c-input"
-        :type = "type" 
-        :placeholder = "placeholder" 
+        :type = "type"
+        :placeholder = "placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
     />
@@ -28,11 +28,11 @@ export default {
     emits: ['update:modelValue'],
     watch: {
         modelValue(value) {
-             
+
         }
     }
 
-    
+
 };
 </script>
 
