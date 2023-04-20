@@ -1,0 +1,10 @@
+@import "./mainStyles.scss";
+
+html,
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: var(--color-background);
+    display: grid;
+    align-items: center;
+}
