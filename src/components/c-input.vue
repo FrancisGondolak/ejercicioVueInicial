@@ -1,6 +1,6 @@
 <template>
     <input
-        class="inputLogin"
+        class="c-input"
         :type = "type" 
         :placeholder = "placeholder" 
         :value="modelValue"
@@ -38,7 +38,7 @@ export default {
 
 <style>
 
-.inputLogin{
+.c-input{
     margin: 0.5em;
     width: 25em;
     height: 3em;
