@@ -16,8 +16,8 @@
             buttonMessage="Login"
             @click=checkForm
             ></CButton>
-            <p v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
-            <p v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
+            <p class="v-home__form__advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p class="v-home__form__p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
         </div>  
     </section>
    
@@ -64,7 +64,7 @@ export default {
             if (this.username === "" || this.password === "") {
                 return "";
             }else{
-                return this.username + " " + this.password;
+                return "Nombre de usuario: " + this.username;
             }
         }
     },
@@ -105,6 +105,16 @@ export default {
 .v-home__form__title {
     color: var(--color-form-title);
     font-size: 35px;
+    font-weight: 600;
+}
+
+.v-home__form__advice {
+    font-weight: 600;
+    color: var(--color-form-advice);
+}
+
+.v-home__form__p {
+    font-weight: 600;
 }
 
 
