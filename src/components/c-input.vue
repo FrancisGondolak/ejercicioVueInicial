@@ -36,12 +36,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 
 .c-input{
     margin: 0.5em;
-    width: 25em;
-    height: 3em;
+    width: 25rem;
+    height: 3rem;
     border-radius: 10px;
     box-shadow: var(--color-box-shadow);
 }

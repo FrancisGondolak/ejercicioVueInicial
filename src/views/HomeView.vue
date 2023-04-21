@@ -7,17 +7,17 @@
             placeholder="Introduce el usuario" 
             v-model="username"
             />
-            <p v-if="!userCorrect">El usuario ha de tener un mínimo de 6 caracteres</p>
             <CInput
             type="password" 
             placeholder="Introduce el password" 
             v-model="password"
             />
-            <p v-if="!passwordCorrect">La contraseña ha de tener un caracter especial</p>
             <CButton
             buttonMessage="Login"
-            @click=buttonPush()
+            @click=checkForm
             ></CButton>
+            <p v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
         </div>  
     </section>
    
@@ -37,32 +37,50 @@ export default {
         return {
             username: "",
             password: "",
+            advice: "El usuario y la contraseña han de tener un mínimo de 6 caracteres",
             userCorrect: false,
             passwordCorrect: false
         }
     },
     watch: {
-        username(value) {
-            if(value === "Francisco"){
+        username() {
+            if(this.username.length >= 6){
                 this.userCorrect = true;
+            }else{
+                this.userCorrect = false;
             }
         },
-        password(value) {
-            if(value === "@Neoris"){
+        password() {
+            if(this.password.length >= 6){
                 this.passwordCorrect = true;
+            }else{
+                this.passwordCorrect = false;
             }
         }
 
     },
+    computed: {
+        welcome() {
+            if (this.username === "" || this.password === "") {
+                return "";
+            }else{
+                return this.username + " " + this.password;
+      }
+        }
+    },
     methods: {
-        buttonPush() {
-            alert("Botón funciona")
+        checkForm() {
+            if(this.username === "Francisco" && this.password === "Neoris") {
+                alert("Login correcto");
+            }else{
+                alert("Usuario y/o contraseña incorrectos");
+            }
         }     
     }
 };
 </script>
 
-<style>
+<style lang="scss">
 
 .v-home {
     border: 5px solid rgb(190, 157, 157);
