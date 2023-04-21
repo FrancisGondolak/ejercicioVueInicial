@@ -74,6 +74,8 @@ export default {
                 alert("Login correcto");
             }else{
                 alert("Usuario y/o contraseña incorrectos");
+                this.username = "";
+                this.password = "";
             }
         }     
     }
@@ -83,7 +85,6 @@ export default {
 <style lang="scss">
 
 .v-home {
-    border: 5px solid rgb(190, 157, 157);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +92,6 @@ export default {
 }
 
 .v-home__form{
-    border: 5px solid red;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -100,6 +100,8 @@ export default {
     height: 70%;
     width: 40%;
     background: var(--color-form-background);
+    box-shadow: var(--color-form-shadow);
+    border: 3px solid var(--color-form-border);
 }
 
 .v-home__form__title {

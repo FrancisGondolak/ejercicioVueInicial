@@ -1,16 +1,17 @@
 :root {
     --color-background: rgb(21, 51, 42);
+    --color-background2: rgb(74, 48, 85);
 
-    --color-form-background: rgb(107, 187, 126);
+    --color-form-background: rgb(107, 190, 112);
+    --color-form-border: rgba(158, 9, 133, 0.986);
+    --color-form-shadow: 15px 15px 10px rgb(15, 2, 2);
     --color-form-title: rgb(77, 2, 45);
     --color-form-advice: rgba(117, 5, 5, 0.986);
+    
 
     --color-button-background: rgb(117, 0, 68);
     --color-button-text: rgb(255, 255, 255);
 
     --color-input-shadow-deselected: 5px 5px 5px rgb(53, 11, 11);
-    --color-input-shadow-selected: 10px 8px 10px rgb(53, 11, 11);
-
-   
-    
+    --color-input-shadow-selected: 10px 8px 10px rgb(53, 11, 11);  
 }

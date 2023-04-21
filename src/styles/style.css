@@ -4,7 +4,7 @@ html,
 body {
     height: 100vh;
     margin: 0;
-    background-color: var(--color-background);
+    background: linear-gradient(to bottom right, var(--color-background), var(--color-background2)) ;
     display: grid;
     align-items: center;
 }
