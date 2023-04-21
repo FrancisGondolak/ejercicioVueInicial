@@ -7,19 +7,17 @@
             placeholder="Introduce el usuario" 
             v-model="username"
             />
-            <p v-if="!userCorrect">El usuario ha de tener un mínimo de 6 caracteres</p>
-            <p v-else>El nombre de usuario es válido</p>
             <CInput
             type="password" 
             placeholder="Introduce el password" 
             v-model="password"
             />
-            <!-- <p v-if="!passwordCorrect">La contraseña ha de tener un caracter especial</p> -->
             <CButton
             buttonMessage="Login"
-            @click=checkForm()
+            @click=checkForm
             ></CButton>
-            <p>{{ welcome }}</p>
+            <p v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
         </div>  
     </section>
    
@@ -39,9 +37,9 @@ export default {
         return {
             username: "",
             password: "",
+            advice: "El usuario y la contraseña han de tener un mínimo de 6 caracteres",
             userCorrect: false,
-            passwordCorrect: false,
-            correctLogin: false
+            passwordCorrect: false
         }
     },
     watch: {
@@ -52,11 +50,13 @@ export default {
                 this.userCorrect = false;
             }
         },
-        // password() {
-        //     if(this.password === "@Neoris"){
-        //         this.passwordCorrect = true;
-        //     }
-        // }
+        password() {
+            if(this.password.length >= 6){
+                this.passwordCorrect = true;
+            }else{
+                this.passwordCorrect = false;
+            }
+        }
 
     },
     computed: {
@@ -70,10 +70,10 @@ export default {
     },
     methods: {
         checkForm() {
-            if(this.username != "" && this.password != "") {
-                alert("Bienvenido " + this.username);
+            if(this.username === "Francisco" && this.password === "Neoris") {
+                alert("Login correcto");
             }else{
-                alert("Los campos a rellenar son obligatorios");
+                alert("Usuario y/o contraseña incorrectos");
             }
         }     
     }
