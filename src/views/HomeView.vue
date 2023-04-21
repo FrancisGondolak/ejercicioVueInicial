@@ -16,8 +16,8 @@
             buttonMessage="Login"
             @click=checkForm
             ></CButton>
-            <p v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
-            <p v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
+            <p class="v-home__form__advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p class="v-home__form__p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
         </div>  
     </section>
    
@@ -64,8 +64,8 @@ export default {
             if (this.username === "" || this.password === "") {
                 return "";
             }else{
-                return this.username + " " + this.password;
-      }
+                return "Nombre de usuario: " + this.username;
+            }
         }
     },
     methods: {
@@ -74,6 +74,8 @@ export default {
                 alert("Login correcto");
             }else{
                 alert("Usuario y/o contraseña incorrectos");
+                this.username = "";
+                this.password = "";
             }
         }     
     }
@@ -83,16 +85,13 @@ export default {
 <style lang="scss">
 
 .v-home {
-    border: 5px solid rgb(190, 157, 157);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 600px;
 }
 
 .v-home__form{
-    border: 5px solid red;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -100,12 +99,24 @@ export default {
     align-items: center;
     height: 70%;
     width: 40%;
-    background: var(--color-background-form);
+    background: var(--color-form-background);
+    box-shadow: var(--color-form-shadow);
+    border: 3px solid var(--color-form-border);
 }
 
 .v-home__form__title {
-    color: var(--color-title-text);
+    color: var(--color-form-title);
     font-size: 35px;
+    font-weight: 600;
+}
+
+.v-home__form__advice {
+    font-weight: 600;
+    color: var(--color-form-advice);
+}
+
+.v-home__form__p {
+    font-weight: 600;
 }
 
 
