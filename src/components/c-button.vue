@@ -19,8 +19,8 @@ export default {
 <style lang="scss">
 
 .c-button {
-    background-color: var(--color-background-button);
-    color: var(--color-text-button);
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
     padding: 1rem 2rem;
     border-radius: 12px;
     margin: 1rem;

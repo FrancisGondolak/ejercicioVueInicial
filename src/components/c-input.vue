@@ -43,7 +43,11 @@ export default {
     width: 25rem;
     height: 3rem;
     border-radius: 10px;
-    box-shadow: var(--color-box-shadow);
+    box-shadow: var(--color-input-shadow-deselected);
+}
+
+.c-input:focus{
+    box-shadow: var(--color-input-shadow-selected);
 }
 
 </style>

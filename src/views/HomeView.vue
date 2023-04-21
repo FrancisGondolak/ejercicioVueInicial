@@ -65,7 +65,7 @@ export default {
                 return "";
             }else{
                 return this.username + " " + this.password;
-      }
+            }
         }
     },
     methods: {
@@ -85,7 +85,6 @@ export default {
 .v-home {
     border: 5px solid rgb(190, 157, 157);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 600px;
@@ -100,11 +99,11 @@ export default {
     align-items: center;
     height: 70%;
     width: 40%;
-    background: var(--color-background-form);
+    background: var(--color-form-background);
 }
 
 .v-home__form__title {
-    color: var(--color-title-text);
+    color: var(--color-form-title);
     font-size: 35px;
 }
 
