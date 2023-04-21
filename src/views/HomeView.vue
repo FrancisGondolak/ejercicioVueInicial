@@ -8,16 +8,18 @@
             v-model="username"
             />
             <p v-if="!userCorrect">El usuario ha de tener un mínimo de 6 caracteres</p>
+            <p v-else>El nombre de usuario es válido</p>
             <CInput
             type="password" 
             placeholder="Introduce el password" 
             v-model="password"
             />
-            <p v-if="!passwordCorrect">La contraseña ha de tener un caracter especial</p>
+            <!-- <p v-if="!passwordCorrect">La contraseña ha de tener un caracter especial</p> -->
             <CButton
             buttonMessage="Login"
-            @click=buttonPush()
+            @click=checkForm()
             ></CButton>
+            <p>{{ welcome }}</p>
         </div>  
     </section>
    
@@ -38,31 +40,47 @@ export default {
             username: "",
             password: "",
             userCorrect: false,
-            passwordCorrect: false
+            passwordCorrect: false,
+            correctLogin: false
         }
     },
     watch: {
-        username(value) {
-            if(value === "Francisco"){
+        username() {
+            if(this.username.length >= 6){
                 this.userCorrect = true;
+            }else{
+                this.userCorrect = false;
             }
         },
-        password(value) {
-            if(value === "@Neoris"){
-                this.passwordCorrect = true;
-            }
-        }
+        // password() {
+        //     if(this.password === "@Neoris"){
+        //         this.passwordCorrect = true;
+        //     }
+        // }
 
     },
+    computed: {
+        welcome() {
+            if (this.username === "" || this.password === "") {
+                return "";
+            }else{
+                return this.username + " " + this.password;
+      }
+        }
+    },
     methods: {
-        buttonPush() {
-            alert("Botón funciona")
+        checkForm() {
+            if(this.username != "" && this.password != "") {
+                alert("Bienvenido " + this.username);
+            }else{
+                alert("Los campos a rellenar son obligatorios");
+            }
         }     
     }
 };
 </script>
 
-<style>
+<style lang="scss">
 
 .v-home {
     border: 5px solid rgb(190, 157, 157);
