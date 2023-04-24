@@ -8,7 +8,17 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
-    }
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: () => import('@/views/v-list.vue')
+    },
+    // {
+    //   path: '*',
+    //   name: 'unknow',
+    //   component: () => import('@/views/v-error.vue')
+    // }
   ]
 })
 
