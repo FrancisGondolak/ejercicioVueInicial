@@ -19,8 +19,8 @@ export default {
 .l-homeview {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 600px;
+    align-items: end;
+    height: 700px;
 }
 
 .l-homeview__form{
