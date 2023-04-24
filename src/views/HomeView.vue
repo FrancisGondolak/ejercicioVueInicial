@@ -1,7 +1,7 @@
 <template>
-    <section class="v-home">
-       <div class="v-home__form">
-            <p class="v-home__form__title">Introduce tu datos</p>
+    <l-homeview>
+        <template #form>
+            <p class="v-home__form--title">Introduce tu datos</p>
             <CInput
             type="text" 
             placeholder="Introduce el usuario" 
@@ -16,20 +16,22 @@
             buttonMessage="Login"
             @click=checkForm
             ></CButton>
-            <p class="v-home__form__advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
-            <p class="v-home__form__p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p>
-        </div>  
-    </section>
-   
+            <p class="v-home__form--advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p class="v-home__form--p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p> 
+        </template>    
+    </l-homeview>           
 </template>
 
 <script>
+import LHomeview from "@/layouts/l-homeview.vue"
 import CInput from "@/components/c-input.vue"
 import CButton from "@/components/c-button.vue"
+
 
 export default {
     name: "HomeView",
     components: {
+        LHomeview,
         CInput,
         CButton
     },
@@ -44,17 +46,15 @@ export default {
     },
     watch: {
         username() {
+            this.userCorrect = false;
             if(this.username.length >= 6){
                 this.userCorrect = true;
-            }else{
-                this.userCorrect = false;
             }
         },
         password() {
+            this.passwordCorrect = false;
             if(this.password.length >= 6){
                 this.passwordCorrect = true;
-            }else{
-                this.passwordCorrect = false;
             }
         }
 
@@ -63,15 +63,16 @@ export default {
         welcome() {
             if (this.username === "" || this.password === "") {
                 return "";
-            }else{
-                return "Nombre de usuario: " + this.username;
             }
+
+            return "Nombre de usuario: " + this.username;
         }
     },
     methods: {
         checkForm() {
             if(this.username === "Francisco" && this.password === "Neoris") {
                 alert("Login correcto");
+                this.$router.push({name:'list'});
             }else{
                 alert("Usuario y/o contraseña incorrectos");
                 this.username = "";
@@ -84,38 +85,18 @@ export default {
 
 <style lang="scss">
 
-.v-home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-}
-
-.v-home__form{
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
-    width: 40%;
-    background: var(--color-form-background);
-    box-shadow: var(--color-form-shadow);
-    border: 3px solid var(--color-form-border);
-}
-
-.v-home__form__title {
+.v-home__form--title {
     color: var(--color-form-title);
     font-size: 35px;
     font-weight: 600;
 }
 
-.v-home__form__advice {
+.v-home__form--advice {
     font-weight: 600;
     color: var(--color-form-advice);
 }
 
-.v-home__form__p {
+.v-home__form--p {
     font-weight: 600;
 }
 

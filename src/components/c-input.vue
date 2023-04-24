@@ -25,21 +25,14 @@ export default {
             default: ""
         }
     },
-    emits: ['update:modelValue'],
-    watch: {
-        modelValue(value) {
-
-        }
-    }
-
-
+    emits: ['update:modelValue']
 };
 </script>
 
 <style lang="scss">
 
 .c-input{
-    margin: 0.5em;
+    margin: 10px;
     width: 25rem;
     height: 3rem;
     border-radius: 10px;
