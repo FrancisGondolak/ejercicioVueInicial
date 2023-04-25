@@ -26,6 +26,7 @@
 import LHomeview from "@/layouts/l-homeview.vue"
 import CInput from "@/components/c-input.vue"
 import CButton from "@/components/c-button.vue"
+import { userStore } from "@/stores/user"
 
 
 export default {
@@ -69,15 +70,21 @@ export default {
         }
     },
     methods: {
-        checkForm() {
-            if(this.username === "Francisco" && this.password === "Neoris") {
-                alert("Login correcto");
-                this.$router.push({name:'list'});
-            }else{
-                alert("Usuario y/o contraseña incorrectos");
-                this.username = "";
-                this.password = "";
-            }
+        async checkForm() {
+
+            const { username, password } = this
+
+            const doLogin = await userStore().login({ username, password })
+
+            console.log(doLogin)
+            // if(this.username === "Francisco" && this.password === "Neoris") {
+            //     alert("Login correcto");
+            //     this.$router.push({name:'list'});
+            // }else{
+            //     alert("Usuario y/o contraseña incorrectos");
+            //     this.username = "";
+            //     this.password = "";
+            // }
         }     
     }
 };
