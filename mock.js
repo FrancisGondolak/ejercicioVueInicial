@@ -41,7 +41,7 @@ app.use(function (req, res, next) {
 app.post('/user/login', (req, res) => {
    const user = req.body
    console.log(user)
-   if (user.username === 'Daniel' && user.password === 'Lopez') {
+   if (user.username === 'Francisco' && user.password === 'Neoris') {
       res.send(true)
    } else {
       res.status(404).send({ data: 'User not found!' })

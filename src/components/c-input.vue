@@ -2,7 +2,7 @@
     <input
         class="c-input"
         :type = "type"
-        :placeholder = "placeholder"
+        placeholder = "placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
     />
