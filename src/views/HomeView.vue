@@ -77,14 +77,14 @@ export default {
             const doLogin = await userStore().login({ username, password })
 
             console.log(doLogin)
-            // if(this.username === "Francisco" && this.password === "Neoris") {
-            //     alert("Login correcto");
-            //     this.$router.push({name:'list'});
-            // }else{
-            //     alert("Usuario y/o contraseña incorrectos");
-            //     this.username = "";
-            //     this.password = "";
-            // }
+
+            if(doLogin) {
+                this.$router.push({name:'list'});
+            }else{
+                alert("Usuario y/o contraseña incorrectos");
+                this.username = "";
+                this.password = "";
+            }
         }     
     }
 };

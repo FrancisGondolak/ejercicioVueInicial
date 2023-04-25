@@ -48,7 +48,7 @@ app.post('/user/login', (req, res) => {
    }
 })
 
-app.get('/products/getAll', (req, res) => {
+app.get('/characters/getAll', (req, res) => {
    const response = [
       {
          balance: '7.839',
