@@ -1,7 +1,7 @@
 <template>
     <div class="l-list">
         <section class="l-listLeft">
-            <slot name="iconLeft" />
+            <slot name="pokeballIcon" />
         </section>
         <section class="l-listCenter">
             <div class="l-listCenter__title">
@@ -12,7 +12,7 @@
             </div>
         </section> 
         <section class="l-listRight">
-            <slot name="iconRight" />
+            <slot name="pokeballIcon" />
         </section>
     </div>
 </template>
@@ -27,13 +27,19 @@ export default {
 
 <style lang="scss">
 
+.l-list {
+    display: flex;
+    flex-direction: row;
+}
+
 .l-listLeft {
-    width: 100%;
+    width: 30%;
     height: 20px;
     background-color: red;
 }
 
 .l-listCenter {
+    width: 40%;
     background-color: yellow;
 }
 
@@ -43,9 +49,9 @@ export default {
 }
 
 .l-listRight {
-    width: 100%;
+    width: 30%;
     height: 20px;
-    background-color: blue;
+    background-color: rgb(110, 110, 235);
 }
 
 </style>

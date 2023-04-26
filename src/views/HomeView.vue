@@ -1,7 +1,7 @@
 <template>
     <l-homeview>
         <template #form>
-            <p class="v-home__form--title">Introduce tu datos</p>
+            <p class="v-home__form--title">Introduce tus datos</p>
             <CInput
             type="text" 
             placeholder="Introduce el usuario" 

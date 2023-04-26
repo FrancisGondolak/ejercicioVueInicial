@@ -1,20 +1,18 @@
 <template>
     <l-list>
-        <template #iconLeft>
-
+        <template #pokeballIcon>
+            <p>Hola que tal</p>
         </template>
         <template #title>
             <p>LISTADO DE POKÉMON</p>
         </template>
         <template #pokemonList>
-            <ul v-for="character in characters" :key="character.type">
-                <li>{{ character.name }}</li>
-                <li>{{ character.type }}</li>  
-                <li>{{ character.number }}</li>    
-            </ul>
-        </template>
-        <template #iconRight>
-
+            <c-pokemon 
+                v-for="character in characters" 
+                :key="character.type" 
+                :pokemon="character"
+            >
+            </c-pokemon>
         </template>
     </l-list>
 </template>
@@ -26,12 +24,14 @@
 
 import { charactersStore } from '@/stores/characters';
 import LList from '@/layouts/l-list.vue';
+import CPokemon from '@/components/c-pokemon.vue';
 
     export default {
         name: "v-list",
 
         components: {
-            LList
+            LList,
+            CPokemon
         },
 
         data() {
