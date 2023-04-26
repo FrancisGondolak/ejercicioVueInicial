@@ -1,23 +1,38 @@
 <template>
-    <section>
-        <h1>ESTÁS EN LA LISTA DE PERSONAJES</h1>
-        <ul v-for="character in characters" :key="character.type">
-          <li>{{ character.balance }}</li>
-          <li>{{ character.type }}</li>  
-          <li>{{ character.number }}</li>    
-        </ul>
-    </section>
-    
+    <l-list>
+        <template #iconLeft>
+
+        </template>
+        <template #title>
+            <p>LISTADO DE POKÉMON</p>
+        </template>
+        <template #pokemonList>
+            <ul v-for="character in characters" :key="character.type">
+                <li>{{ character.name }}</li>
+                <li>{{ character.type }}</li>  
+                <li>{{ character.number }}</li>    
+            </ul>
+        </template>
+        <template #iconRight>
+
+        </template>
+    </l-list>
 </template>
+
+
+       
 
 <script>
 
 import { charactersStore } from '@/stores/characters';
+import LList from '@/layouts/l-list.vue';
 
     export default {
         name: "v-list",
 
-        components: {},
+        components: {
+            LList
+        },
 
         data() {
             return {
@@ -51,3 +66,15 @@ import { charactersStore } from '@/stores/characters';
     }
     
 </script>
+
+<style lang="scss">
+
+p {
+    margin:0;
+}
+
+ul {
+    margin:0;
+}
+
+</style>

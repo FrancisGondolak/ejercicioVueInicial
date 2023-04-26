@@ -51,34 +51,34 @@ app.post('/user/login', (req, res) => {
 app.get('/characters/getAll', (req, res) => {
    const response = [
       {
-         balance: '7.839',
-         type: 'Cuenta',
-         number: '**** **** **** **** **** 6993'
+         name: 'Bulbasaur',
+         type: 'Planta',
+         number: '01'
       },
       {
-         balance: '',
-         type: 'Tarjeta de débito',
-         number: '**** **** **** **** 9959'
+         name: 'Charmander',
+         type: 'Fuego',
+         number: '04'
       },
       {
-         balance: '',
-         type: 'Tarjeta de débito',
-         number: '**** **** **** **** 9959'
+         name: 'Squirtle',
+         type: 'Agua',
+         number: '07'
       },
       {
-         balance: '7.839',
-         type: 'Cuenta',
-         number: '**** **** **** **** **** 6993'
+         name: 'Pikachu',
+         type: 'Eléctrico',
+         number: '25'
       },
       {
-         balance: '7.839',
-         type: 'Cuenta',
-         number: '**** **** **** **** **** 6993'
+         name: 'Psyduck',
+         type: 'Agua',
+         number: '54'
       },
       {
-         balance: '7.839',
-         type: 'Cuenta',
-         number: '**** **** **** **** **** 6993'
+         name: 'Mewtwo',
+         type: 'Psíquico',
+         number: '150'
       }
    ]
    res.send(response)
