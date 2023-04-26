@@ -1,8 +1,8 @@
 <template>
     <div class="c-pokemon">
-        <span class="c-pokemon--name">{{ pokemon.name }}</span>
-        <span class="c-pokemon--type">{{ pokemon.type }}</span>
-        <span class="c-pokemon--number">{{ pokemon.number }}</span>
+        <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
+        <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
+        <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
     </div>   
 </template>
 

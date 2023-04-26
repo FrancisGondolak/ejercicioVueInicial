@@ -1,7 +1,10 @@
 <template>
     <l-list>
         <template #pokeballIcon>
-            <p>Hola que tal</p>
+            <c-pokeball 
+            src="src/components/assets/images/pokeball.png"
+            alt="pokeballIcon"
+            ></c-pokeball>
         </template>
         <template #title>
             <p>LISTADO DE POKÉMON</p>
@@ -25,13 +28,15 @@
 import { charactersStore } from '@/stores/characters';
 import LList from '@/layouts/l-list.vue';
 import CPokemon from '@/components/c-pokemon.vue';
+import CPokeball from '@/components/c-pokeball.vue';
 
     export default {
         name: "v-list",
 
         components: {
             LList,
-            CPokemon
+            CPokemon,
+            CPokeball
         },
 
         data() {
@@ -71,10 +76,7 @@ import CPokemon from '@/components/c-pokemon.vue';
 
 p {
     margin:0;
-}
-
-ul {
-    margin:0;
+    font-size: 50px;
 }
 
 </style>
