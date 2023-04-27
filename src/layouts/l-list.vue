@@ -64,7 +64,7 @@ export default {
 
 .l-listCenter__nameList {
     background-color: blue;
-    width: 40%;
+    width: 60%;
 }
 
 .l-listRight {

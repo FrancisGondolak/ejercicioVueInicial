@@ -53,32 +53,38 @@ app.get('/characters/getAll', (req, res) => {
       {
          name: 'Bulbasaur',
          type: 'Planta',
-         number: '01'
+         number: '01',
+         image: 'https://imgmedia.larepublica.pe/640x377/larepublica/migration/images/XZIZFWFA2BDF3CEJVJFVVN6GH4.webp'
       },
       {
          name: 'Charmander',
          type: 'Fuego',
-         number: '04'
+         number: '04',
+         image: ''
       },
       {
          name: 'Squirtle',
          type: 'Agua',
-         number: '07'
+         number: '07',
+         image: ''
       },
       {
          name: 'Pikachu',
          type: 'Eléctrico',
-         number: '25'
+         number: '25',
+         image: ''
       },
       {
          name: 'Psyduck',
          type: 'Agua',
-         number: '54'
+         number: '54',
+         image: ''
       },
       {
          name: 'Mewtwo',
          type: 'Psíquico',
-         number: '150'
+         number: '150',
+         image: ''
       }
    ]
    res.send(response)
