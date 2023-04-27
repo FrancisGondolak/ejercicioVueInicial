@@ -1,7 +1,5 @@
 <template>
-    <div class="c-pokeball">
-        <img :src="src" alt="alt">
-    </div>   
+    <img :src="src" alt="alt">   
 </template>
 
 <script>
@@ -23,10 +21,5 @@ export default {
 </script>
 
 <style lang="scss">
-
-.c-pokeball {
-    display: flex;
-    justify-content: right;
-}
 
 </style>
