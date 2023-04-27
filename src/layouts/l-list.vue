@@ -49,7 +49,7 @@ export default {
 
 .l-listCenter {
     width: 40%;
-    height: 650px;
+    height: auto;
     background-color: yellow;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,8 @@ export default {
 
 .l-listCenter__title {
     background-color: green;
-    margin-bottom: 60px;
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
 
 .l-listCenter__nameList {

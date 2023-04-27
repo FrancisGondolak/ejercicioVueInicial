@@ -54,37 +54,37 @@ app.get('/characters/getAll', (req, res) => {
          name: 'Bulbasaur',
          type: 'Planta',
          number: '01',
-         image: 'https://imgmedia.larepublica.pe/640x377/larepublica/migration/images/XZIZFWFA2BDF3CEJVJFVVN6GH4.webp'
+         image: 'https://upload.wikimedia.org/wikipedia/en/2/28/Pok%C3%A9mon_Bulbasaur_art.png'
       },
       {
          name: 'Charmander',
          type: 'Fuego',
          number: '04',
-         image: ''
+         image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Pok%C3%A9mon_Charmander_art.png'
       },
       {
          name: 'Squirtle',
          type: 'Agua',
          number: '07',
-         image: ''
+         image: 'https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png'
       },
       {
          name: 'Pikachu',
          type: 'Eléctrico',
          number: '25',
-         image: ''
+         image: 'https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png'
       },
       {
          name: 'Psyduck',
          type: 'Agua',
          number: '54',
-         image: ''
+         image: 'https://upload.wikimedia.org/wikipedia/it/thumb/3/32/Psyduck.png/1200px-Psyduck.png'
       },
       {
          name: 'Mewtwo',
          type: 'Psíquico',
          number: '150',
-         image: ''
+         image: 'https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/latest/20190408034831/Mewtwo.png'
       }
    ]
    res.send(response)

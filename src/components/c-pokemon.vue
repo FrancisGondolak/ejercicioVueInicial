@@ -6,7 +6,7 @@
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
         <div class="c-pokemon__image">
-            <img :src="pokemon.image" alt="imagen + {{ pokemon.name }}">
+            <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">
         </div>  
     </div>   
 </template>
@@ -47,12 +47,14 @@ export default {
   .c-pokemon__image{   
     width: 50%;
     background-color: brown;
+    display: flex;
+    justify-content: space-around;
   }
 
-  img {
+  .pokeImage {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    border-radius: 10%;
   }
 
 </style>
