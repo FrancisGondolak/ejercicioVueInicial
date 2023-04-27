@@ -20,7 +20,13 @@ export default {
             type: Object,
             required: true
         }
+    },
+    computed: {
+        pokemonBackground() {
+            
+        }
     }
+
 }
 </script>
 
@@ -29,8 +35,9 @@ export default {
   .c-pokemon {
     border: 5px solid black;
     border-radius: 15px;
-    margin-top: 3px;
-    background: white;
+    margin-top: 20px;
+    padding: 5px 0;
+    background: rgb(92, 214, 129);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,13 +47,11 @@ export default {
     width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: left;
-    background-color: aquamarine;
+    text-align: center;
   }
 
   .c-pokemon__image{   
     width: 50%;
-    background-color: brown;
     display: flex;
     justify-content: space-around;
   }

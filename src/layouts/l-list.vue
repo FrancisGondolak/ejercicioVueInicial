@@ -42,7 +42,6 @@ export default {
 .l-listLeft {
     width: 30%;
     height: 125px;
-    background-color: red;
     display: flex;
     justify-content: right;
 }
@@ -50,7 +49,6 @@ export default {
 .l-listCenter {
     width: 40%;
     height: auto;
-    background-color: yellow;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -58,20 +56,17 @@ export default {
 }
 
 .l-listCenter__title {
-    background-color: green;
     margin-top: 35px;
     margin-bottom: 35px;
 }
 
 .l-listCenter__nameList {
-    background-color: blue;
     width: 60%;
 }
 
 .l-listRight {
     width: 30%;
     height: 125px;
-    background-color: rgb(110, 110, 235);
     display: flex;
     justify-content: left;
 }
