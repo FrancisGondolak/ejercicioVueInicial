@@ -15,9 +15,7 @@ export default {
             type: Object,
             required: true
         }
-    },
-    //HACER UNA COMPUTADA QUE, SEGÚN EL TIPO DEL POKEMON, LE PONGA LAS
-    //LETRAS DE UN COLOR U OTRO
+    }
 }
 </script>
 

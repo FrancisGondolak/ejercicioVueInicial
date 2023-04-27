@@ -1,7 +1,8 @@
 <template>
     <div class="l-list">
         <section class="l-listLeft">
-            <slot name="pokeballIcon" />
+            <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
+            <CPokeball v-else></CPokeball>
         </section>
         <section class="l-listCenter">
             <div class="l-listCenter__title">
@@ -12,15 +13,21 @@
             </div>
         </section> 
         <section class="l-listRight">
-            <slot name="pokeballIcon" />
+            <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
+            <CPokeball v-else></CPokeball>
         </section>
     </div>
 </template>
 
 <script>
+import CPokeball from '@/components/c-pokeball.vue'
 
 export default {
-    name:"LList"
+    name:"LList",
+
+    components:{
+        CPokeball
+    }
 }
 
 </script>
