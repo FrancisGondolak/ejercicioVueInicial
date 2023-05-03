@@ -40,6 +40,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--color-input-shadow-deselected);
   }
 
   .c-pokemon__info {

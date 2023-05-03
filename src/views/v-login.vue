@@ -1,7 +1,7 @@
 <template>
-    <l-homeview>
+    <l-login>
         <template #form>
-            <p class="v-home__form--title">Introduce tus datos</p>
+            <p class="v-login__form--title">Introduce tus datos</p>
             <CInput
             type="text" 
             placeholder="Introduce el usuario" 
@@ -16,23 +16,23 @@
             buttonMessage="Login"
             @click=checkForm
             ></CButton>
-            <p class="v-home__form--advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
-            <p class="v-home__form--p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p> 
+            <p class="v-login__form--advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
+            <p class="v-login__form--p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p> 
         </template>    
-    </l-homeview>           
+    </l-login>           
 </template>
 
 <script>
-import LHomeview from "@/layouts/l-homeview.vue"
+import LLogin from "@/layouts/l-login.vue"
 import CInput from "@/components/c-input.vue"
 import CButton from "@/components/c-button.vue"
 import { userStore } from "@/stores/user"
 
 
 export default {
-    name: "HomeView",
+    name: "Login",
     components: {
-        LHomeview,
+        LLogin,
         CInput,
         CButton
     },
@@ -92,18 +92,18 @@ export default {
 
 <style lang="scss">
 
-.v-home__form--title {
+.v-login__form--title {
     color: var(--color-form-title);
     font-size: 35px;
     font-weight: 600;
 }
 
-.v-home__form--advice {
+.v-login__form--advice {
     font-weight: 600;
     color: var(--color-form-advice);
 }
 
-.v-home__form--p {
+.v-login__form--p {
     font-weight: 600;
 }
 

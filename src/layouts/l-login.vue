@@ -1,6 +1,6 @@
 <template>
-    <section class="l-homeview">
-        <div class="l-homeview__form">
+    <section class="l-login">
+        <div class="l-login__form">
             <slot name="form" />
         </div>
     </section>
@@ -9,21 +9,21 @@
 <script>
 
 export default {
-    name:"LHomeview"
+    name:"LLogin"
 }
 
 </script>
 
 <style lang="scss">
 
-.l-homeview {
+.l-login {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-.l-homeview__form{
+.l-login__form{
     border-radius: 30px;
     display: flex;
     flex-direction: column;
