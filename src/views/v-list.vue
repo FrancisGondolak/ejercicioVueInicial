@@ -9,13 +9,26 @@
         <template #title>
             <p>LISTADO DE POKÉMON</p>
         </template>
-        <template #pokemonList>
+        <!-- este template, el listado completo de Pokémon, sólo se va a mostrar cuando la variable 
+        select esté en false -->
+        <template #pokemonList v-if="!select">
+            <!-- @pokemonSelected significa que está a la escucha de ese evento que le viene desde
+            el hijo (c-pokemon) y en cuanto reciba aviso va a ejecutar el método selectedPokemon,
+            situado en methods, abajo -->
             <c-pokemon 
                 v-for="character in characters" 
                 :key="character.number" 
                 :pokemon="character"
+                @pokemonSelected="selectedPokemon"
             >
             </c-pokemon>
+        </template>
+        <!-- cuando la variable select esté en true, va a mostrar este otro template -->
+        <template #pokemonDetails v-else>
+            <span class="c-pokemon--name">Nombre: {{ pokemonshown.name }}</span>
+            <span class="c-pokemon--type">Tipo: {{ pokemonshown.type }}</span>
+            <span class="c-pokemon--number">Número: {{ pokemonshown.number }}</span>
+            <img @click=unselected class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
         </template>
     </l-list>
 </template>
@@ -43,7 +56,9 @@ import CPokeball from '@/components/c-pokeball.vue';
             return {
                 characters: [],
                 fetched: false,
-                error: false
+                error: false,
+                select: false,
+                pokemonshown: {}
             }
         },
 
@@ -62,6 +77,19 @@ import CPokeball from '@/components/c-pokeball.vue';
                 } catch (error) {
                     this.error = true;
                 }
+            },
+            //cuando el padre reciba el aviso de $emit desde el hijo va a lanzar este método que
+            //va a setear el valor de la variable select de data() en true y va a guardar en el
+            //objeto pokemonshown el objeto pokemonselected que le llega desde c-pokemon
+            selectedPokemon({ pokemonselected, selected}) {
+                this.pokemonshown = pokemonselected;
+                this.select = selected;
+            },
+            //método que vamos a llamar cuando pulsemos la imagen del template #pokemonDetails, mediante
+            //el cual vamos a setear de nuevo la variable select en false, mostrando otra vez el listado
+            //completo de Pokémon
+            unselected() {
+                this.select = false;
             }
         },
         

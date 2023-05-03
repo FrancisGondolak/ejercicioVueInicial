@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!selected" class="c-pokemon" :style=getColor(pokemon.type) @click=pulsaPokemon>
+    <div class="c-pokemon" :style=getColor(pokemon.type) @click=pulsaPokemon>
         <div class="c-pokemon__info">
             <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
             <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
@@ -8,9 +8,6 @@
         <div class="c-pokemon__image">
             <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">
         </div>  
-    </div>   
-    <div v-else>
-      <p @click="pulsaPokemon">HOLA QUE TAL</p>
     </div>
 </template>
 
@@ -26,7 +23,13 @@ export default {
     },
     data() {
       return {
-        selected: false
+        selected: true,
+        pokemonselected: {
+          name: this.pokemon.name,
+          type: this.pokemon.type,
+          number: this.pokemon.number,
+          image: this.pokemon.image
+        }
       }
     },
     methods: {
@@ -39,8 +42,16 @@ export default {
       redirigeme() {
         this.$router.push({name:'home'});
       },
+      //al pulsar sobre cualquier caja de Pokemon invocamos esta función, la cual
+      //emite hacia el padre (v-list) un evento llamado pokemonSelected y le pasa
+      //un objeto pokemonselected con los datos (name, type, etc...) del Pokemon sobre el que se ha pulsado 
+      //y un booleano (selected) con valor true
       pulsaPokemon() {
-        this.selected = !this.selected;
+        console.log(this.pokemonselected.name)
+        this.$emit('pokemonSelected', {
+          pokemonselected: this.pokemonselected,
+          selected: this.selected
+        });  
       }
     }
 
