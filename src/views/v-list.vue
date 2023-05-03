@@ -25,10 +25,11 @@
         </template>
         <!-- cuando la variable select esté en true, va a mostrar este otro template -->
         <template #pokemonDetails v-else>
-            <span class="c-pokemon--name">Nombre: {{ pokemonshown.name }}</span>
-            <span class="c-pokemon--type">Tipo: {{ pokemonshown.type }}</span>
-            <span class="c-pokemon--number">Número: {{ pokemonshown.number }}</span>
-            <img @click=unselected class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
+            <c-pokemondetails
+                :pokemonshown="pokemonshown"
+                @pokemonUnselected="unselectedPokemon"
+            >
+            </c-pokemondetails>
         </template>
     </l-list>
 </template>
@@ -42,6 +43,7 @@ import { charactersStore } from '@/stores/characters';
 import LList from '@/layouts/l-list.vue';
 import CPokemon from '@/components/c-pokemon.vue';
 import CPokeball from '@/components/c-pokeball.vue';
+import CPokemondetails from '@/components/c-pokemondetails.vue';
 
     export default {
         name: "v-list",
@@ -49,7 +51,8 @@ import CPokeball from '@/components/c-pokeball.vue';
         components: {
             LList,
             CPokemon,
-            CPokeball
+            CPokeball,
+            CPokemondetails
         },
 
         data() {
@@ -85,11 +88,8 @@ import CPokeball from '@/components/c-pokeball.vue';
                 this.pokemonshown = pokemonselected;
                 this.select = selected;
             },
-            //método que vamos a llamar cuando pulsemos la imagen del template #pokemonDetails, mediante
-            //el cual vamos a setear de nuevo la variable select en false, mostrando otra vez el listado
-            //completo de Pokémon
-            unselected() {
-                this.select = false;
+            unselectedPokemon(newValue) {
+                this.select = newValue;
             }
         },
         
