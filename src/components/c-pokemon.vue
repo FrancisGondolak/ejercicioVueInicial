@@ -1,5 +1,5 @@
 <template>
-    <div class="c-pokemon" :style=getColor(pokemon.type) @click=redirigeme>
+    <div v-if="!selected" class="c-pokemon" :style=getColor(pokemon.type) @click=pulsaPokemon>
         <div class="c-pokemon__info">
             <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
             <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
@@ -9,6 +9,9 @@
             <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">
         </div>  
     </div>   
+    <div v-else>
+      <p @click="pulsaPokemon">HOLA QUE TAL</p>
+    </div>
 </template>
 
 <script>
@@ -21,6 +24,11 @@ export default {
             required: true
         }
     },
+    data() {
+      return {
+        selected: false
+      }
+    },
     methods: {
       getColor(type) {
         return "background-color: var(--color-PokemonType--" + this.pokemon.type +");";
@@ -30,6 +38,9 @@ export default {
       },
       redirigeme() {
         this.$router.push({name:'home'});
+      },
+      pulsaPokemon() {
+        this.selected = !this.selected;
       }
     }
 
