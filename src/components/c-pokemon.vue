@@ -1,5 +1,5 @@
 <template>
-    <div class="c-pokemon">
+    <div class="c-pokemon" :style=getColor(pokemon.type)>
         <div class="c-pokemon__info">
             <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
             <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
@@ -21,10 +21,10 @@ export default {
             required: true
         }
     },
-    computed: {
-        pokemonBackground() {
-            
-        }
+    methods: {
+      getColor(type) {
+        return "background-color: var(--color-PokemonType--" + this.pokemon.type +");";
+      }
     }
 
 }
@@ -37,7 +37,6 @@ export default {
     border-radius: 15px;
     margin-top: 20px;
     padding: 5px 0;
-    background: rgb(92, 214, 129);
     display: flex;
     align-items: center;
     justify-content: center;

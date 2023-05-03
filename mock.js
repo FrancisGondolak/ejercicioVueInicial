@@ -70,7 +70,7 @@ app.get('/characters/getAll', (req, res) => {
       },
       {
          name: 'Pikachu',
-         type: 'Eléctrico',
+         type: 'Electricidad',
          number: '25',
          image: 'https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png'
       },
@@ -82,7 +82,7 @@ app.get('/characters/getAll', (req, res) => {
       },
       {
          name: 'Mewtwo',
-         type: 'Psíquico',
+         type: 'Psiquico',
          number: '150',
          image: 'https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/latest/20190408034831/Mewtwo.png'
       }

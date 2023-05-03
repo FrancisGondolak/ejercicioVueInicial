@@ -12,7 +12,7 @@
         <template #pokemonList>
             <c-pokemon 
                 v-for="character in characters" 
-                :key="character.type" 
+                :key="character.number" 
                 :pokemon="character"
             >
             </c-pokemon>
