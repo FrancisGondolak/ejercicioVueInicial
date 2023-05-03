@@ -1,11 +1,11 @@
 <template>
-    <div class="c-pokemon" :style=getColor(pokemonshown.type) @click=pulsaPokemon>
-        <div class="c-pokemon__info">
-            <span class="c-pokemon--name">Nombre: {{ pokemonshown.name }}</span>
-            <span class="c-pokemon--type">Tipo: {{ pokemonshown.type }}</span>
-            <span class="c-pokemon--number">Número: {{ pokemonshown.number }}</span>
+    <div class="c-pokemondetails" :style=getColor(pokemonshown.type) @click=pulsaPokemon>
+        <div class="c-pokemondetails__info">
+            <span class="c-pokemondetails--name">Nombre: {{ pokemonshown.name }}</span>
+            <span class="c-pokemondetails--type">Tipo: {{ pokemonshown.type }}</span>
+            <span class="c-pokemondetails--number">Número: {{ pokemonshown.number }}</span>
         </div>
-        <div class="c-pokemon__image">
+        <div class="c-pokemondetails__image">
             <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
         </div>  
     </div>
@@ -38,36 +38,41 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-  .c-pokemon {
+  .c-pokemondetails {
     border: 5px solid black;
     border-radius: 15px;
     margin-top: 20px;
+    height: 500px;
     padding: 5px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
+    cursor: pointer;
   }
 
-  .c-pokemon__info {
+  .c-pokemondetails__info {
     width: 50%;
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-color: red;
   }
 
-  .c-pokemon__image{   
-    width: 50%;
+  .c-pokemondetails__image{   
+    width: 100%;
     display: flex;
     justify-content: space-around;
+    background-color: blue;
   }
 
   .pokeImage {
-    width: 100px;
-    height: 100px;
+    width: 400px;
+    height: 400px;
     border-radius: 10%;
+    background-color: white;
   }
 
 </style>

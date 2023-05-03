@@ -69,6 +69,7 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
+    cursor: pointer;
   }
 
   .c-pokemon__info {
