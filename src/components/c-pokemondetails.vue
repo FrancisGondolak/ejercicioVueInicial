@@ -51,6 +51,7 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
+    background-color: red;
     cursor: pointer;
   }
 
@@ -69,8 +70,8 @@ export default {
   }
 
   .pokeImage {
-    width: 165px;
-    height: 165px;
+    width: 200px;
+    height: 200px;
     margin-bottom: 50px;
     margin-right: auto;
     margin-left: auto;
