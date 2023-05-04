@@ -6,8 +6,9 @@
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
         <div class="c-pokemon__image">
-            <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">
-        </div>  
+            <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">    
+        </div>
+        <button class="info">Pokédex</button>
     </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
     },
     methods: {
       getColor(type) {
-        return "background-color: var(--color-PokemonType--" + this.pokemon.type +");";
+        return "background-color: var(--color-PokemonType--" + type + ");";
       },
       avisame(name) {
         alert("Has pulsado sobre " + name);
@@ -73,7 +74,7 @@ export default {
   }
 
   .c-pokemon__info {
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -89,6 +90,18 @@ export default {
     width: 100px;
     height: 100px;
     border-radius: 10%;
+    padding: 10px;
+  }
+
+  .info {
+    height: 25px;
+    margin-top: 85px;
+    align-items: center;
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
+    border-radius: 10px;
+    box-shadow: var(--color-shadow-boxPokemon);
+    cursor: pointer;
   }
 
 </style>
