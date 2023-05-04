@@ -1,14 +1,15 @@
 <template>
-    <div class="c-pokemon" :style=getColor(pokemon.type) @click=pulsaPokemon>
+    <div class="c-pokemon" :style=getColor(pokemon.type)>
         <div class="c-pokemon__info">
             <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
             <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
         <div class="c-pokemon__image">
-            <img class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name">    
+            <img v-if="!pokeball" class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @click=openPokeball>
+            <img v-if="pokeball" class="pokeImage" src="src/components/assets/images/pokeball.png" alt="pokeballIcon" @click=openPokeball>     
         </div>
-        <button class="info">Pokédex</button>
+        <button class="info"  @click=pulsaPokemon>Pokédex</button>
     </div>
 </template>
 
@@ -30,7 +31,8 @@ export default {
           type: this.pokemon.type,
           number: this.pokemon.number,
           image: this.pokemon.image
-        }
+        },
+        pokeball: true
       }
     },
     methods: {
@@ -53,6 +55,9 @@ export default {
           pokemonselected: this.pokemonselected,
           selected: this.selected
         });  
+      },
+      openPokeball() {
+        this.pokeball =!this.pokeball;
       }
     }
 
