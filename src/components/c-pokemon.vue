@@ -5,11 +5,13 @@
             <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
-        <div class="c-pokemon__image">
-            <img v-if="!pokeball" class="pokeImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @click=openPokeball>
-            <img v-if="pokeball" class="pokeImage" src="src/components/assets/images/pokeball.png" alt="pokeballIcon" @click=openPokeball>     
+        <div class="c-pokemon__pokemonImage" v-if="!pokeball">
+            <img class="pokemonImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @click=openPokeball>     
         </div>
-        <button class="info"  @click=pulsaPokemon>Pokédex</button>
+        <div v-else class="c-pokemon__pokeballImage">
+          <img class="pokeballImage" src="src/components/assets/images/pokeball.png" alt="pokeballIcon" @click=openPokeball>
+        </div>
+        <button class="pokedexButton" @click=showPokedex>Pokédex</button>
     </div>
 </template>
 
@@ -45,11 +47,11 @@ export default {
       redirigeme() {
         this.$router.push({name:'home'});
       },
-      //al pulsar sobre cualquier caja de Pokemon invocamos esta función, la cual
+      //al pulsar sobre el botón Pokédex de cualquier caja de Pokemon invocamos esta función, la cual
       //emite hacia el padre (v-list) un evento llamado pokemonSelected y le pasa
       //un objeto pokemonselected con los datos (name, type, etc...) del Pokemon sobre el que se ha pulsado 
       //y un booleano (selected) con valor true
-      pulsaPokemon() {
+      showPokedex() {
         console.log(this.pokemonselected.name)
         this.$emit('pokemonSelected', {
           pokemonselected: this.pokemonselected,
@@ -75,7 +77,6 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
-    cursor: pointer;
   }
 
   .c-pokemon__info {
@@ -83,22 +84,46 @@ export default {
     display: flex;
     flex-direction: column;
     text-align: center;
+    cursor: default;
   }
 
-  .c-pokemon__image{   
+  .c-pokemon__pokemonImage {   
     width: 50%;
     display: flex;
     justify-content: space-around;
   }
 
-  .pokeImage {
+  .c-pokemon__pokeballImage {   
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    :hover {
+      transition: 4s;
+      transform: rotate(1440deg);
+    }
+  }
+
+  .pokemonImage {
     width: 100px;
     height: 100px;
     border-radius: 10%;
     padding: 10px;
+    cursor: pointer;
   }
 
-  .info {
+  .pokeballImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .pokeballImag:hover {
+    opacity: 0.5;
+  }
+
+  .pokedexButton {
     height: 25px;
     margin-top: 85px;
     align-items: center;
