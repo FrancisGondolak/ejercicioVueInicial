@@ -33,7 +33,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .l-list {
     display: flex;
@@ -57,8 +57,9 @@ export default {
 }
 
 .l-listCenter__title {
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .l-listCenter__nameList {

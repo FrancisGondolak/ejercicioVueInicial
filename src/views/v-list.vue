@@ -7,7 +7,7 @@
             ></c-pokeball>
         </template>
         <template #title>
-            <p>LISTADO DE POKÉMON</p>
+            <img class="tituloLista" src="src/components/assets/images/listadoPokemon.png" alt="tituloLista">
         </template>
         <!-- este template, el listado completo de Pokémon, sólo se va a mostrar cuando la variable 
         select esté en false -->
@@ -102,9 +102,8 @@ import CPokemondetails from '@/components/c-pokemondetails.vue';
 
 <style lang="scss">
 
-p {
-    margin:0;
-    font-size: 50px;
+.tituloLista {
+    width: 80%;
 }
 
 </style>

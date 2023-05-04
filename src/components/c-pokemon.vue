@@ -6,7 +6,7 @@
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
         <div class="c-pokemon__pokemonImage" v-if="!pokeball">
-            <img class="pokemonImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @click=openPokeball>     
+            <img class="pokemonImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @mouseleave=openPokeball>     
         </div>
         <div v-else class="c-pokemon__pokeballImage">
           <img class="pokeballImage" src="src/components/assets/images/pokeball.png" alt="pokeballIcon" @click=openPokeball>
@@ -92,7 +92,8 @@ export default {
     display: flex;
     justify-content: space-around;
     :hover {
-      transform: scale(1.1);
+      transition: 2s;
+      transform: scale(2.8);
     }
   }
 
@@ -107,16 +108,16 @@ export default {
   }
 
   .pokemonImage {
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     border-radius: 10%;
     padding: 10px;
     cursor: pointer;
   }
 
   .pokeballImage {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 10%;
     padding: 10px;
     cursor: pointer;

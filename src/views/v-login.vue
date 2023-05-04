@@ -1,7 +1,7 @@
 <template>
     <l-login>
         <template #form>
-            <p class="v-login__form--title">Introduce tus datos</p>
+            <img class="v-login__form--title" src="src/components/assets/images/pookedex.png" alt="introduceDatos">
             <CInput
             type="text" 
             placeholder="Introduce el usuario" 
@@ -93,9 +93,9 @@ export default {
 <style lang="scss">
 
 .v-login__form--title {
-    color: var(--color-form-title);
-    font-size: 35px;
-    font-weight: 600;
+    width: 60%;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .v-login__form--advice {
