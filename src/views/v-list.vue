@@ -7,7 +7,8 @@
             ></c-pokeball>
         </template>
         <template #title>
-            <img class="tituloLista" src="src/components/assets/images/listadoPokemon.png" alt="tituloLista">
+            <img v-if="!select" class="tituloLista" src="src/components/assets/images/listadoPokemon.png" alt="tituloLista">
+            <img v-else class="tituloLista" src="src/components/assets/images/pokedex.png" alt="tituloLista">
         </template>
         <!-- este template, el listado completo de Pokémon, sólo se va a mostrar cuando la variable 
         select esté en false -->
