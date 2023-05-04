@@ -91,6 +91,9 @@ export default {
     width: 50%;
     display: flex;
     justify-content: space-around;
+    :hover {
+      transform: scale(1.1);
+    }
   }
 
   .c-pokemon__pokeballImage {   
@@ -119,19 +122,20 @@ export default {
     cursor: pointer;
   }
 
-  .pokeballImag:hover {
-    opacity: 0.5;
-  }
-
   .pokedexButton {
     height: 25px;
     margin-top: 85px;
+    margin-right: 3px;
     align-items: center;
     background-color: var(--color-button-background);
     color: var(--color-button-text);
     border-radius: 10px;
     box-shadow: var(--color-shadow-boxPokemon);
     cursor: pointer;
+  }
+
+  button:hover {
+    transform: scale(1.1);
   }
 
 </style>
