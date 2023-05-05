@@ -71,7 +71,7 @@ export default {
   .c-pokemon {
     border: 5px solid black;
     border-radius: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 5px 0;
     display: flex;
     align-items: center;

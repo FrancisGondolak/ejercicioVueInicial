@@ -5,9 +5,18 @@
             <span class="c-pokemondetails--type">Tipo: {{ pokemonshown.type }}</span>
             <span class="c-pokemondetails--number">Número: {{ pokemonshown.number }}</span>
         </div> -->
-        <div class="c-pokemondetails__image">
+        <section class="c-pokemondetails__top">
+          <div class="big_circle_blue"></div>
+          <div class="small_circle_red"></div>
+          <div class="small_circle_orange"></div>
+          <div class="small_circle_green"></div>
+        </section>
+        <section class="c-pokemondetails__image">
             <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
-        </div>  
+        </section>
+        <section class="c-pokemondetails__bottom">
+          <p>Iconillos de abajo</p>
+        </section>
     </div>
 </template>
 
@@ -44,10 +53,11 @@ export default {
     border: 5px solid black;
     border-radius: 15px;
     margin-top: 20px;
-    height: 555px;
+    height: 600px;
     width: 100%;
     padding: 5px 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
@@ -55,27 +65,53 @@ export default {
     cursor: pointer;
   }
 
-  .c-pokemondetails__info {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color: red;
+  // .c-pokemondetails__info {
+  //   width: 50%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   text-align: center;
+  // }
+
+  .c-pokemondetails__top {
+    height: 100%;
+    width: 100%;
+    background-color: purple;
   }
 
-  .c-pokemondetails__image{   
+  .big_circle_blue {
+    background: rgb(50, 184, 224);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .small_circle_red {
+    
+  }
+
+  .c-pokemondetails__image {   
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-around;
+    background-color: white;
   }
 
   .pokeImage {
     width: 200px;
     height: 200px;
-    margin-bottom: 50px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 10%;
+    background-color: green;
+  }
+
+  .c-pokemondetails__bottom {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(108, 108, 212);
   }
 
 </style>
