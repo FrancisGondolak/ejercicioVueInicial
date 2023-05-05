@@ -73,12 +73,15 @@ export default {
   // }
 
   .c-pokemondetails__top {
-    height: 100%;
     width: 100%;
     background-color: purple;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
   }
 
   .big_circle_blue {
+    border: 3px solid black;
     background: rgb(50, 184, 224);
     border-radius: 50%;
     width: 70px;
@@ -88,7 +91,33 @@ export default {
   }
 
   .small_circle_red {
-    
+    border: 3px solid black;
+    background: rgb(231, 27, 12);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .small_circle_orange {
+    border: 3px solid black;
+    background: rgb(231, 143, 12);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .small_circle_green {
+    border: 3px solid black;
+    background: rgb(12, 231, 23);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-top: 5px;
+    margin-left: 5px;
   }
 
   .c-pokemondetails__image {   
