@@ -133,7 +133,7 @@ export default {
     height: 6%;
     margin-left: auto;
     margin-right: auto;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     cursor: default;
   }
