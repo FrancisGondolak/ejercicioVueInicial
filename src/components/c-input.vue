@@ -37,6 +37,12 @@ export default {
     height: 3rem;
     border-radius: 10px;
     box-shadow: var(--color-input-shadow-deselected);
+    background-color: rgb(35, 90, 241);
+    color: var(--color-button-text);
+}
+
+.c-input::placeholder {
+    color: var(--color-button-text);
 }
 
 .c-input:focus{
