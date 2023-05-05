@@ -1,5 +1,5 @@
 <template>
-    <div class="c-pokemondetails" @click=pulsaPokemon>
+    <div class="c-pokemondetails">
         <section class="c-pokemondetails__top">
           <div class="big_circle_blue"></div>
           <div class="small_circle_red"></div>
@@ -24,7 +24,15 @@
           </section>  
         </section>
         <section class="c-pokemondetails__bottom">
-          <p>Iconillos de abajo</p>
+          <section class="c-pokemondetails__bottom--top">
+            <div class="medium_circle_darkblue"></div>
+            <div class="medium_bar_green"></div>
+            <div class="medium_bar_yellow"></div>
+          </section>
+          <section class="c-pokemondetails__bottom--bottom">
+            <div class="long_bar_yellow"></div>
+            <div class="medium_circle_red" @click=pulsaPokemon></div>
+          </section>
         </section>
     </div>
 </template>
@@ -70,20 +78,19 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
-    background-color: red;
-    cursor: pointer;
+    background-color: rgb(252, 57, 57);
   }
 
   .c-pokemondetails__top {
     width: 100%;
-    background-color: purple;
+    // background-color: purple;
     margin-bottom: 15px;
     display: flex;
     flex-direction: row;
   }
 
   .big_circle_blue {
-    border: 3px solid black;
+    border: var(--color-border-elementsPokedex);
     background: rgb(50, 184, 224);
     border-radius: 50%;
     width: 70px;
@@ -93,8 +100,8 @@ export default {
   }
 
   .small_circle_red {
-    border: 3px solid black;
-    background: rgb(231, 27, 12);
+    border: var(--color-border-elementsPokedex);
+    background: rgb(255, 17, 0);
     border-radius: 50%;
     width: 35px;
     height: 35px;
@@ -103,7 +110,7 @@ export default {
   }
 
   .small_circle_orange {
-    border: 3px solid black;
+    border: var(--color-border-elementsPokedex);
     background: rgb(231, 143, 12);
     border-radius: 50%;
     width: 35px;
@@ -113,7 +120,7 @@ export default {
   }
 
   .small_circle_green {
-    border: 3px solid black;
+    border: var(--color-border-elementsPokedex);
     background: rgb(12, 231, 23);
     border-radius: 50%;
     width: 35px;
@@ -128,7 +135,7 @@ export default {
     margin-right: auto;
     font-size: 20px;
     font-weight: bold;
-    background-color: rgb(201, 142, 176);
+    cursor: default;
   }
 
   .c-pokemondetails__middle--bottom {
@@ -140,6 +147,7 @@ export default {
     width: 90%;
     height: 100%;
     border: 10px solid gray;
+    border-radius: 10px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-around;
@@ -150,7 +158,6 @@ export default {
   .c-pokemondetails__image {
     width: 50%;
     height: 100%;
-    background-color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +166,6 @@ export default {
   .pokeImage {
     width: 90%;
     height: 70%;
-    background-color: green;
   }
 
   .c-pokemondetails__info {
@@ -169,14 +175,80 @@ export default {
     align-items: left;
     justify-content: space-evenly;
     margin-right: 2px;
-    background-color: yellow;
+    cursor: default;
   }
 
   .c-pokemondetails__bottom {
     height: 60%;
     width: 100%;
     margin-top: 15px;
-    background-color: rgb(108, 108, 212);
+  }
+
+  .c-pokemondetails__bottom--top {
+    width: 100%;
+    height: 45%;
+    display: flex;
+  }
+
+  .medium_circle_darkblue {
+    border: var(--color-border-elementsPokedex);
+    background:  rgb(0, 68, 255);
+    border-radius: 50%;
+    width: 10%;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 15px;
+  }
+
+  .medium_bar_green {
+    border: var(--color-border-elementsPokedex);
+    background:  rgb(26, 201, 20);
+    border-radius: 20px;
+    width: 25%;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 15px;
+  }
+
+  .medium_bar_yellow {
+    border: var(--color-border-elementsPokedex);
+    background:  rgb(196, 199, 27);
+    border-radius: 20px;
+    width: 25%;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 15px;
+  }
+  .c-pokemondetails__bottom--bottom {
+    width: 100%;
+    height: 45%;
+    display: flex;
+  }
+
+  .long_bar_yellow {
+    border: var(--color-border-elementsPokedex);
+    background:  rgb(196, 199, 27);
+    border-radius: 20px;
+    width: 75%;
+    height: 60px;
+    margin-top: 5px;
+    margin-left: 15px;
+  }
+
+  .medium_circle_red {
+    border: 5px solid black;
+    background:  rgb(255, 8, 0);
+    box-shadow: var(--color-shadow-buttonPokedex);
+    border-radius: 50%;
+    width: 12%;
+    height: 60px;
+    margin-top: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+
+  .medium_circle_red:hover {
+    transform: scale(0.9);
   }
 
 </style>
