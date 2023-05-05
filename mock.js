@@ -54,37 +54,55 @@ app.get('/characters/getAll', (req, res) => {
          name: 'Bulbasaur',
          type: 'Planta',
          number: '01',
-         image: 'https://upload.wikimedia.org/wikipedia/en/2/28/Pok%C3%A9mon_Bulbasaur_art.png'
+         image: 'https://upload.wikimedia.org/wikipedia/en/2/28/Pok%C3%A9mon_Bulbasaur_art.png',
+         weight: "6'9 kg",
+         height: "0'7 m",
+         description: "Una rara semilla fue plantada en su espalda al nacer. La planta brota y crece con este Pokémon"
       },
       {
          name: 'Charmander',
          type: 'Fuego',
          number: '04',
-         image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Pok%C3%A9mon_Charmander_art.png'
+         image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Pok%C3%A9mon_Charmander_art.png',
+         weight: "8'5 kg",
+         height: "0'6 m",
+         description: "Prefiere los sitios calientes. Dicen que cuando llueve sale vapor de la punta de su cola"
       },
       {
          name: 'Squirtle',
          type: 'Agua',
          number: '07',
-         image: 'https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png'
+         image: 'https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png',
+         weight: "9'0 kg",
+         height: "0'5 m",
+         description: "Tras nacer, su espalda se hincha y endurece como una concha. Echa potente espuma por la boca"
       },
       {
          name: 'Pikachu',
          type: 'Electricidad',
          number: '25',
-         image: 'https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png'
+         image: 'https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png',
+         weight: "6'0 kg",
+         height: "0'4 m",
+         description: "Cuando varios de estos Pokémon se juntan, su energía puede causar fuertes tormentas"
       },
       {
          name: 'Psyduck',
          type: 'Agua',
          number: '54',
-         image: 'https://upload.wikimedia.org/wikipedia/it/thumb/3/32/Psyduck.png/1200px-Psyduck.png'
+         image: 'https://upload.wikimedia.org/wikipedia/it/thumb/3/32/Psyduck.png/1200px-Psyduck.png',
+         weight: "19'6 kg",
+         height: "0'8 m",
+         description: "Aunque calma al enemigo con su vacía mirada, este Pokémon usará poderes psicoquinéticos"
       },
       {
          name: 'Mewtwo',
          type: 'Psiquico',
          number: '150',
-         image: 'https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/latest/20190408034831/Mewtwo.png'
+         image: 'https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/latest/20190408034831/Mewtwo.png',
+         weight: "122 kg",
+         height: "2'0 m",
+         description: "Fue creado por un científico tras años de horribles experimentos de ingeniería genética"
       }
    ]
    res.send(response)

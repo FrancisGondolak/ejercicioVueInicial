@@ -32,7 +32,10 @@ export default {
           name: this.pokemon.name,
           type: this.pokemon.type,
           number: this.pokemon.number,
-          image: this.pokemon.image
+          image: this.pokemon.image,
+          weight: this.pokemon.weight,
+          height: this.pokemon.height,
+          description: this.pokemon.description
         },
         pokeball: true
       }

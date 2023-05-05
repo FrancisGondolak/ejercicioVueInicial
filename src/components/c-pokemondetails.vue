@@ -1,10 +1,5 @@
 <template>
     <div class="c-pokemondetails" @click=pulsaPokemon>
-        <!-- <div class="c-pokemondetails__info">
-            <span class="c-pokemondetails--name">Nombre: {{ pokemonshown.name }}</span>
-            <span class="c-pokemondetails--type">Tipo: {{ pokemonshown.type }}</span>
-            <span class="c-pokemondetails--number">Número: {{ pokemonshown.number }}</span>
-        </div> -->
         <section class="c-pokemondetails__top">
           <div class="big_circle_blue"></div>
           <div class="small_circle_red"></div>
@@ -13,6 +8,14 @@
         </section>
         <section class="c-pokemondetails__image">
             <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
+            <div class="c-pokemondetails__info">
+              <span class="c-pokemondetails--name">Nombre: {{ pokemonshown.name }}</span>
+              <span class="c-pokemondetails--type">Tipo: {{ pokemonshown.type }}</span>
+              <span class="c-pokemondetails--number">Número: {{ pokemonshown.number }}</span>
+              <span class="c-pokemondetails--weight">Peso: {{ pokemonshown.weight }}</span>
+              <span class="c-pokemondetails--height">Altura: {{ pokemonshown.height }}</span>
+              <span class="c-pokemondetails--description">Descripción: {{ pokemonshown.description }}</span>
+            </div>
         </section>
         <section class="c-pokemondetails__bottom">
           <p>Iconillos de abajo</p>
@@ -65,12 +68,12 @@ export default {
     cursor: pointer;
   }
 
-  // .c-pokemondetails__info {
-  //   width: 50%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   text-align: center;
-  // }
+  .c-pokemondetails__info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 
   .c-pokemondetails__top {
     width: 100%;
@@ -133,7 +136,7 @@ export default {
   .pokeImage {
     width: 200px;
     height: 200px;
-    margin-right: auto;
+    margin: auto auto auto 5px;
     background-color: green;
   }
 
