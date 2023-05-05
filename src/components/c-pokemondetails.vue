@@ -7,17 +7,21 @@
           <div class="small_circle_green"></div>
         </section>
         <section class="c-pokemondetails__middle">
-          <div class="c-pokemondetails__image">
-            <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
-          </div>  
-          <div class="c-pokemondetails__info">
-            <span class="c-pokemondetails--name">Nombre: {{ pokemonshown.name }}</span>
-            <span class="c-pokemondetails--type">Tipo: {{ pokemonshown.type }}</span>
-            <span class="c-pokemondetails--number">Número: {{ pokemonshown.number }}</span>
-            <span class="c-pokemondetails--weight">Peso: {{ pokemonshown.weight }}</span>
-            <span class="c-pokemondetails--height">Altura: {{ pokemonshown.height }}</span>
-            <span class="c-pokemondetails--description">Descripción: {{ pokemonshown.description }}</span>
-          </div>
+          <section class="c-pokemondetails__middle--top">
+            <span class="c-pokemondetails--name">{{ pokemonshown.name }}</span>
+          </section>
+          <section class="c-pokemondetails__middle--bottom">
+            <div class="c-pokemondetails__image">
+              <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
+            </div>  
+            <div class="c-pokemondetails__info">
+              <span class="c-pokemondetails--type"><b>Tipo: </b>{{ pokemonshown.type }}</span>
+              <span class="c-pokemondetails--number"><b>Número: </b>{{ pokemonshown.number }}</span>
+              <span class="c-pokemondetails--weight"><b>Peso: </b>{{ pokemonshown.weight }}</span>
+              <span class="c-pokemondetails--height"><b>Altura: </b>{{ pokemonshown.height }}</span>
+              <span class="c-pokemondetails--description"><b>Descripción: </b>{{ pokemonshown.description }}</span>
+            </div>
+          </section>  
         </section>
         <section class="c-pokemondetails__bottom">
           <p>Iconillos de abajo</p>
@@ -117,6 +121,20 @@ export default {
     margin-top: 5px;
     margin-left: 5px;
   }
+  .c-pokemondetails__middle--top {
+    display: flex;
+    height: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(201, 142, 176);
+  }
+
+  .c-pokemondetails__middle--bottom {
+    display: flex;
+    height: 92%;
+  }
 
   .c-pokemondetails__middle {   
     width: 90%;
@@ -125,6 +143,7 @@ export default {
     box-sizing: border-box;
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     background-color: white;
   }
 
@@ -149,6 +168,7 @@ export default {
     flex-direction: column;
     align-items: left;
     justify-content: space-evenly;
+    margin-right: 2px;
     background-color: yellow;
   }
 
