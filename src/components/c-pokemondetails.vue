@@ -121,8 +121,10 @@ export default {
   }
 
   .c-pokemondetails__image {   
-    width: 100%;
+    width: 90%;
     height: 100%;
+    border: 10px solid gray;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     background-color: white;
@@ -132,14 +134,13 @@ export default {
     width: 200px;
     height: 200px;
     margin-right: auto;
-    margin-left: auto;
-    border-radius: 10%;
     background-color: green;
   }
 
   .c-pokemondetails__bottom {
-    height: 100%;
+    height: 60%;
     width: 100%;
+    margin-top: 15px;
     background-color: rgb(108, 108, 212);
   }
 
