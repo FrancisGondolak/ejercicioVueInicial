@@ -37,7 +37,6 @@ export default {
 <style lang="scss" scoped>
 
 .c-warning {
-    // background-color: var(--color-form-background);
     background-color: var(--color-form-background);
     width: 40%;
     height: 100%;
