@@ -2,7 +2,9 @@
     <l-login>
         <template #form>
             <img class="v-login__form--title" src="src/components/assets/images/pookedex.png" alt="introduceDatos">
-            <CWarning v-if="showWarning"/>
+            <CWarning v-if="showWarning"
+            @dismissWarning="closeWarning"
+            />
             <div class="formBox" v-else>
                 <CInput 
                 type="text" 
@@ -93,9 +95,9 @@ export default {
                 this.password = "";
             }
         },
-        dismissWarning() {
-            this.showWarning = false;
-        }     
+        closeWarning(newValue) {
+                this.showWarning = newValue;
+        }   
     }
 };
 </script>
