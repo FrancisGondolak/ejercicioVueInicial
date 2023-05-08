@@ -24,7 +24,9 @@
             >
             </c-pokemon>
         </template>
-        <!-- cuando la variable select esté en true, va a mostrar este otro template -->
+        <!-- cuando la variable select esté en true, va a mostrar este otro template. Recibe además
+        el aviso cuando el pokemon ha dejado de estar seleccionado (con el evento pokemonUnselected)
+        poniendo la variable select de nuevo en false para que se muestre el listado Pokémon-->
         <template #pokedex v-else>
             <c-pokedex
                 :pokemonshown="pokemonshown"
@@ -89,6 +91,8 @@ import CPokedex from '@/components/c-pokedex.vue';
                 this.pokemonshown = pokemonselected;
                 this.select = selected;
             },
+            //el padre recibe el emit desde c-pokedex con el método closePokedex() que deselecciona el Pokémon
+            //devolviendo la variable select a false para que se muestre de nuevo el listado de Pokémon
             unselectedPokemon(newValue) {
                 this.select = newValue;
             }

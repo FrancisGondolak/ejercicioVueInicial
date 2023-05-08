@@ -39,6 +39,7 @@ export default {
     box-shadow: var(--color-input-shadow-deselected);
     background-color: rgb(35, 90, 241);
     color: var(--color-button-text);
+    outline: none;
 }
 
 .c-input::placeholder {

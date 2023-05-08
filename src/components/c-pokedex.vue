@@ -31,7 +31,7 @@
           </section>
           <section class="c-pokedex__bottom--bottom">
             <div class="long_bar_yellow"></div>
-            <div class="medium_circle_red" @click=pulsaPokemon></div>
+            <div class="medium_circle_red" @click=closePokedex></div>
           </section>
         </section>
     </div>
@@ -53,10 +53,10 @@ export default {
       }
     },
     methods: {
-      getColor(type) {
+      getColor() {
         return "background-color: var(--color-PokemonType--" + this.pokemonshown.type +");";
       },
-      pulsaPokemon() {
+      closePokedex() {
         this.$emit('pokemonUnselected', this.selected);  
       }
     }
@@ -78,12 +78,11 @@ export default {
     align-items: center;
     justify-content: center;
     box-shadow: var(--color-shadow-boxPokemon);
-    background-color: rgb(252, 57, 57);
+    background-color: var(--color-backgroundPokedex);
   }
 
   .c-pokedex__top {
     width: 100%;
-    // background-color: purple;
     margin-bottom: 15px;
     display: flex;
     flex-direction: row;
@@ -146,13 +145,13 @@ export default {
   .c-pokedex__middle {   
     width: 90%;
     height: 100%;
-    border: 10px solid gray;
+    border: var(--color-border-screenPokedex);
     border-radius: 10px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
   }
 
   .c-pokedex__image {
