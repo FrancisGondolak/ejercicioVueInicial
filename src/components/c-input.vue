@@ -33,7 +33,7 @@ export default {
 
 .c-input{
     margin: 10px;
-    width: 70%;
+    width: 95%;
     height: 3rem;
     border-radius: 10px;
     box-shadow: var(--color-input-shadow-deselected);

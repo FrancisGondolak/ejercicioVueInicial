@@ -16,14 +16,14 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .c-button {
     background-color: var(--color-button-background);
     color: var(--color-button-text);
     padding: 1rem 2rem;
     border-radius: 12px;
-    margin: 1rem;
+    margin: 2rem;
     width: 9rem;
     cursor: pointer;
 }

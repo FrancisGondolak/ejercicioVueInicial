@@ -1,8 +1,8 @@
 <template>
     <section class="l-login">
-        <slot name="login_warning"></slot>
         <div class="l-login__form">
             <slot name="form" />
+            <slot name="login_warning" />
         </div>
     </section>
 </template>
@@ -19,9 +19,11 @@ export default {
 
 .l-login {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: auto;
+    margin-top: 100px;
 }
 
 .l-login__form{

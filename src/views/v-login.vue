@@ -1,28 +1,24 @@
 <template>
     <l-login>
-        <template #login_warning v-if="showWarning">
-            <c-warning
-                :pokemonshown="pokemonshown"
-                @pokemonUnselected="unselectedPokemon"
-            >
-            </c-warning>
-        </template>
         <template #form>
             <img class="v-login__form--title" src="src/components/assets/images/pookedex.png" alt="introduceDatos">
-            <CInput
-            type="text" 
-            placeholder="Introduce el usuario" 
-            v-model="username"
-            />
-            <CInput
-            type="password" 
-            placeholder="Introduce el password" 
-            v-model="password"
-            />
-            <CButton
-            buttonMessage="Login"
-            @click=checkForm
-            ></CButton>
+            <CWarning v-if="showWarning"/>
+            <div class="formBox" v-else>
+                <CInput 
+                type="text" 
+                placeholder="Introduce el usuario" 
+                v-model="username"
+                />
+                <CInput
+                type="password" 
+                placeholder="Introduce el password" 
+                v-model="password"
+                />
+                <CButton
+                buttonMessage="Login"
+                @click=checkForm
+                ></CButton>
+            </div>
             <p class="v-login__form--advice" v-if="!userCorrect || !passwordCorrect">{{ advice }}</p>
             <p class="v-login__form--p" v-else-if="userCorrect && passwordCorrect">{{ welcome }}</p> 
         </template>    
@@ -33,6 +29,7 @@
 import LLogin from "@/layouts/l-login.vue"
 import CInput from "@/components/c-input.vue"
 import CButton from "@/components/c-button.vue"
+import CWarning from "@/components/c-warning.vue"
 import { userStore } from "@/stores/user"
 
 
@@ -41,7 +38,8 @@ export default {
     components: {
         LLogin,
         CInput,
-        CButton
+        CButton,
+        CWarning
     },
     data() {
         return {
@@ -74,7 +72,7 @@ export default {
                 return "";
             }
 
-            return "Nombre de usuario: " + this.username;
+            return "Bienvenido/a " + this.username;
         }
     },
     methods: {
@@ -106,8 +104,15 @@ export default {
 
 .v-login__form--title {
     width: 60%;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.formBox {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .v-login__form--advice {
