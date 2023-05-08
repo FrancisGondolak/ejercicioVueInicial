@@ -9,6 +9,7 @@
         <section class="c-pokedex__middle">
           <section class="c-pokedex__middle--top">
             <span class="c-pokedex--name">{{ pokemonshown.name }}</span>
+            <audio autoplay :src=getSound(pokemonshown.name)></audio>
           </section>
           <section class="c-pokedex__middle--bottom">
             <div class="c-pokedex__image">
@@ -55,6 +56,9 @@ export default {
     methods: {
       getColor() {
         return "background-color: var(--color-PokemonType--" + this.pokemonshown.type +");";
+      },
+      getSound(name) {
+        return "src/components/assets/audio/" + name + "Sound.mp3"
       },
       closePokedex() {
         this.$emit('pokemonUnselected', this.selected);  
