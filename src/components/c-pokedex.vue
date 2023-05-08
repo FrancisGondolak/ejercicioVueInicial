@@ -1,5 +1,6 @@
 <template>
     <div class="c-pokedex">
+      <audio autoplay src="src/components/assets/audio/openPokedex.mp3"></audio>
         <section class="c-pokedex__top">
           <div class="big_circle_blue"></div>
           <div class="small_circle_red"></div>
@@ -9,7 +10,6 @@
         <section class="c-pokedex__middle">
           <section class="c-pokedex__middle--top">
             <span class="c-pokedex--name">{{ pokemonshown.name }}</span>
-            <!-- si la variable playAudio está en true, reproduce el audio -->
             <audio autoplay :src=getSound(pokemonshown.name) v-if="playAudio"></audio>
           </section>
           <section class="c-pokedex__middle--bottom">
