@@ -89,14 +89,15 @@ export default {
             if(doLogin) {
                 this.$router.push({name:'list'});
             }else{
-                // alert("Usuario y/o contraseña incorrectos");
                 this.showWarning = true;
+                this.advice = "Usuario o contraseña incorrectos";
                 this.username = "";
                 this.password = "";
             }
         },
         closeWarning(newValue) {
                 this.showWarning = newValue;
+                this.advice = "El usuario y la contraseña han de tener un mínimo de 6 caracteres";
         }   
     }
 };
@@ -118,12 +119,14 @@ export default {
 }
 
 .v-login__form--advice {
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: bold;
     color: var(--color-form-advice);
 }
 
 .v-login__form--p {
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
