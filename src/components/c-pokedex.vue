@@ -1,35 +1,35 @@
 <template>
-    <div class="c-pokemondetails">
-        <section class="c-pokemondetails__top">
+    <div class="c-pokedex">
+        <section class="c-pokedex__top">
           <div class="big_circle_blue"></div>
           <div class="small_circle_red"></div>
           <div class="small_circle_orange"></div>
           <div class="small_circle_green"></div>
         </section>
-        <section class="c-pokemondetails__middle">
-          <section class="c-pokemondetails__middle--top">
-            <span class="c-pokemondetails--name">{{ pokemonshown.name }}</span>
+        <section class="c-pokedex__middle">
+          <section class="c-pokedex__middle--top">
+            <span class="c-pokedex--name">{{ pokemonshown.name }}</span>
           </section>
-          <section class="c-pokemondetails__middle--bottom">
-            <div class="c-pokemondetails__image">
+          <section class="c-pokedex__middle--bottom">
+            <div class="c-pokedex__image">
               <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name">
             </div>  
-            <div class="c-pokemondetails__info">
-              <span class="c-pokemondetails--type"><b>Tipo: </b>{{ pokemonshown.type }}</span>
-              <span class="c-pokemondetails--number"><b>Número: </b>{{ pokemonshown.number }}</span>
-              <span class="c-pokemondetails--weight"><b>Peso: </b>{{ pokemonshown.weight }}</span>
-              <span class="c-pokemondetails--height"><b>Altura: </b>{{ pokemonshown.height }}</span>
-              <span class="c-pokemondetails--description"><b>Descripción: </b>{{ pokemonshown.description }}</span>
+            <div class="c-pokedex__info">
+              <span class="c-pokedex--type"><b>Tipo: </b>{{ pokemonshown.type }}</span>
+              <span class="c-pokedex--number"><b>Número: </b>{{ pokemonshown.number }}</span>
+              <span class="c-pokedex--weight"><b>Peso: </b>{{ pokemonshown.weight }}</span>
+              <span class="c-pokedex--height"><b>Altura: </b>{{ pokemonshown.height }}</span>
+              <span class="c-pokedex--description"><b>Descripción: </b>{{ pokemonshown.description }}</span>
             </div>
           </section>  
         </section>
-        <section class="c-pokemondetails__bottom">
-          <section class="c-pokemondetails__bottom--top">
+        <section class="c-pokedex__bottom">
+          <section class="c-pokedex__bottom--top">
             <div class="medium_circle_darkblue"></div>
             <div class="medium_bar_green"></div>
             <div class="medium_bar_yellow"></div>
           </section>
-          <section class="c-pokemondetails__bottom--bottom">
+          <section class="c-pokedex__bottom--bottom">
             <div class="long_bar_yellow"></div>
             <div class="medium_circle_red" @click=pulsaPokemon></div>
           </section>
@@ -40,7 +40,7 @@
 <script>
 
 export default {
-    name: "c-pokemondetails",
+    name: "c-pokedex",
     props: {
         pokemonshown: {
             type: Object,
@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 
-  .c-pokemondetails {
+  .c-pokedex {
     border: 5px solid black;
     border-radius: 15px;
     margin-top: 20px;
@@ -81,7 +81,7 @@ export default {
     background-color: rgb(252, 57, 57);
   }
 
-  .c-pokemondetails__top {
+  .c-pokedex__top {
     width: 100%;
     // background-color: purple;
     margin-bottom: 15px;
@@ -128,7 +128,7 @@ export default {
     margin-top: 5px;
     margin-left: 5px;
   }
-  .c-pokemondetails__middle--top {
+  .c-pokedex__middle--top {
     display: flex;
     height: 6%;
     margin-left: auto;
@@ -138,12 +138,12 @@ export default {
     cursor: default;
   }
 
-  .c-pokemondetails__middle--bottom {
+  .c-pokedex__middle--bottom {
     display: flex;
     height: 92%;
   }
 
-  .c-pokemondetails__middle {   
+  .c-pokedex__middle {   
     width: 90%;
     height: 100%;
     border: 10px solid gray;
@@ -155,7 +155,7 @@ export default {
     background-color: white;
   }
 
-  .c-pokemondetails__image {
+  .c-pokedex__image {
     width: 50%;
     height: 100%;
     display: flex;
@@ -168,7 +168,7 @@ export default {
     height: 70%;
   }
 
-  .c-pokemondetails__info {
+  .c-pokedex__info {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -178,13 +178,13 @@ export default {
     cursor: default;
   }
 
-  .c-pokemondetails__bottom {
+  .c-pokedex__bottom {
     height: 60%;
     width: 100%;
     margin-top: 15px;
   }
 
-  .c-pokemondetails__bottom--top {
+  .c-pokedex__bottom--top {
     width: 100%;
     height: 45%;
     display: flex;
@@ -219,7 +219,7 @@ export default {
     margin-top: 5px;
     margin-left: 15px;
   }
-  .c-pokemondetails__bottom--bottom {
+  .c-pokedex__bottom--bottom {
     width: 100%;
     height: 45%;
     display: flex;

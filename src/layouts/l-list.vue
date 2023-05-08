@@ -10,7 +10,7 @@
             </div>
             <div class="l-listCenter__nameList">
                 <slot name="pokemonList" />
-                <slot name="pokemonDetails"></slot>
+                <slot name="pokedex"></slot>
             </div>
         </section> 
         <section class="l-listRight">

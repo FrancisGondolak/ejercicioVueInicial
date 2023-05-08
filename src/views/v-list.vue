@@ -25,12 +25,12 @@
             </c-pokemon>
         </template>
         <!-- cuando la variable select esté en true, va a mostrar este otro template -->
-        <template #pokemonDetails v-else>
-            <c-pokemondetails
+        <template #pokedex v-else>
+            <c-pokedex
                 :pokemonshown="pokemonshown"
                 @pokemonUnselected="unselectedPokemon"
             >
-            </c-pokemondetails>
+            </c-pokedex>
         </template>
     </l-list>
 </template>
@@ -44,7 +44,7 @@ import { charactersStore } from '@/stores/characters';
 import LList from '@/layouts/l-list.vue';
 import CPokemon from '@/components/c-pokemon.vue';
 import CPokeball from '@/components/c-pokeball.vue';
-import CPokemondetails from '@/components/c-pokemondetails.vue';
+import CPokedex from '@/components/c-pokedex.vue';
 
     export default {
         name: "v-list",
@@ -53,7 +53,7 @@ import CPokemondetails from '@/components/c-pokemondetails.vue';
             LList,
             CPokemon,
             CPokeball,
-            CPokemondetails
+            CPokedex
         },
 
         data() {
