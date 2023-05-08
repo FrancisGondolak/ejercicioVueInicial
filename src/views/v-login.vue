@@ -1,5 +1,12 @@
 <template>
     <l-login>
+        <template #login_warning v-if="showWarning">
+            <c-warning
+                :pokemonshown="pokemonshown"
+                @pokemonUnselected="unselectedPokemon"
+            >
+            </c-warning>
+        </template>
         <template #form>
             <img class="v-login__form--title" src="src/components/assets/images/pookedex.png" alt="introduceDatos">
             <CInput
@@ -42,7 +49,8 @@ export default {
             password: "",
             advice: "El usuario y la contraseña han de tener un mínimo de 6 caracteres",
             userCorrect: false,
-            passwordCorrect: false
+            passwordCorrect: false,
+            showWarning: false
         }
     },
     watch: {
@@ -81,10 +89,14 @@ export default {
             if(doLogin) {
                 this.$router.push({name:'list'});
             }else{
-                alert("Usuario y/o contraseña incorrectos");
+                // alert("Usuario y/o contraseña incorrectos");
+                this.showWarning = true;
                 this.username = "";
                 this.password = "";
             }
+        },
+        dismissWarning() {
+            this.showWarning = false;
         }     
     }
 };

@@ -1,5 +1,6 @@
 <template>
     <section class="l-login">
+        <slot name="login_warning"></slot>
         <div class="l-login__form">
             <slot name="form" />
         </div>
