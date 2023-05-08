@@ -9,7 +9,8 @@
         <section class="c-pokedex__middle">
           <section class="c-pokedex__middle--top">
             <span class="c-pokedex--name">{{ pokemonshown.name }}</span>
-            <audio autoplay :src=getSound(pokemonshown.name)></audio>
+            <!-- si la variable playAudio está en true, reproduce el audio -->
+            <audio autoplay :src=getSound(pokemonshown.name) v-if="playAudio"></audio>
           </section>
           <section class="c-pokedex__middle--bottom">
             <div class="c-pokedex__image">
@@ -26,7 +27,7 @@
         </section>
         <section class="c-pokedex__bottom">
           <section class="c-pokedex__bottom--top">
-            <div class="medium_circle_darkblue"></div>
+            <div class="medium_circle_darkblue" @click=playingAudio></div>
             <div class="medium_bar_green"></div>
             <div class="medium_bar_yellow"></div>
           </section>
@@ -50,7 +51,8 @@ export default {
     },
     data() {
       return {
-        selected: false
+        selected: false,
+        playAudio: false
       }
     },
     methods: {
@@ -59,6 +61,13 @@ export default {
       },
       getSound(name) {
         return "src/components/assets/audio/" + name + "Sound.mp3"
+      },
+      //función para reproducir el audio al pulsar sobre el botón darkblue de la Pokédex. Creamos dentro 
+      //una función setTimeout para hacer que ponga en false al cabo de 100 ms la variable playAudio y
+      //así poder repetir el audio al pulsar sobre el botón
+      playingAudio() {
+        setTimeout(() => {this.playAudio = true}, 100)
+        this.playAudio = false
       },
       closePokedex() {
         this.$emit('pokemonUnselected', this.selected);  
@@ -201,6 +210,12 @@ export default {
     height: 50px;
     margin-top: 5px;
     margin-left: 15px;
+    box-shadow: var(--color-shadow-buttonPokedex);
+    cursor: pointer;
+  }
+
+  .medium_circle_darkblue:hover {
+    transform: scale(0.9);
   }
 
   .medium_bar_green {
