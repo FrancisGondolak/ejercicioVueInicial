@@ -6,7 +6,8 @@
             <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
         </div>
         <div class="c-pokemon__pokemonImage" v-if="!pokeball">
-            <img class="pokemonImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @mouseleave=openPokeball>     
+            <img class="pokemonImage" :src="pokemon.image" :alt="'imagen' + pokemon.name" @mouseleave=openPokeball> 
+            <audio autoplay src="src/components/assets/audio/pokeballOpen.mp3"></audio>    
         </div>
         <div v-else class="c-pokemon__pokeballImage">
           <img class="pokeballImage" src="src/components/assets/images/pokeball.png" alt="pokeballIcon" @click=openPokeball>
@@ -69,7 +70,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .c-pokemon {
     border: 5px solid black;
@@ -139,7 +140,7 @@ export default {
   }
 
   button:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
   }
 
 </style>
