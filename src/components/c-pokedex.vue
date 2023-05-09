@@ -1,6 +1,5 @@
 <template>
   <div class="c-pokedex">
-    <audio autoplay src="src/components/assets/audio/openPokedex.mp3"></audio>
     <section class="c-pokedex__top">
       <div class="big_circle_blue"></div>
       <div class="small_circle_red"></div>
@@ -29,7 +28,10 @@
     </section>
     <section class="c-pokedex__bottom">
       <section class="c-pokedex__bottom--top">
-        <div class="medium_circle_darkblue" @click="playingAudio"></div>
+        <div class="medium_circle_darkblue" @click="playingAudio">
+          <audio autoplay src="src/components/assets/audio/openPokedex.mp3" />
+          <img class="soundIcon" src="src/components/assets/icons/soundIcon.svg" alt="soundIcon" />
+        </div>
         <div class="medium_bar_green"></div>
         <div class="medium_bar_yellow"></div>
       </section>
@@ -38,7 +40,7 @@
         <div class="medium_circle_red" @click="closePokedex">
           <img
             class="turnOffIcon"
-            src="src/components/assets/icons/turnOff.svg"
+            src="src/components/assets/icons/turnOffIcon.svg"
             alt="turnOffIcon"
           />
         </div>
@@ -219,11 +221,19 @@ export default {
   margin-top: 5px;
   margin-left: 15px;
   box-shadow: var(--color-shadow-buttonPokedex);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
 .medium_circle_darkblue:hover {
   transform: scale(0.9);
+}
+
+.soundIcon {
+  width: 80%;
+  height: 80%;
 }
 
 .medium_bar_green {
@@ -283,6 +293,5 @@ export default {
 .turnOffIcon {
   width: 80%;
   height: 80%;
-  cursor: pointer;
 }
 </style>
