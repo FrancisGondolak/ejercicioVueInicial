@@ -1,9 +1,7 @@
 <template>
   <div class="c-pokemon" :style="getColor(pokemon.type)">
     <div class="c-pokemon__info">
-      <span class="c-pokemon--name">Nombre: {{ pokemon.name }}</span>
-      <span class="c-pokemon--type">Tipo: {{ pokemon.type }}</span>
-      <span class="c-pokemon--number">Número: {{ pokemon.number }}</span>
+      <span class="c-pokemon--name">{{ pokemon.name }}</span>
     </div>
     <div class="c-pokemon__pokemonImage" v-if="!pokeball">
       <img
@@ -95,6 +93,10 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
+  height: 6%;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'papyrus';
   cursor: default;
 }
 
@@ -115,7 +117,6 @@ export default {
   :not(:hover) {
     animation: shake 1s infinite;
   }
-  background-color: green;
 }
 
 .c-pokemon__pokeballImage:hover {

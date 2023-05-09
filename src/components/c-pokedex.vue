@@ -255,7 +255,7 @@ export default {
   cursor: pointer;
 }
 
-.medium_circle_darkblue:hover {
+.medium_circle_darkblue:active {
   transform: scale(0.9);
 }
 
