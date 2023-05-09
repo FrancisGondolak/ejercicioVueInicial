@@ -115,7 +115,6 @@ export default {
   :not(:hover) {
     animation: shake 1s infinite;
   }
-  background-color: green;
 }
 
 .c-pokemon__pokeballImage:hover {
