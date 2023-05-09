@@ -14,15 +14,15 @@
       <section class="c-pokedex__middle--bottom">
         <div class="c-pokedex__image">
           <img
-            v-if="!pixelImage"
+            v-if="imageNumber === -1"
             class="pokeImage"
             :src="pokemonshown.image"
             :alt="'imagen' + pokemonshown.name"
           />
           <img
-            v-if="pixelImage"
+            v-else
             class="pokeImage"
-            :src="pokemonshown.pixel + pokemonshown.name + imageNumber + '.png'"
+            :src="pokemonshown.pixel + pokemonshown.name + imageNumber + archiveExtension"
             :alt="'imagenPixel' + pokemonshown.name"
           />
         </div>
@@ -43,8 +43,8 @@
           <audio autoplay :src="getSound(pokemonshown.name)" v-if="playAudio" />
           <img class="soundIcon" src="src/components/assets/icons/soundIcon.svg" alt="soundIcon" />
         </div>
-        <div class="medium_bar_green" @click="showPixelImage"></div>
-        <div class="medium_bar_yellow"></div>
+        <div class="medium_bar_green" @click="imageBack"></div>
+        <div class="medium_bar_yellow" @click="imageAdvance"></div>
       </section>
       <section class="c-pokedex__bottom--bottom">
         <div class="long_bar_yellow"></div>
@@ -74,7 +74,8 @@ export default {
       selected: false,
       playAudio: false,
       pixelImage: false,
-      imageNumber: 0
+      archiveExtension: '.png',
+      imageNumber: -1
     }
   },
   methods: {
@@ -95,6 +96,25 @@ export default {
     },
     showPixelImage() {
       this.pixelImage = !this.pixelImage
+    },
+    imageAdvance() {
+      this.archiveExtension = '.png'
+      if (this.imageNumber === 3) {
+        this.archiveExtension = '.gif'
+      }
+      if (this.imageNumber > 3) {
+        this.imageNumber = -1
+      } else {
+        this.imageNumber += 1
+      }
+    },
+    imageBack() {
+      this.archiveExtension = '.png'
+      if (this.imageNumber < 0) {
+        this.imageNumber = -1
+      } else {
+        this.imageNumber -= 1
+      }
     },
     closePokedex() {
       this.$emit('pokemonUnselected', this.selected)
@@ -300,10 +320,16 @@ export default {
   border: var(--color-border-elementsPokedex);
   background: rgb(196, 199, 27);
   border-radius: 20px;
+  box-shadow: var(--color-shadow-buttonPokedex);
   width: 25%;
   height: 30px;
   margin-top: 5px;
   margin-left: 15px;
+  cursor: pointer;
+}
+
+.medium_bar_yellow:active {
+  transform: scale(0.9);
 }
 .c-pokedex__bottom--bottom {
   width: 100%;
