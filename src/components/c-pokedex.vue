@@ -1,7 +1,9 @@
 <template>
   <div class="c-pokedex">
     <section class="c-pokedex__top">
-      <div class="big_circle_blue"></div>
+      <div class="big_circle_blue">
+        <div class="tiny_circle_white"></div>
+      </div>
       <div class="small_circle_red"></div>
       <div class="small_circle_orange"></div>
       <div class="small_circle_green"></div>
@@ -119,6 +121,45 @@ export default {
   height: 100%;
   margin-top: 5px;
   margin-left: 5px;
+  position: relative;
+  overflow: hidden;
+}
+// .tiny_circle_white {
+//   border: var(--color-border-elementsPokedex);
+//   background: rgb(255, 255, 255);
+//   border-radius: 50%;
+//   width: 5%;
+//   height: 5%;
+//   margin-top: 5px;
+//   margin-left: 15px;
+//   transition: 4s;
+//   transform: translate(10px, 0px);
+// }
+
+.big_circle_blue:after {
+  content: '';
+  transform: translateX(100%);
+  width: 30%;
+  height: 120%;
+  position: absolute;
+  z-index: 1;
+  animation: slide 5s infinite;
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(128, 186, 232, 0) 99%,
+    rgba(125, 185, 232, 0) 100%
+  );
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
 }
 
 .small_circle_red {
