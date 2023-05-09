@@ -55,7 +55,7 @@ app.get('/characters/getAll', (req, res) => {
       type: 'Planta',
       number: '01',
       image: 'https://upload.wikimedia.org/wikipedia/en/2/28/Pok%C3%A9mon_Bulbasaur_art.png',
-      pixel: 'src/components/assets/images/spriteBulbasaur.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: "6'9 kg",
       height: "0'7 m",
       description:
@@ -66,7 +66,7 @@ app.get('/characters/getAll', (req, res) => {
       type: 'Fuego',
       number: '04',
       image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Pok%C3%A9mon_Charmander_art.png',
-      pixel: 'src/components/assets/images/spriteCharmander.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: "8'5 kg",
       height: "0'6 m",
       description:
@@ -77,7 +77,7 @@ app.get('/characters/getAll', (req, res) => {
       type: 'Agua',
       number: '07',
       image: 'https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png',
-      pixel: 'src/components/assets/images/spriteSquirtle.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: "9'0 kg",
       height: "0'5 m",
       description:
@@ -88,7 +88,7 @@ app.get('/characters/getAll', (req, res) => {
       type: 'Electricidad',
       number: '25',
       image: 'https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png',
-      pixel: 'src/components/assets/images/spritePikachu.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: "6'0 kg",
       height: "0'4 m",
       description:
@@ -99,7 +99,7 @@ app.get('/characters/getAll', (req, res) => {
       type: 'Agua',
       number: '54',
       image: 'https://upload.wikimedia.org/wikipedia/it/thumb/3/32/Psyduck.png/1200px-Psyduck.png',
-      pixel: 'src/components/assets/images/spritePsyduck.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: "19'6 kg",
       height: "0'8 m",
       description:
@@ -111,7 +111,7 @@ app.get('/characters/getAll', (req, res) => {
       number: '150',
       image:
         'https://images.wikidexcdn.net/mwuploads/wikidex/d/d3/latest/20190408034831/Mewtwo.png',
-      pixel: 'src/components/assets/images/spriteMewtwo.png',
+      pixel: 'src/components/assets/images/sprite',
       weight: '122 kg',
       height: "2'0 m",
       description:

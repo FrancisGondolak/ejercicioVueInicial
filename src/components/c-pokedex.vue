@@ -22,7 +22,7 @@
           <img
             v-if="pixelImage"
             class="pokeImage"
-            :src="pokemonshown.pixel"
+            :src="pokemonshown.pixel + pokemonshown.name + imageNumber + '.png'"
             :alt="'imagenPixel' + pokemonshown.name"
           />
         </div>
@@ -73,7 +73,8 @@ export default {
     return {
       selected: false,
       playAudio: false,
-      pixelImage: false
+      pixelImage: false,
+      imageNumber: 0
     }
   },
   methods: {
@@ -94,7 +95,6 @@ export default {
     },
     showPixelImage() {
       this.pixelImage = !this.pixelImage
-      console.log(this.pokemonshown.type)
     },
     closePokedex() {
       this.$emit('pokemonUnselected', this.selected)
@@ -284,10 +284,16 @@ export default {
   border: var(--color-border-elementsPokedex);
   background: rgb(26, 201, 20);
   border-radius: 20px;
+  box-shadow: var(--color-shadow-buttonPokedex);
   width: 25%;
   height: 30px;
   margin-top: 5px;
   margin-left: 15px;
+  cursor: pointer;
+}
+
+.medium_bar_green:active {
+  transform: scale(0.9);
 }
 
 .medium_bar_yellow {
@@ -330,7 +336,7 @@ export default {
   cursor: pointer;
 }
 
-.medium_circle_red:hover {
+.medium_circle_red:active {
   transform: scale(0.9);
 }
 
