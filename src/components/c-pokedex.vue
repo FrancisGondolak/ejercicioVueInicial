@@ -1,9 +1,8 @@
 <template>
   <div class="c-pokedex">
+    <audio autoplay src="src/components/assets/audio/openPokedex.mp3" />
     <section class="c-pokedex__top">
-      <div class="big_circle_blue">
-        <div class="tiny_circle_white"></div>
-      </div>
+      <div class="big_circle_blue"></div>
       <div class="small_circle_red"></div>
       <div class="small_circle_orange"></div>
       <div class="small_circle_green"></div>
@@ -11,7 +10,6 @@
     <section class="c-pokedex__middle">
       <section class="c-pokedex__middle--top">
         <span class="c-pokedex--name">{{ pokemonshown.name }}</span>
-        <audio autoplay :src="getSound(pokemonshown.name)" v-if="playAudio"></audio>
       </section>
       <section class="c-pokedex__middle--bottom">
         <div class="c-pokedex__image">
@@ -31,7 +29,7 @@
     <section class="c-pokedex__bottom">
       <section class="c-pokedex__bottom--top">
         <div class="medium_circle_darkblue" @click="playingAudio">
-          <audio autoplay src="src/components/assets/audio/openPokedex.mp3" />
+          <audio autoplay :src="getSound(pokemonshown.name)" v-if="playAudio" />
           <img class="soundIcon" src="src/components/assets/icons/soundIcon.svg" alt="soundIcon" />
         </div>
         <div class="medium_bar_green"></div>
@@ -124,17 +122,6 @@ export default {
   position: relative;
   overflow: hidden;
 }
-// .tiny_circle_white {
-//   border: var(--color-border-elementsPokedex);
-//   background: rgb(255, 255, 255);
-//   border-radius: 50%;
-//   width: 5%;
-//   height: 5%;
-//   margin-top: 5px;
-//   margin-left: 15px;
-//   transition: 4s;
-//   transform: translate(10px, 0px);
-// }
 
 .big_circle_blue:after {
   content: '';
@@ -143,7 +130,7 @@ export default {
   height: 120%;
   position: absolute;
   z-index: 1;
-  animation: slide 5s infinite;
+  animation: shine 5s infinite;
   background: -webkit-linear-gradient(
     left,
     rgba(255, 255, 255, 0) 0%,
@@ -153,7 +140,7 @@ export default {
   );
 }
 
-@keyframes slide {
+@keyframes shine {
   0% {
     transform: translateX(-100%);
   }
