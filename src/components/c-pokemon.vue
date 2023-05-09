@@ -41,6 +41,7 @@ export default {
         type: this.pokemon.type,
         number: this.pokemon.number,
         image: this.pokemon.image,
+        pixel: this.pokemon.pixel,
         weight: this.pokemon.weight,
         height: this.pokemon.height,
         description: this.pokemon.description

@@ -13,7 +13,18 @@
       </section>
       <section class="c-pokedex__middle--bottom">
         <div class="c-pokedex__image">
-          <img class="pokeImage" :src="pokemonshown.image" :alt="'imagen' + pokemonshown.name" />
+          <img
+            v-if="!pixelImage"
+            class="pokeImage"
+            :src="pokemonshown.image"
+            :alt="'imagen' + pokemonshown.name"
+          />
+          <img
+            v-if="pixelImage"
+            class="pokeImage"
+            :src="pokemonshown.pixel"
+            :alt="'imagenPixel' + pokemonshown.name"
+          />
         </div>
         <div class="c-pokedex__info">
           <span class="c-pokedex--type"><b>Tipo: </b>{{ pokemonshown.type }}</span>
@@ -32,7 +43,7 @@
           <audio autoplay :src="getSound(pokemonshown.name)" v-if="playAudio" />
           <img class="soundIcon" src="src/components/assets/icons/soundIcon.svg" alt="soundIcon" />
         </div>
-        <div class="medium_bar_green"></div>
+        <div class="medium_bar_green" @click="showPixelImage"></div>
         <div class="medium_bar_yellow"></div>
       </section>
       <section class="c-pokedex__bottom--bottom">
@@ -61,7 +72,8 @@ export default {
   data() {
     return {
       selected: false,
-      playAudio: false
+      playAudio: false,
+      pixelImage: false
     }
   },
   methods: {
@@ -79,6 +91,10 @@ export default {
         this.playAudio = true
       }, 100)
       this.playAudio = false
+    },
+    showPixelImage() {
+      this.pixelImage = !this.pixelImage
+      console.log(this.pokemonshown.type)
     },
     closePokedex() {
       this.$emit('pokemonUnselected', this.selected)
