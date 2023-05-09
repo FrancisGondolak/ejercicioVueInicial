@@ -91,7 +91,7 @@ export default {
 }
 
 .c-pokemon__info {
-  width: 40%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -99,7 +99,7 @@ export default {
 }
 
 .c-pokemon__pokemonImage {
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: space-around;
   :hover {
@@ -109,12 +109,13 @@ export default {
 }
 
 .c-pokemon__pokeballImage {
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: space-around;
   :not(:hover) {
     animation: shake 1s infinite;
   }
+  background-color: green;
 }
 
 .c-pokemon__pokeballImage:hover {
