@@ -69,4 +69,53 @@ export default {
   display: flex;
   justify-content: left;
 }
+
+//TAMAÑO LAPTOP Y TABLET//
+
+@media only screen and (max-width: 1854px) {
+  .l-listCenter {
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .l-listCenter__title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .l-listCenter__nameList {
+    width: 65%;
+  }
+}
+
+//TAMAÑO MÓVIL//
+
+@media only screen and (max-width: 635px) {
+  .l-listLeft {
+    display: none !important;
+  }
+  .l-listCenter {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .l-listCenter__title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .l-listCenter__nameList {
+    width: 85%;
+  }
+  .l-listRight {
+    display: none;
+  }
+}
 </style>
