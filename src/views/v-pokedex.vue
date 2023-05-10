@@ -5,14 +5,13 @@
     </template>
     <template #title>
       <img
-        class="tituloLista"
-        src="src/components/assets/images/listadoPokemon.png"
-        alt="tituloLista"
+        class="tituloPokedex"
+        src="src/components/assets/images/pokedex.png"
+        alt="tituloPokedex"
       />
     </template>
-    <template #pokemonList>
-      <c-pokemon v-for="character in characters" :key="character.number" :pokemon="character">
-      </c-pokemon>
+    <template #pokedex>
+      <c-pokedex :pokemonshown="pokemonshown" :pokemonselected="pokemonSelected"> </c-pokedex>
     </template>
   </l-list>
 </template>
@@ -20,46 +19,56 @@
 <script>
 import { charactersStore } from '@/stores/characters'
 import LList from '@/layouts/l-list.vue'
-import CPokemon from '@/components/c-pokemon.vue'
 import CPokeball from '@/components/c-pokeball.vue'
+import CPokedex from '@/components/c-pokedex.vue'
 
 export default {
-  name: 'v-list',
+  name: 'v-pokedex',
 
   components: {
     LList,
-    CPokemon,
-    CPokeball
+    CPokeball,
+    CPokedex
   },
 
   data() {
     return {
       characters: [],
       fetched: false,
-      error: false
+      error: false,
+      pokemonshown: {},
+      pokemonSelected: this.$route.params.pokemonNumber
     }
   },
 
   methods: {
-    async getAllCharacters() {
+    async getAllCharacters(pokemonSelected) {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
         this.fetched = true
+        this.getPokemon(pokemonSelected)
       } catch (error) {
         this.error = true
+      }
+    },
+    getPokemon(pokemonSelected) {
+      for (let i = 0; i < this.characters.length; i++) {
+        if (pokemonSelected === this.characters[i].number) {
+          this.pokemonshown = this.characters[i]
+        }
       }
     }
   },
 
   created() {
-    this.getAllCharacters()
+    this.getAllCharacters(this.pokemonSelected)
   }
 }
 </script>
 
 <style lang="scss">
-.tituloLista {
+.tituloPokedex {
   width: 80%;
 }
 </style>
