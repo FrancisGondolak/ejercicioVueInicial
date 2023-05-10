@@ -64,7 +64,6 @@ export default {
     //un objeto pokemonselected con los datos (name, type, etc...) del Pokemon sobre el que se ha pulsado
     //y un booleano (selected) con valor true
     showPokedex() {
-      console.log(this.pokemonselected.name)
       this.$emit('pokemonSelected', {
         pokemonselected: this.pokemonselected,
         selected: this.selected
