@@ -41,27 +41,18 @@ export default {
     }
   },
 
-  props: {},
-
-  watch: {},
-
-  computed: {},
-
   methods: {
     async getAllCharacters(pokemonSelected) {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
         this.fetched = true
-        console.log(pokemonSelected)
         this.getPokemon(pokemonSelected)
       } catch (error) {
         this.error = true
       }
     },
     getPokemon(pokemonSelected) {
-      console.log('entro en getPokemon')
-      //aqui tengo que buscar el pokemon seleccionado en el array de Pokemon y guardarlo en el objeto pokemonshown
       for (let i = 0; i < this.characters.length; i++) {
         if (pokemonSelected === this.characters[i].number) {
           this.pokemonshown = this.characters[i]
