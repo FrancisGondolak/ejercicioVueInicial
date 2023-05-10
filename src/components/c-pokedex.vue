@@ -43,8 +43,20 @@
           <audio autoplay :src="getSound(pokemonshown.name)" v-if="playAudio" />
           <img class="soundIcon" src="src/components/assets/icons/soundIcon.svg" alt="soundIcon" />
         </div>
-        <div class="medium_bar_green" @click="imageBack"></div>
-        <div class="medium_bar_yellow" @click="imageAdvance"></div>
+        <div class="medium_bar_green" @click="imageBack">
+          <img
+            class="arrowsIcon"
+            src="src/components/assets/icons/backIcon.svg"
+            alt="backArrowsIcon"
+          />
+        </div>
+        <div class="medium_bar_yellow" @click="imageAdvance">
+          <img
+            class="arrowsIcon"
+            src="src/components/assets/icons/advanceIcon.svg"
+            alt="advanceArrowsIcon"
+          />
+        </div>
       </section>
       <section class="c-pokedex__bottom--bottom">
         <div class="long_bar_yellow"></div>
@@ -337,6 +349,11 @@ export default {
 
 .medium_bar_yellow:active {
   transform: scale(0.9);
+}
+
+.arrowsIcon {
+  width: 100%;
+  height: 100%;
 }
 .c-pokedex__bottom--bottom {
   width: 100%;
