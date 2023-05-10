@@ -98,22 +98,29 @@ export default {
       this.pixelImage = !this.pixelImage
     },
     imageAdvance() {
-      this.archiveExtension = '.png'
-      if (this.imageNumber === 3) {
-        this.archiveExtension = '.gif'
+      this.imageNumber += 1
+
+      if (this.imageNumber > 4) {
+        this.imageNumber = 4
       }
-      if (this.imageNumber > 3) {
-        this.imageNumber = -1
+
+      if (this.imageNumber === 4) {
+        this.archiveExtension = '.gif'
       } else {
-        this.imageNumber += 1
+        this.archiveExtension = '.png'
       }
     },
     imageBack() {
-      this.archiveExtension = '.png'
+      this.imageNumber -= 1
+
       if (this.imageNumber < 0) {
         this.imageNumber = -1
+      }
+
+      if (this.imageNumber === 4) {
+        this.archiveExtension = '.gif'
       } else {
-        this.imageNumber -= 1
+        this.archiveExtension = '.png'
       }
     },
     closePokedex() {
