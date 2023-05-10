@@ -57,7 +57,7 @@ export default {
       alert('Has pulsado sobre ' + name)
     },
     redirigeme() {
-      this.$router.push({ name: 'pokedex' })
+      this.$router.push({ name: 'pokedex', params: { pokemonNumber: this.pokemon.number } })
     },
     //al pulsar sobre el botón Pokédex de cualquier caja de Pokemon invocamos esta función, la cual
     //emite hacia el padre (v-list) un evento llamado pokemonSelected y le pasa
