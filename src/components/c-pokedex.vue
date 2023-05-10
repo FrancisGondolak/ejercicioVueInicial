@@ -61,10 +61,7 @@
       <section class="c-pokedex__bottom--bottom">
         <div class="long_bar_yellow">
           <p>
-            Hola que tal estás yo muy bien gracias y este es el texto de prueba para ver si se
-            desplaza cómodamente por la pantalla de derecha a izquierda sin cortes ni nada por el
-            estilo no vaya a ser que la haya fastidiado sin querer y luego me cuesta mucho
-            arreglarlo todo jejejeje
+            {{ pokemonshown.description }}
           </p>
         </div>
         <div class="medium_circle_red" @click="closePokedex">
