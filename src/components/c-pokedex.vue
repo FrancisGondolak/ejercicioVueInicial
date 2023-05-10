@@ -94,9 +94,6 @@ export default {
     }
   },
   methods: {
-    getColor() {
-      return 'background-color: var(--color-PokemonType--' + this.pokemonshown.type + ');'
-    },
     getSound(name) {
       return 'src/components/assets/audio/' + name + 'Sound.mp3'
     },

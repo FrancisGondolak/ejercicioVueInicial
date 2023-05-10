@@ -11,7 +11,7 @@
       />
     </template>
     <template #pokedex>
-      <c-pokedex :pokemonshown="pokemonshown" @pokemonUnselected="unselectedPokemon"> </c-pokedex>
+      <c-pokedex :pokemonshown="pokemonshown" :pokemonselected="pokemonSelected"> </c-pokedex>
     </template>
   </l-list>
 </template>
@@ -36,8 +36,8 @@ export default {
       characters: [],
       fetched: false,
       error: false,
-      select: false,
-      pokemonshown: {}
+      pokemonshown: {},
+      pokemonSelected: this.$route.params.pokemonNumber
     }
   },
 
@@ -48,31 +48,30 @@ export default {
   computed: {},
 
   methods: {
-    async getAllCharacters() {
+    async getAllCharacters(pokemonSelected) {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
         this.fetched = true
+        console.log(pokemonSelected)
+        this.getPokemon(pokemonSelected)
       } catch (error) {
         this.error = true
       }
     },
-    //cuando el padre reciba el aviso de $emit desde el hijo va a lanzar este método que
-    //va a setear el valor de la variable select de data() en true y va a guardar en el
-    //objeto pokemonshown el objeto pokemonselected que le llega desde c-pokemon
-    selectedPokemon({ pokemonselected, selected }) {
-      this.pokemonshown = pokemonselected
-      this.select = selected
-    },
-    //el padre recibe el emit desde c-pokedex con el método closePokedex() que deselecciona el Pokémon
-    //devolviendo la variable select a false para que se muestre de nuevo el listado de Pokémon
-    unselectedPokemon(newValue) {
-      this.select = newValue
+    getPokemon(pokemonSelected) {
+      console.log('entro en getPokemon')
+      //aqui tengo que buscar el pokemon seleccionado en el array de Pokemon y guardarlo en el objeto pokemonshown
+      for (let i = 0; i < this.characters.length; i++) {
+        if (pokemonSelected === this.characters[i].number) {
+          this.pokemonshown = this.characters[i]
+        }
+      }
     }
   },
 
   created() {
-    this.getAllCharacters()
+    this.getAllCharacters(this.pokemonSelected)
   }
 }
 </script>
