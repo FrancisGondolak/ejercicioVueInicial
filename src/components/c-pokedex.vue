@@ -89,7 +89,6 @@ export default {
     return {
       selected: false,
       playAudio: false,
-      pixelImage: false,
       archiveExtension: '.png',
       imageNumber: -1
     }
@@ -109,9 +108,6 @@ export default {
         this.playAudio = true
       }, 100)
       this.playAudio = false
-    },
-    showPixelImage() {
-      this.pixelImage = !this.pixelImage
     },
     imageAdvance() {
       this.imageNumber += 1
