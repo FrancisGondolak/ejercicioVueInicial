@@ -59,10 +59,8 @@
         </div>
       </section>
       <section class="c-pokedex__bottom--bottom">
-        <div class="long_bar_yellow">
-          <p>
-            {{ pokemonshown.movements }}
-          </p>
+        <div class="long_bar_green">
+          <p><b>Movimientos: </b>{{ pokemonshown.movements }}</p>
         </div>
         <div class="medium_circle_red" @click="closePokedex">
           <img
@@ -164,7 +162,7 @@ export default {
 }
 
 .big_circle_blue {
-  border: var(--color-border-elementsPokedex);
+  border: 4px solid rgb(255, 255, 255);
   background: rgb(50, 184, 224);
   border-radius: 50%;
   width: 15%;
@@ -358,22 +356,23 @@ export default {
   display: flex;
 }
 
-.long_bar_yellow {
+.long_bar_green {
   border: var(--color-border-elementsPokedex);
-  background: rgb(196, 199, 27);
+  background: rgb(122, 228, 136);
   border-radius: 20px;
   width: 75%;
   height: 60px;
   margin-top: 5px;
   margin-left: 15px;
-  color: white;
+  color: rgb(5, 2, 2);
   overflow: hidden;
   display: flex;
   align-items: center;
 }
-.long_bar_yellow p {
+.long_bar_green p {
   animation: textScrolling 30s linear infinite;
   white-space: nowrap;
+  font-size: 30px;
 }
 @keyframes textScrolling {
   0% {
