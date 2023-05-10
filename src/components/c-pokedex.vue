@@ -59,7 +59,14 @@
         </div>
       </section>
       <section class="c-pokedex__bottom--bottom">
-        <div class="long_bar_yellow"></div>
+        <div class="long_bar_yellow">
+          <p>
+            Hola que tal estás yo muy bien gracias y este es el texto de prueba para ver si se
+            desplaza cómodamente por la pantalla de derecha a izquierda sin cortes ni nada por el
+            estilo no vaya a ser que la haya fastidiado sin querer y luego me cuesta mucho
+            arreglarlo todo jejejeje
+          </p>
+        </div>
         <div class="medium_circle_red" @click="closePokedex">
           <img
             class="turnOffIcon"
@@ -369,8 +376,23 @@ export default {
   height: 60px;
   margin-top: 5px;
   margin-left: 15px;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
-
+.long_bar_yellow p {
+  animation: textScrolling 30s linear infinite;
+  white-space: nowrap;
+}
+@keyframes textScrolling {
+  0% {
+    transform: translate(100%, 0%);
+  }
+  100% {
+    transform: translate(-100%, 0%);
+  }
+}
 .medium_circle_red {
   border: 5px solid black;
   background: rgb(255, 8, 0);
