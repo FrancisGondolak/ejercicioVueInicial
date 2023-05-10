@@ -1,7 +1,8 @@
 <template>
-    <section class="l-homeview">
-        <div class="l-homeview__form">
+    <section class="l-login">
+        <div class="l-login__form">
             <slot name="form" />
+            <slot name="login_warning" />
         </div>
     </section>
 </template>
@@ -9,27 +10,28 @@
 <script>
 
 export default {
-    name:"LHomeview"
+    name:"LLogin"
 }
 
 </script>
 
 <style lang="scss">
 
-.l-homeview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-}
-
-.l-homeview__form{
-    border-radius: 30px;
+.l-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70%;
+    height: auto;
+    padding-top: 100px;
+}
+
+.l-login__form{
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
     width: 40%;
     background: var(--color-form-background);
     box-shadow: var(--color-form-shadow);

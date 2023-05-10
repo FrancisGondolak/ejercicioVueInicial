@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import Login from '@/views/v-login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,18 +7,18 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: Login
     },
     {
       path: '/list',
       name: 'list',
       component: () => import('@/views/v-list.vue')
     },
-    // {
-    //   path: '*',
-    //   name: 'unknow',
-    //   component: () => import('@/views/v-error.vue')
-    // }
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'unknow',
+      component: () => import('@/views/v-error.vue')
+    }
   ]
 })
 

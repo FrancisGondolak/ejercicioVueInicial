@@ -2,9 +2,11 @@
 
 html,
 body {
-    height: 100vh;
-    margin: 0;
-    background: linear-gradient(to bottom right, var(--color-background), var(--color-background2)) ;
-    display: grid;
-    align-items: center;
+    height: 100%;
+    margin: 0;  
+    background: var(--color-background);
+}
+
+#app {
+    height: 100%;
 }
