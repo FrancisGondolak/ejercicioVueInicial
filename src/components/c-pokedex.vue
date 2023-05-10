@@ -136,7 +136,8 @@ export default {
       }
     },
     closePokedex() {
-      this.$emit('pokemonUnselected', this.selected)
+      // this.$emit('pokemonUnselected', this.selected)
+      this.$router.push({ name: 'list' })
     }
   }
 }
