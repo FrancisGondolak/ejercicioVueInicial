@@ -61,7 +61,7 @@
       <section class="c-pokedex__bottom--bottom">
         <div class="long_bar_yellow">
           <p>
-            {{ pokemonshown.description }}
+            {{ pokemonshown.movements }}
           </p>
         </div>
         <div class="medium_circle_red" @click="closePokedex">
