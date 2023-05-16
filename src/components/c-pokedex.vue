@@ -107,6 +107,9 @@ export default {
       }, 100)
       this.playAudio = false
     },
+    pokemonFight() {
+      this.$router.push({ name: 'fight', params: { pokemonNumber: this.pokemonshown.number } })
+    },
     imageAdvance() {
       this.imageNumber += 1
 
