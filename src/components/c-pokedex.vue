@@ -6,6 +6,9 @@
       <div class="small_circle_red"></div>
       <div class="small_circle_orange"></div>
       <div class="small_circle_green"></div>
+      <div class="combatButton" @click="pokemonFight">
+        <img class="fightIcon" src="src/components/assets/icons/fightIcon.svg" alt="fightIcon" />
+      </div>
     </section>
     <section class="c-pokedex__middle">
       <section class="c-pokedex__middle--top">
@@ -227,6 +230,30 @@ export default {
   height: 50%;
   margin-top: 5px;
   margin-left: 5px;
+}
+
+.combatButton {
+  border: 5px solid black;
+  background: rgb(157, 235, 13);
+  box-shadow: var(--color-shadow-buttonPokedex);
+  border-radius: 15%;
+  width: 14%;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 34%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.combatButton:active {
+  transform: scale(0.9);
+}
+
+.fightIcon {
+  width: 120%;
+  height: 120%;
 }
 .c-pokedex__middle--top {
   display: flex;
