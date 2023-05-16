@@ -64,7 +64,7 @@ export default {
 .l-listCenter__title {
   margin-top: 5px;
   margin-bottom: 5px;
-  width: 70%;
+  width: 65%;
   justify-content: center;
   display: flex;
 }
@@ -102,7 +102,7 @@ export default {
 
 //TAMAÑO MÓVIL//
 
-@media only screen and (max-width: 635px) {
+@media only screen and (max-width: 1100px) {
   .l-listLeft {
     display: none !important;
   }
@@ -118,14 +118,26 @@ export default {
   .l-listCenter__title {
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 100%;
+    width: 70%;
   }
 
   .l-listCenter__nameList {
-    width: 85%;
+    width: 60%;
   }
   .l-listRight {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .l-listCenter__title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 80%;
+  }
+
+  .l-listCenter__nameList {
+    width: 90%;
   }
 }
 </style>
