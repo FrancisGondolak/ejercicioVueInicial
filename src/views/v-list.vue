@@ -4,11 +4,7 @@
       <c-pokeball src="src/components/assets/images/pokeball.png" alt="pokeballIcon"></c-pokeball>
     </template>
     <template #title>
-      <img
-        class="tituloLista"
-        src="src/components/assets/images/listadoPokemon.png"
-        alt="tituloLista"
-      />
+      <img class="tituloLista" src="src/components/assets/images/listado.png" alt="tituloLista" />
     </template>
     <template #pokemonList>
       <c-pokemon v-for="character in characters" :key="character.number" :pokemon="character">
@@ -60,6 +56,6 @@ export default {
 
 <style lang="scss">
 .tituloLista {
-  width: 80%;
+  width: 50%;
 }
 </style>

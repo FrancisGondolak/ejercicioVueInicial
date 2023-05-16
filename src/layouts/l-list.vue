@@ -1,12 +1,19 @@
 <template>
   <div class="l-list">
     <section class="l-listLeft">
-      <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
-      <CPokeball v-else></CPokeball>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ipsum excepturi dolores,
+        repellat, temporibus officiis debitis sed ratione harum aliquam ab dignissimos, quas nisi.
+        Molestias numquam voluptatem ipsum officia natus.
+      </p>
     </section>
     <section class="l-listCenter">
       <div class="l-listCenter__title">
+        <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
+        <CPokeball v-else></CPokeball>
         <slot name="title" />
+        <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
+        <CPokeball v-else></CPokeball>
       </div>
       <div class="l-listCenter__nameList">
         <slot name="pokemonList" />
@@ -14,8 +21,11 @@
       </div>
     </section>
     <section class="l-listRight">
-      <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
-      <CPokeball v-else></CPokeball>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ipsum excepturi dolores,
+        repellat, temporibus officiis debitis sed ratione harum aliquam ab dignissimos, quas nisi.
+        Molestias numquam voluptatem ipsum officia natus.
+      </p>
     </section>
   </div>
 </template>
@@ -39,9 +49,9 @@ export default {
 
 .l-listLeft {
   width: 30%;
-  height: 125px;
   display: flex;
-  justify-content: right;
+  flex-direction: column;
+  background-color: green;
 }
 
 .l-listCenter {
@@ -49,14 +59,17 @@ export default {
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  background-color: white;
 }
 
 .l-listCenter__title {
   margin-top: 5px;
   margin-bottom: 5px;
-  text-align: center;
+  width: 70%;
+  justify-content: center;
+  display: flex;
+  background-color: pink;
 }
 
 .l-listCenter__nameList {
@@ -65,9 +78,9 @@ export default {
 
 .l-listRight {
   width: 30%;
-  height: 125px;
   display: flex;
-  justify-content: left;
+  flex-direction: column;
+  background-color: green;
 }
 
 //TAMAÑO LAPTOP Y TABLET//
@@ -87,7 +100,7 @@ export default {
   }
 
   .l-listCenter__nameList {
-    width: 65%;
+    width: 60%;
   }
 }
 
