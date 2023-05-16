@@ -51,7 +51,6 @@ export default {
   width: 30%;
   display: flex;
   flex-direction: column;
-  background-color: green;
 }
 
 .l-listCenter {
@@ -60,7 +59,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
 }
 
 .l-listCenter__title {
@@ -69,7 +67,6 @@ export default {
   width: 70%;
   justify-content: center;
   display: flex;
-  background-color: pink;
 }
 
 .l-listCenter__nameList {
@@ -80,7 +77,6 @@ export default {
   width: 30%;
   display: flex;
   flex-direction: column;
-  background-color: green;
 }
 
 //TAMAÑO LAPTOP Y TABLET//
@@ -122,6 +118,7 @@ export default {
   .l-listCenter__title {
     margin-top: 5px;
     margin-bottom: 5px;
+    width: 100%;
   }
 
   .l-listCenter__nameList {
