@@ -30,13 +30,21 @@ export default {
 .l-fight {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .l-fightTitle {
   background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 30%;
+  justify-content: center;
+  display: flex;
 }
 
 .l-fightScreen {
   background-color: green;
+  width: 90%;
+  height: 800px;
 }
 </style>

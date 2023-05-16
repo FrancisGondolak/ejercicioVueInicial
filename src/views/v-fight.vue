@@ -11,10 +11,33 @@
       />
     </template>
     <template #fight>
-      <p>
+      <section id="fightScreen">
+        <div id="fightScreen__Pokemon">
+          <section id="fightScreen__Pokemon--enemy">
+            <div id="enemyPokemonLife"></div>
+            <div id="enemyPokemonImage">
+              <img :src="route + enemyPokemon.name + extension" alt="" />
+            </div>
+          </section>
+          <section id="fightScreen__Pokemon--mine">
+            <div id="myPokemonLife"></div>
+            <div id="myPokemonImage">
+              <img :src="route + myPokemon.name + extension" alt="" />
+            </div>
+          </section>
+        </div>
+        <div id="fightScreen__log"></div>
+      </section>
+      <section id="fightButtons">
+        <div id="fightButtons__attack01"></div>
+        <div id="fightButtons__attack02"></div>
+        <div id="fightButtons__attack03"></div>
+        <div id="fightButtons__attack04"></div>
+      </section>
+      <!-- <p>
         AQUI IRIA TODO LO NUEVO, LA SCREEN ENTERA {{ this.myPokemon.name }}
         {{ this.enemyPokemon.name }}
-      </p>
+      </p> -->
     </template>
   </l-fight>
 </template>
@@ -39,6 +62,8 @@ export default {
       error: false,
       myPokemon: {},
       pokemonSelected: this.$route.params.pokemonNumber,
+      route: 'src/components/assets/images/sprite',
+      extension: '3.png',
       pokemonTotal: '',
       enemyPokemon: ''
     }
@@ -80,8 +105,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.tituloPokedex {
-  width: 50%;
-}
-</style>
+<style lang="scss" scoped></style>
