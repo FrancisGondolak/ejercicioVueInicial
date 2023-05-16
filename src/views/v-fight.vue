@@ -5,34 +5,34 @@
     </template>
     <template #title>
       <img
-        class="tituloPokedex"
+        class="tituloCombate"
         src="src/components/assets/images/combate.png"
-        alt="tituloPokedex"
+        alt="tituloCombate"
       />
     </template>
     <template #fight>
-      <section id="fightScreen">
-        <div id="fightScreen__Pokemon">
-          <section id="fightScreen__Pokemon--enemy">
-            <div id="enemyPokemonLife"></div>
-            <div id="enemyPokemonImage">
-              <img :src="route + enemyPokemon.name + extension" alt="" />
+      <section class="fightScreen">
+        <div class="fightScreen__Pokemon">
+          <section class="fightScreen__Pokemon--enemy">
+            <div class="enemyPokemonLife"></div>
+            <div class="enemyPokemonImageBox">
+              <img class="enemyPokemonImage" :src="route + enemyPokemon.name + '3.png'" alt="" />
             </div>
           </section>
-          <section id="fightScreen__Pokemon--mine">
-            <div id="myPokemonLife"></div>
-            <div id="myPokemonImage">
-              <img :src="route + myPokemon.name + extension" alt="" />
+          <section class="fightScreen__Pokemon--mine">
+            <div class="myPokemonLife"></div>
+            <div class="myPokemonImageBox">
+              <img class="myPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
             </div>
           </section>
         </div>
-        <div id="fightScreen__log"></div>
+        <div class="fightScreen__log"></div>
       </section>
-      <section id="fightButtons">
-        <div id="fightButtons__attack01"></div>
-        <div id="fightButtons__attack02"></div>
-        <div id="fightButtons__attack03"></div>
-        <div id="fightButtons__attack04"></div>
+      <section class="fightButtons">
+        <div class="fightButtons__attack01"></div>
+        <div class="fightButtons__attack02"></div>
+        <div class="fightButtons__attack03"></div>
+        <div class="fightButtons__attack04"></div>
       </section>
       <!-- <p>
         AQUI IRIA TODO LO NUEVO, LA SCREEN ENTERA {{ this.myPokemon.name }}
@@ -63,7 +63,6 @@ export default {
       myPokemon: {},
       pokemonSelected: this.$route.params.pokemonNumber,
       route: 'src/components/assets/images/sprite',
-      extension: '3.png',
       pokemonTotal: '',
       enemyPokemon: ''
     }
@@ -105,4 +104,34 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tituloCombate {
+  width: 60%;
+}
+.enemyPokemonImageBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enemyPokemonImage {
+  width: 20%;
+  height: 20%;
+}
+
+.myPokemonImageBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+}
+
+.myPokemonImage {
+  width: 30%;
+  height: 30%;
+}
+</style>
