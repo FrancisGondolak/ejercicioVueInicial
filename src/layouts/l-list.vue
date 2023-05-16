@@ -1,12 +1,6 @@
 <template>
   <div class="l-list">
-    <section class="l-listLeft">
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ipsum excepturi dolores,
-        repellat, temporibus officiis debitis sed ratione harum aliquam ab dignissimos, quas nisi.
-        Molestias numquam voluptatem ipsum officia natus.
-      </p>
-    </section>
+    <section class="l-listLeft"></section>
     <section class="l-listCenter">
       <div class="l-listCenter__title">
         <slot v-if="$slots.pokeballIcon" name="pokeballIcon" />
@@ -20,13 +14,7 @@
         <slot name="pokedex"></slot>
       </div>
     </section>
-    <section class="l-listRight">
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ipsum excepturi dolores,
-        repellat, temporibus officiis debitis sed ratione harum aliquam ab dignissimos, quas nisi.
-        Molestias numquam voluptatem ipsum officia natus.
-      </p>
-    </section>
+    <section class="l-listRight"></section>
   </div>
 </template>
 
@@ -55,7 +43,6 @@ export default {
 
 .l-listCenter {
   width: 40%;
-  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
