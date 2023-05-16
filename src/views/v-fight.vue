@@ -1,5 +1,5 @@
 <template>
-  <l-list>
+  <l-fight>
     <template #pokeballIcon>
       <c-pokeball src="src/components/assets/images/pokeball.png" alt="pokeballIcon"></c-pokeball>
     </template>
@@ -11,21 +11,24 @@
       />
     </template>
     <template #fight>
-      <p>AQUI IRIA TODO LO NUEVO, LA SCREEN ENTERA</p>
+      <p>
+        AQUI IRIA TODO LO NUEVO, LA SCREEN ENTERA {{ this.myPokemon.name }}
+        {{ this.enemyPokemon.name }}
+      </p>
     </template>
-  </l-list>
+  </l-fight>
 </template>
 
 <script>
 import { charactersStore } from '@/stores/characters'
-import LList from '@/layouts/l-list.vue'
+import LFight from '@/layouts/l-fight.vue'
 import CPokeball from '@/components/c-pokeball.vue'
 
 export default {
   name: 'v-fight',
 
   components: {
-    LList,
+    LFight,
     CPokeball
   },
 
@@ -34,8 +37,10 @@ export default {
       characters: [],
       fetched: false,
       error: false,
-      pokemonshown: {},
-      pokemonSelected: this.$route.params.pokemonNumber
+      myPokemon: {},
+      pokemonSelected: this.$route.params.pokemonNumber,
+      pokemonTotal: '',
+      enemyPokemon: ''
     }
   },
 
@@ -45,17 +50,27 @@ export default {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
         this.fetched = true
-        this.getPokemon(pokemonSelected)
+        this.getMyPokemon(pokemonSelected)
       } catch (error) {
         this.error = true
       }
     },
-    getPokemon(pokemonSelected) {
+    getMyPokemon(pokemonSelected) {
       for (let i = 0; i < this.characters.length; i++) {
         if (pokemonSelected === this.characters[i].number) {
-          this.pokemonshown = this.characters[i]
+          this.myPokemon = this.characters[i]
         }
       }
+      this.choosePokemonEnemy()
+    },
+    choosePokemonEnemy() {
+      //guardamos en pokemonTotal la longitud del array de Pokemon
+      this.pokemonTotal = this.characters.length
+      //con un Math.random elegimos al azar un número del total de la longitud del array
+      //y lo asignamos a enemyPokemon
+      this.enemyPokemon = Math.floor(Math.random() * this.pokemonTotal)
+      //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
+      this.enemyPokemon = this.characters[this.enemyPokemon]
     }
   },
 
