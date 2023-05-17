@@ -29,36 +29,44 @@
         </section>
 
         <section class="gameboy__middle">
+          <!-- SECTION QUE CONTIENE LA LUZ DE ENCENDIDO -->
           <section class="gameboyPower">
             <div class="gameboyPower__light"></div>
             <div class="gameboyPower__letters">
               <p>BATTERY</p>
             </div>
           </section>
+
+          <!-- SECTION QUE CONTIENE LA PANTALLA PROPIAMENTE DICHA -->
           <section class="gameboyScreen">
+            <!-- DIV QUE CONTIENE LA PARTE SUPERIOR DE LA PANTALLA -->
             <div class="gameboyScreen__top">
-              <div class="fightScreen">
-                <div class="fightScreen__Pokemon">
-                  <section class="fightScreen__Pokemon--enemy">
-                    <div class="enemyPokemonLife"></div>
-                    <div class="enemyPokemonImageBox">
-                      <img
-                        class="enemyPokemonImage"
-                        :src="route + enemyPokemon.name + '3.png'"
-                        alt=""
-                      />
-                    </div>
-                  </section>
-                  <section class="fightScreen__Pokemon--mine">
-                    <div class="myPokemonLife"></div>
-                    <div class="myPokemonImageBox">
-                      <img class="myPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
-                    </div>
-                  </section>
-                </div>
-                <div class="fightScreen__log"></div>
+              <!-- DIV QUE CONTIENE LA ZONA DONDE SE MUESTRA EL COMBATE -->
+              <div class="gameboyScreen__top--combat">
+                <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON ENEMIGO -->
+                <section class="enemyPokemon__zone">
+                  <div class="enemyPokemonData"></div>
+                  <div class="enemyPokemonImageBox">
+                    <img
+                      class="enemyPokemonImage"
+                      :src="route + enemyPokemon.name + '3.png'"
+                      alt=""
+                    />
+                  </div>
+                </section>
+                <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
+                <section class="ownPokemon__zone">
+                  <div class="ownPokemonImageBox">
+                    <img class="ownPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
+                  </div>
+                  <div class="ownPokemonData"></div>
+                </section>
               </div>
+
+              <!-- DIV QUE CONTIENE LOS MENSAJES DEL COMBATE -->
+              <div class="gameboyScreen__top--log"></div>
             </div>
+            <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
               <div class="fightButtons">
                 <div class="fightButtons__attack01"></div>
@@ -257,13 +265,23 @@ export default {
 }
 
 .gameboyScreen__top {
-  height: 75%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
   background-color: green;
 }
-.fightScreen__Pokemon--enemy {
+.gameboyScreen__top--combat {
+  height: 70%;
   display: flex;
-  align-items: flex-end;
-  background-color: pink;
+  flex-direction: column;
+  border: 5px solid black;
+}
+.enemyPokemon__zone {
+  height: 50%;
+  display: flex;
+}
+.enemyPokemonData {
+  background-color: aqua;
 }
 .enemyPokemonImageBox {
   width: 50%;
@@ -280,7 +298,11 @@ export default {
   height: 20%;
 }
 
-.myPokemonImageBox {
+.ownPokemon__zone {
+  height: 50%;
+  background-color: brown;
+}
+.ownPokemonImageBox {
   width: 50%;
   height: 100%;
   display: flex;
@@ -289,13 +311,18 @@ export default {
   background-color: rgb(204, 141, 141);
 }
 
-.myPokemonImage {
+.ownPokemonImage {
   width: 30%;
   height: 30%;
 }
 
+.gameboyScreen__top--log {
+  height: 30%;
+  border: 5px solid red;
+}
+
 .gameboyScreen_down {
-  height: 25%;
+  height: 20%;
   width: 100%;
   background-color: blue;
 }
