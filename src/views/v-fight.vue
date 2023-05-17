@@ -206,7 +206,7 @@ export default {
 
 .gameboy__middle {
   display: flex;
-  height: 80%;
+  height: 85%;
 }
 
 .gameboyPower {
@@ -225,10 +225,10 @@ export default {
   height: 5%;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px,
     rgba(255, 0, 0, 0.5) 0 2px 12px;
-  animation: blinkRed 2s infinite;
+  animation: flashingLight 2s infinite;
 }
 
-@keyframes blinkRed {
+@keyframes flashingLight {
   from {
     background-color: rgb(255, 0, 0);
   }
@@ -245,10 +245,19 @@ export default {
   font-size: 20px;
   color: white;
 }
+
+//A PARTIR DE AQUÍ ES DONDE ESTÁ LA PANTALLA DE GAME BOY PROPIAMENTE DICHA
 .gameboyScreen {
   height: 100%;
   width: 80%;
   margin: 0 auto 10px 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.gameboyScreen__top {
+  height: 75%;
   background-color: green;
 }
 .fightScreen__Pokemon--enemy {
@@ -286,9 +295,8 @@ export default {
 }
 
 .gameboyScreen_down {
-  height: 20%;
-  width: 80%;
-  margin: 10px auto 100px auto;
+  height: 25%;
+  width: 100%;
   background-color: blue;
 }
 </style>
