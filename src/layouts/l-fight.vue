@@ -46,7 +46,7 @@ export default {
 .l-fightScreen {
   border: 5px solid gray;
   background-color: gray;
-  border-radius: 20px;
+  border-radius: 30px 30px 160px 30px;
   width: 70%;
   height: 900px;
 }

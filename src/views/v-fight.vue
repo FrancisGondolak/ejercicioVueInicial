@@ -3,6 +3,7 @@
     <template #pokeballIcon>
       <c-pokeball src="src/components/assets/images/pokeball.png" alt="pokeballIcon"></c-pokeball>
     </template>
+
     <template #title>
       <img
         class="tituloCombate"
@@ -18,7 +19,9 @@
             <div class="longStripe__red"></div>
             <div class="longStripe__blue"></div>
           </div>
-          <div class="gameboy__top--letters"></div>
+          <div class="gameboy__top--letters">
+            <p>DOT MATRIX WITH STEREO SOUND</p>
+          </div>
           <div class="gameboy__top--rightStripes">
             <div class="shortStripe__red"></div>
             <div class="shortStripe__blue"></div>
@@ -52,10 +55,6 @@
         <div class="fightButtons__attack03"></div>
         <div class="fightButtons__attack04"></div>
       </section>
-      <!-- <p>
-        AQUI IRIA TODO LO NUEVO, LA SCREEN ENTERA {{ this.myPokemon.name }}
-        {{ this.enemyPokemon.name }}
-      </p> -->
     </template>
   </l-fight>
 </template>
@@ -123,13 +122,74 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//ESTILOS DEL ENCABEZADO DE LA PÁGINA
 .tituloCombate {
   width: 60%;
 }
+
+//ESTILOS DE LOS ADORNOS DE LA PANTALLA DE GAMEBOY
+
+.gameboy {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameboy__top {
+  display: flex;
+  height: 10%;
+}
+.gameboy__top--leftStripes {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.longStripe__red {
+  width: 97%;
+  height: 15%;
+  margin: 19px 5px 5px 20px;
+  background-color: rgb(168, 12, 12);
+}
+
+.longStripe__blue {
+  width: 97%;
+  height: 15%;
+  margin: 0 5px 19px 20px;
+  background-color: rgb(27, 27, 170);
+}
+
+.gameboy__top--letters {
+  width: auto;
+}
+
+.gameboy__top--letters > p {
+  color: white;
+  font-size: 20px;
+}
+
+.gameboy__top--rightStripes {
+  width: 22%;
+}
+
+.shortStripe__red {
+  width: 95%;
+  height: 15%;
+  margin: 19px 20px 5px 5px;
+  background-color: rgb(168, 12, 12);
+}
+
+.shortStripe__blue {
+  width: 95%;
+  height: 15%;
+  margin: 0 20px 19px 5px;
+  background-color: rgb(27, 27, 170);
+}
+
+//ESTILOS DE LA PANTALLA DE LA GAMEBOY
 .fightScreen {
   height: 60%;
   width: 80%;
-  margin: 100px auto 10px auto;
+  margin: 0 auto 10px auto;
   background-color: red;
 }
 .fightScreen__Pokemon--enemy {
