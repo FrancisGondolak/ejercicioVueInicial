@@ -10,6 +10,24 @@
         alt="tituloCombate"
       />
     </template>
+
+    <template #gameboy>
+      <div class="gameboy">
+        <div class="gameboy__top">
+          <div class="gameboy__top--leftStripes">
+            <div class="longStripe__red"></div>
+            <div class="longStripe__blue"></div>
+          </div>
+          <div class="gameboy__top--letters"></div>
+          <div class="gameboy__top--rightStripes">
+            <div class="shortStripe__red"></div>
+            <div class="shortStripe__blue"></div>
+          </div>
+        </div>
+        <div class="gameboy__left"></div>
+      </div>
+    </template>
+
     <template #fight>
       <section class="fightScreen">
         <div class="fightScreen__Pokemon">
@@ -108,12 +126,25 @@ export default {
 .tituloCombate {
   width: 60%;
 }
+.fightScreen {
+  height: 60%;
+  width: 80%;
+  margin: 100px auto 10px auto;
+  background-color: red;
+}
+.fightScreen__Pokemon--enemy {
+  display: flex;
+  align-items: flex-end;
+  background-color: pink;
+}
 .enemyPokemonImageBox {
   width: 50%;
   height: 100%;
   display: flex;
+
   align-items: center;
   justify-content: center;
+  background-color: red;
 }
 
 .enemyPokemonImage {
@@ -127,11 +158,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: grey;
+  background-color: rgb(204, 141, 141);
 }
 
 .myPokemonImage {
   width: 30%;
   height: 30%;
+}
+
+.fightButtons {
+  height: 20%;
+  width: 80%;
+  margin: 10px auto 100px auto;
+  background-color: blue;
 }
 </style>
