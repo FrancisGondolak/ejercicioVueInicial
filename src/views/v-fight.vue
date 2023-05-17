@@ -47,7 +47,10 @@
                 <section class="enemyPokemon__zone">
                   <div class="enemyPokemonData">
                     <div class="enemyPokemonData__name">{{ enemyPokemonName }}</div>
-                    <div class="enemyPokemonData__life"></div>
+                    <div class="enemyPokemonData__life">
+                      <div class="enemyPokemonData__life--HPIcon">HP:</div>
+                      <div class="enemyPokemonData__life--bar"></div>
+                    </div>
                   </div>
                   <div class="enemyPokemonImageBox">
                     <img
@@ -64,7 +67,10 @@
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ myPokemonName }}</div>
-                    <div class="ownPokemonData__life"></div>
+                    <div class="ownPokemonData__life">
+                      <div class="ownPokemonData__life--HPIcon">HP:</div>
+                      <div class="ownPokemonData__life--bar"></div>
+                    </div>
                   </div>
                 </section>
               </div>
@@ -306,8 +312,27 @@ export default {
 
 .enemyPokemonData__life {
   height: 70%;
+  display: flex;
   border: 5px solid blue;
 }
+
+.enemyPokemonData__life--HPIcon {
+  width: 10%;
+  height: 40%;
+  color: rgb(206, 206, 32);
+  font-size: 35px;
+  text-align: center;
+  background-color: black;
+  margin: auto 0 auto 5px;
+}
+
+.enemyPokemonData__life--bar {
+  width: 100%;
+  height: 25%;
+  margin: auto 0 auto 0;
+  background-color: rgb(26, 201, 26);
+}
+
 .enemyPokemonImageBox {
   width: 40%;
   height: 100%;
@@ -358,7 +383,25 @@ export default {
 
 .ownPokemonData__life {
   height: 70%;
+  display: flex;
   border: 5px solid blue;
+}
+
+.ownPokemonData__life--HPIcon {
+  width: 10%;
+  height: 25%;
+  color: rgb(206, 206, 32);
+  font-size: 35px;
+  text-align: center;
+  background-color: black;
+  margin: auto 0 90px 0;
+}
+
+.ownPokemonData__life--bar {
+  width: 100%;
+  height: 15%;
+  margin: auto 5px 100px 0;
+  background-color: rgb(26, 201, 26);
 }
 
 .gameboyScreen__top--log {
