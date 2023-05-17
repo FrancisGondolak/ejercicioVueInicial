@@ -10,7 +10,6 @@
 
     <section class="l-fightScreen">
       <slot name="gameboy" />
-      <slot name="fight" />
     </section>
   </div>
 </template>
@@ -35,7 +34,6 @@ export default {
 }
 
 .l-fightTitle {
-  background-color: white;
   margin-top: 5px;
   margin-bottom: 5px;
   width: 30%;

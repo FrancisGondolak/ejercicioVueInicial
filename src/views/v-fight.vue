@@ -14,7 +14,7 @@
 
     <template #gameboy>
       <div class="gameboy">
-        <div class="gameboy__top">
+        <section class="gameboy__top">
           <div class="gameboy__top--leftStripes">
             <div class="longStripe__red"></div>
             <div class="longStripe__blue"></div>
@@ -26,35 +26,50 @@
             <div class="shortStripe__red"></div>
             <div class="shortStripe__blue"></div>
           </div>
-        </div>
-        <div class="gameboy__left"></div>
-      </div>
-    </template>
+        </section>
 
-    <template #fight>
-      <section class="fightScreen">
-        <div class="fightScreen__Pokemon">
-          <section class="fightScreen__Pokemon--enemy">
-            <div class="enemyPokemonLife"></div>
-            <div class="enemyPokemonImageBox">
-              <img class="enemyPokemonImage" :src="route + enemyPokemon.name + '3.png'" alt="" />
+        <section class="gameboy__middle">
+          <section class="gameboyPower">
+            <div class="gameboyPower__light"></div>
+            <div class="gameboyPower__letters">
+              <p>BATTERY</p>
             </div>
           </section>
-          <section class="fightScreen__Pokemon--mine">
-            <div class="myPokemonLife"></div>
-            <div class="myPokemonImageBox">
-              <img class="myPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
+          <section class="gameboyScreen">
+            <div class="gameboyScreen__top">
+              <div class="fightScreen">
+                <div class="fightScreen__Pokemon">
+                  <section class="fightScreen__Pokemon--enemy">
+                    <div class="enemyPokemonLife"></div>
+                    <div class="enemyPokemonImageBox">
+                      <img
+                        class="enemyPokemonImage"
+                        :src="route + enemyPokemon.name + '3.png'"
+                        alt=""
+                      />
+                    </div>
+                  </section>
+                  <section class="fightScreen__Pokemon--mine">
+                    <div class="myPokemonLife"></div>
+                    <div class="myPokemonImageBox">
+                      <img class="myPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
+                    </div>
+                  </section>
+                </div>
+                <div class="fightScreen__log"></div>
+              </div>
+            </div>
+            <div class="gameboyScreen_down">
+              <div class="fightButtons">
+                <div class="fightButtons__attack01"></div>
+                <div class="fightButtons__attack02"></div>
+                <div class="fightButtons__attack03"></div>
+                <div class="fightButtons__attack04"></div>
+              </div>
             </div>
           </section>
-        </div>
-        <div class="fightScreen__log"></div>
-      </section>
-      <section class="fightButtons">
-        <div class="fightButtons__attack01"></div>
-        <div class="fightButtons__attack02"></div>
-        <div class="fightButtons__attack03"></div>
-        <div class="fightButtons__attack04"></div>
-      </section>
+        </section>
+      </div>
     </template>
   </l-fight>
 </template>
@@ -127,16 +142,18 @@ export default {
   width: 60%;
 }
 
-//ESTILOS DE LOS ADORNOS DE LA PANTALLA DE GAMEBOY
+//ESTILOS DE LA PARTE SUPERIOR DE LA GAME BOY
 
 .gameboy {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .gameboy__top {
   display: flex;
-  height: 10%;
+  height: 6%;
+  justify-content: center;
 }
 .gameboy__top--leftStripes {
   width: 55%;
@@ -147,14 +164,14 @@ export default {
 .longStripe__red {
   width: 97%;
   height: 15%;
-  margin: 19px 5px 5px 20px;
+  margin: 20px 5px 5px 20px;
   background-color: rgb(168, 12, 12);
 }
 
 .longStripe__blue {
   width: 97%;
   height: 15%;
-  margin: 0 5px 19px 20px;
+  margin: 0px 5px 0px 20px;
   background-color: rgb(27, 27, 170);
 }
 
@@ -174,23 +191,65 @@ export default {
 .shortStripe__red {
   width: 95%;
   height: 15%;
-  margin: 19px 20px 5px 5px;
+  margin: 20px 20px 5px 5px;
   background-color: rgb(168, 12, 12);
 }
 
 .shortStripe__blue {
   width: 95%;
   height: 15%;
-  margin: 0 20px 19px 5px;
+  margin: 0px 20px 0px 5px;
   background-color: rgb(27, 27, 170);
 }
 
-//ESTILOS DE LA PANTALLA DE LA GAMEBOY
-.fightScreen {
-  height: 60%;
+//ESTILOS DE LA PARTE MEDIA DE LA GAME BOY
+
+.gameboy__middle {
+  display: flex;
+  height: 80%;
+}
+
+.gameboyPower {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameboyPower__light {
+  background-color: rgb(255, 0, 0);
+  border-radius: 50%;
+  width: 25%;
+  height: 5%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px,
+    rgba(255, 0, 0, 0.5) 0 2px 12px;
+  animation: blinkRed 2s infinite;
+}
+
+@keyframes blinkRed {
+  from {
+    background-color: rgb(255, 0, 0);
+  }
+  50% {
+    background-color: rgb(170, 0, 0);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px,
+      rgba(255, 0, 0, 0.5) 0 2px 0;
+  }
+  to {
+    background-color: rgb(255, 0, 0);
+  }
+}
+.gameboyPower__letters > p {
+  font-size: 20px;
+  color: white;
+}
+.gameboyScreen {
+  height: 100%;
   width: 80%;
-  margin: 0 auto 10px auto;
-  background-color: red;
+  margin: 0 auto 10px 0;
+  background-color: green;
 }
 .fightScreen__Pokemon--enemy {
   display: flex;
@@ -226,7 +285,7 @@ export default {
   height: 30%;
 }
 
-.fightButtons {
+.gameboyScreen_down {
   height: 20%;
   width: 80%;
   margin: 10px auto 100px auto;
