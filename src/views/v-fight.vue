@@ -45,7 +45,10 @@
               <div class="gameboyScreen__top--combat">
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON ENEMIGO -->
                 <section class="enemyPokemon__zone">
-                  <div class="enemyPokemonData"></div>
+                  <div class="enemyPokemonData">
+                    <div class="enemyPokemonData__name">{{ enemyPokemonName }}</div>
+                    <div class="enemyPokemonData__life"></div>
+                  </div>
                   <div class="enemyPokemonImageBox">
                     <img
                       class="enemyPokemonImage"
@@ -59,7 +62,10 @@
                   <div class="ownPokemonImageBox">
                     <img class="ownPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
                   </div>
-                  <div class="ownPokemonData"></div>
+                  <div class="ownPokemonData">
+                    <div class="ownPokemonData__name">{{ myPokemonName }}</div>
+                    <div class="ownPokemonData__life"></div>
+                  </div>
                 </section>
               </div>
 
@@ -68,11 +74,11 @@
             </div>
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
-              <div class="fightButtons">
-                <div class="fightButtons__attack01"></div>
-                <div class="fightButtons__attack02"></div>
-                <div class="fightButtons__attack03"></div>
-                <div class="fightButtons__attack04"></div>
+              <div class="gameboyScreen_down--buttons">
+                <div class="button_01"></div>
+                <div class="button_02"></div>
+                <div class="button_03"></div>
+                <div class="button_04"></div>
               </div>
             </div>
           </section>
@@ -104,7 +110,9 @@ export default {
       pokemonSelected: this.$route.params.pokemonNumber,
       route: 'src/components/assets/images/sprite',
       pokemonTotal: '',
-      enemyPokemon: ''
+      enemyPokemon: '',
+      myPokemonName: '',
+      enemyPokemonName: ''
     }
   },
 
@@ -125,6 +133,7 @@ export default {
           this.myPokemon = this.characters[i]
         }
       }
+      this.myPokemonName = this.myPokemon.name.toUpperCase()
       this.choosePokemonEnemy()
     },
     choosePokemonEnemy() {
@@ -135,6 +144,7 @@ export default {
       this.enemyPokemon = Math.floor(Math.random() * this.pokemonTotal)
       //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
       this.enemyPokemon = this.characters[this.enemyPokemon]
+      this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
     }
   },
 
@@ -277,33 +287,47 @@ export default {
   border: 5px solid black;
 }
 .enemyPokemon__zone {
-  height: 50%;
+  height: 40%;
   display: flex;
 }
 .enemyPokemonData {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
   background-color: aqua;
 }
+
+.enemyPokemonData__name {
+  height: 30%;
+  font-size: 50px;
+  padding-left: 10px;
+  border: 5px solid green;
+}
+
+.enemyPokemonData__life {
+  height: 70%;
+  border: 5px solid blue;
+}
 .enemyPokemonImageBox {
-  width: 50%;
+  width: 40%;
   height: 100%;
   display: flex;
-
   align-items: center;
   justify-content: center;
   background-color: red;
 }
 
 .enemyPokemonImage {
-  width: 20%;
-  height: 20%;
+  width: 40%;
+  height: 100%;
 }
 
 .ownPokemon__zone {
-  height: 50%;
-  background-color: brown;
+  height: 60%;
+  display: flex;
 }
 .ownPokemonImageBox {
-  width: 50%;
+  width: 40%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -312,8 +336,29 @@ export default {
 }
 
 .ownPokemonImage {
-  width: 30%;
+  width: 60%;
+  height: 100%;
+}
+
+.ownPokemonData {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(173, 118, 118);
+}
+
+.ownPokemonData__name {
   height: 30%;
+  font-size: 55px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+  border: 5px solid green;
+}
+
+.ownPokemonData__life {
+  height: 70%;
+  border: 5px solid blue;
 }
 
 .gameboyScreen__top--log {
