@@ -89,7 +89,9 @@
                 </div>
               </div>
               <div class="gameboyScreen_down--center">
-                <div class="pokeballMini"></div>
+                <div class="pokeballCircle">
+                  <div class="pokeballButton"></div>
+                </div>
               </div>
               <div class="gameboyScreen_down--right">
                 <div class="attackButton__up">
@@ -291,19 +293,20 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: white;
+  border: 5px solid black;
 }
 
 .gameboyScreen__top {
   height: 80%;
   display: flex;
   flex-direction: column;
-  background-color: green;
+  // background-color: green;
 }
 .gameboyScreen__top--combat {
   height: 70%;
   display: flex;
   flex-direction: column;
-  border: 5px solid black;
+  // border: 5px solid black;
 }
 .enemyPokemon__zone {
   height: 40%;
@@ -313,20 +316,20 @@ export default {
   width: 60%;
   display: flex;
   flex-direction: column;
-  background-color: aqua;
+  // background-color: aqua;
 }
 
 .enemyPokemonData__name {
   height: 30%;
   font-size: 50px;
   padding-left: 10px;
-  border: 5px solid green;
+  // border: 5px solid green;
 }
 
 .enemyPokemonData__life {
   height: 70%;
   display: flex;
-  border: 5px solid blue;
+  // border: 5px solid blue;
 }
 
 .enemyPokemonData__life--HPIcon {
@@ -352,7 +355,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  // background-color: red;
 }
 
 .enemyPokemonImage {
@@ -370,7 +373,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(204, 141, 141);
+  // background-color: rgb(204, 141, 141);
 }
 
 .ownPokemonImage {
@@ -382,7 +385,7 @@ export default {
   width: 60%;
   display: flex;
   flex-direction: column;
-  background-color: rgb(173, 118, 118);
+  // background-color: rgb(173, 118, 118);
 }
 
 .ownPokemonData__name {
@@ -391,13 +394,13 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding-right: 10px;
-  border: 5px solid green;
+  // border: 5px solid green;
 }
 
 .ownPokemonData__life {
   height: 70%;
   display: flex;
-  border: 5px solid blue;
+  // border: 5px solid blue;
 }
 
 .ownPokemonData__life--HPIcon {
@@ -419,14 +422,15 @@ export default {
 
 .gameboyScreen__top--log {
   height: 30%;
-  border: 5px solid red;
+  width: 100%;
+  border: 5px solid rgb(0, 0, 0);
+  box-sizing: border-box;
 }
 
 .gameboyScreen_down {
   height: 20%;
   width: 100%;
   display: flex;
-  background-color: blue;
 }
 .gameboyScreen_down--left {
   width: 45%;
@@ -436,7 +440,37 @@ export default {
 
 .gameboyScreen_down--center {
   width: 10%;
-  border: 5px solid rgb(0, 255, 21);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(red 50%, white 50%);
+  box-sizing: border-box;
+}
+
+.pokeballCircle {
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  border: 10px solid black;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokeballButton {
+  border-radius: 50%;
+  border: 5px solid black;
+  width: 40%;
+  height: 40%;
+  box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.pokeballButton:active {
+  transform: scale(0.9);
 }
 
 .gameboyScreen_down--right {

@@ -31,6 +31,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  background-color: rgb(219, 219, 219);
 }
 
 .l-fightTitle {
