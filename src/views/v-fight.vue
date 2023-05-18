@@ -30,9 +30,9 @@
 
         <section class="gameboy__middle">
           <!-- SECTION QUE CONTIENE LA LUZ DE ENCENDIDO -->
-          <section class="gameboyPower">
-            <div class="gameboyPower__light"></div>
-            <div class="gameboyPower__letters">
+          <section class="gameboy__middle--left">
+            <div class="powerLight"></div>
+            <div class="powerLetters">
               <p>BATTERY</p>
             </div>
           </section>
@@ -81,10 +81,10 @@
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
-                <div class="attackButton__up">
+                <div class="attackButton__topBox">
                   <div class="attackButton"></div>
                 </div>
-                <div class="attackButton__down">
+                <div class="attackButton__bottomBox">
                   <div class="attackButton"></div>
                 </div>
               </div>
@@ -94,10 +94,10 @@
                 </div>
               </div>
               <div class="gameboyScreen_down--right">
-                <div class="attackButton__up">
+                <div class="attackButton__topBox">
                   <div class="attackButton"></div>
                 </div>
-                <div class="attackButton__down">
+                <div class="attackButton__bottomBox">
                   <div class="attackButton"></div>
                 </div>
               </div>
@@ -248,7 +248,7 @@ export default {
   height: 85%;
 }
 
-.gameboyPower {
+.gameboy__middle--left {
   width: 10%;
   height: 100%;
   display: flex;
@@ -257,7 +257,7 @@ export default {
   align-items: center;
 }
 
-.gameboyPower__light {
+.powerLight {
   background-color: rgb(255, 0, 0);
   border-radius: 50%;
   width: 25%;
@@ -280,7 +280,7 @@ export default {
     background-color: rgb(255, 0, 0);
   }
 }
-.gameboyPower__letters > p {
+.powerLetters > p {
   font-size: 20px;
   color: white;
 }
@@ -310,6 +310,9 @@ export default {
 }
 .enemyPokemon__zone {
   height: 40%;
+  width: 90%;
+  margin: 0px auto 0px auto;
+  padding-top: 5px;
   display: flex;
 }
 .enemyPokemonData {
@@ -365,6 +368,8 @@ export default {
 
 .ownPokemon__zone {
   height: 60%;
+  width: 90%;
+  margin: 0px auto 0px auto;
   display: flex;
 }
 .ownPokemonImageBox {
@@ -480,7 +485,7 @@ export default {
   width: 45%;
 }
 
-.attackButton__up {
+.attackButton__topBox {
   height: 50%;
   display: flex;
   flex-direction: row;
@@ -491,7 +496,7 @@ export default {
   box-sizing: border-box;
 }
 
-.attackButton__down {
+.attackButton__bottomBox {
   height: 50%;
   display: flex;
   flex-direction: row;
