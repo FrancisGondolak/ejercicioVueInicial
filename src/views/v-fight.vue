@@ -80,11 +80,24 @@
             </div>
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
-              <div class="gameboyScreen_down--buttons">
-                <div class="button_01"></div>
-                <div class="button_02"></div>
-                <div class="button_03"></div>
-                <div class="button_04"></div>
+              <div class="gameboyScreen_down--left">
+                <div class="attackButton__up">
+                  <div class="attackButton"></div>
+                </div>
+                <div class="attackButton__down">
+                  <div class="attackButton"></div>
+                </div>
+              </div>
+              <div class="gameboyScreen_down--center">
+                <div class="pokeballMini"></div>
+              </div>
+              <div class="gameboyScreen_down--right">
+                <div class="attackButton__up">
+                  <div class="attackButton"></div>
+                </div>
+                <div class="attackButton__down">
+                  <div class="attackButton"></div>
+                </div>
               </div>
             </div>
           </section>
@@ -412,6 +425,59 @@ export default {
 .gameboyScreen_down {
   height: 20%;
   width: 100%;
+  display: flex;
   background-color: blue;
+}
+.gameboyScreen_down--left {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameboyScreen_down--center {
+  width: 10%;
+  border: 5px solid rgb(0, 255, 21);
+}
+
+.gameboyScreen_down--right {
+  width: 45%;
+}
+
+.attackButton__up {
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  border-bottom: 5px solid black;
+  box-sizing: border-box;
+}
+
+.attackButton__down {
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-top: 5px solid black;
+  box-sizing: border-box;
+}
+
+.attackButton {
+  border: 5px solid black;
+  box-sizing: border-box;
+  background: rgb(255, 255, 255);
+  box-shadow: var(--color-shadow-buttonPokedex);
+  border-radius: 5%;
+  width: 40%;
+  height: 60%;
+  display: flex;
+  cursor: pointer;
+}
+
+.attackButton:active {
+  transform: scale(0.9);
 }
 </style>
