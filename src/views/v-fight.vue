@@ -393,6 +393,7 @@ export default {
   font-size: 55px;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
   padding-right: 10px;
   // border: 5px solid green;
 }
@@ -410,19 +411,20 @@ export default {
   font-size: 35px;
   text-align: center;
   background-color: black;
-  margin: auto 0 90px 0;
+  margin: auto 0 120px 0;
 }
 
 .ownPokemonData__life--bar {
   width: 100%;
   height: 15%;
-  margin: auto 5px 100px 0;
+  margin: auto 5px 130px 0;
   background-color: rgb(26, 201, 26);
 }
 
 .gameboyScreen__top--log {
   height: 30%;
-  width: 100%;
+  width: 90%;
+  margin: 0px auto 10px auto;
   border: 5px solid rgb(0, 0, 0);
   box-sizing: border-box;
 }
@@ -431,6 +433,7 @@ export default {
   height: 20%;
   width: 100%;
   display: flex;
+  border-top: 5px solid rgb(0, 0, 0);
 }
 .gameboyScreen_down--left {
   width: 45%;
