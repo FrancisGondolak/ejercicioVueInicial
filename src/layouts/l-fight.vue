@@ -48,6 +48,6 @@ export default {
   background-color: gray;
   border-radius: 30px 30px 160px 30px;
   width: 70%;
-  height: 900px;
+  height: 86.5%;
 }
 </style>

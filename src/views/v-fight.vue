@@ -220,7 +220,7 @@ export default {
 
 .gameboy__top--letters > p {
   color: white;
-  font-size: 20px;
+  font-size: 0.95vw;
 }
 
 .gameboy__top--rightStripes {
