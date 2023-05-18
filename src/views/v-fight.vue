@@ -90,7 +90,7 @@
               </div>
               <div class="gameboyScreen_down--center">
                 <div class="pokeballCircle">
-                  <div class="pokeballButton"></div>
+                  <div class="pokeballButton" @click="powerOffGameboy"></div>
                 </div>
               </div>
               <div class="gameboyScreen_down--right">
@@ -166,6 +166,9 @@ export default {
       //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
       this.enemyPokemon = this.characters[this.enemyPokemon]
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
+    },
+    powerOffGameboy() {
+      this.$router.push({ name: 'list' })
     }
   },
 
