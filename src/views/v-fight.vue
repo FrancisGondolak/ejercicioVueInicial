@@ -62,7 +62,7 @@
                     <img class="ownPokemonImage" :src="showOwnPokemon" alt="" />
                   </div>
                   <div class="ownPokemonData">
-                    <div class="ownPokemonData__name">{{ myPokemonName }}</div>
+                    <div class="ownPokemonData__name">{{ ownPokemonName }}</div>
                     <div class="ownPokemonData__life">
                       <div class="ownPokemonData__life--HPIcon">HP:</div>
                       <div class="ownPokemonData__life--bar"></div>
@@ -123,15 +123,21 @@ export default {
       characters: [],
       fetched: false,
       error: false,
-      myPokemon: '',
+      ownPokemon: '',
       pokemonSelected: this.$route.params.pokemonNumber,
       route: 'src/components/assets/images/sprite',
       pokemonTotal: '',
       enemyPokemon: '',
-      myPokemonName: '',
+      ownPokemonName: '',
       enemyPokemonName: '',
       ownPokemonAttacks: [],
-      enemyPokemonAttacks: []
+      ownPokemonLife: '',
+      ownPokemonPowerAttack: '',
+      ownPokemonPowerDefense: '',
+      enemyPokemonAttacks: [],
+      enemyPokemonLife: '',
+      enemyPokemonPowerAttack: '',
+      enemyPokemonPowerDefense: ''
     }
   },
   computed: {
@@ -145,10 +151,10 @@ export default {
     },
     //computada para recargar el valor de myPokemon cuando lo encuentra undefined al cargar el DOM
     showOwnPokemon() {
-      if (!this.myPokemon) {
+      if (!this.ownPokemon) {
         return ''
       } else {
-        return this.route + this.myPokemon.name + '5.png'
+        return this.route + this.ownPokemon.name + '5.png'
       }
     }
   },
@@ -157,21 +163,25 @@ export default {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
-        this.getMyPokemon(this.pokemonSelected)
+        this.getOwnPokemon(this.pokemonSelected)
         this.fetched = true
       } catch (error) {
         this.error = true
       }
     },
-    getMyPokemon(pokemonSelected) {
+    getOwnPokemon(pokemonSelected) {
       for (let i = 0; i < this.characters.length; i++) {
         if (pokemonSelected === this.characters[i].number) {
-          this.myPokemon = this.characters[i]
+          this.ownPokemon = this.characters[i]
         }
       }
-      this.myPokemonName = this.myPokemon.name.toUpperCase()
-      //recogemos los ataques del Pokémon que hemos elegido en la variable
-      this.ownPokemonAttacks = this.myPokemon.attacks
+      this.ownPokemonName = this.ownPokemon.name.toUpperCase()
+      //recogemos los atributos del Pokémon que hemos elegido para hacerlos más manejables
+      this.ownPokemonAttacks = this.ownPokemon.attacks
+      this.ownPokemonLife = this.ownPokemon.lifePoints
+      this.ownPokemonPowerAttack = this.ownPokemon.attackPoints
+      this.ownPokemonPowerDefense = this.ownPokemon.defensePoints
+      //lanzamos la función para crear al enemigo
       this.choosePokemonEnemy()
     },
     choosePokemonEnemy() {
@@ -182,16 +192,19 @@ export default {
       this.enemyPokemon = Math.floor(Math.random() * this.pokemonTotal)
       //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
       this.enemyPokemon = this.characters[this.enemyPokemon]
-      //recogemos los ataques del Pokémon rival en la variable
+      //recogemos los atributos del Pokémon enemigo en sus variables
       this.enemyPokemonAttacks = this.enemyPokemon.attacks
+      this.enemyPokemonLife = this.enemyPokemon.lifePoints
+      this.enemyPokemonPowerAttack = this.enemyPokemon.attackPoints
+      this.enemyPokemonPowerDefense = this.enemyPokemon.defensePoints
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
     },
     //método para asignar el numero del ataque a cada botón y al ownAttack de cada evento @click
     chooseAttackNumber(number) {
-      if (!this.myPokemon.attacks) {
+      if (!this.ownPokemon.attacks) {
         return ''
       } else {
-        return this.myPokemon.attacks[number]
+        return this.ownPokemon.attacks[number]
       }
     },
     //método para el ataque del Pokémon propio
@@ -207,13 +220,13 @@ export default {
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (attack === 'Placaje') {
-        this.enemyPokemon.lifePoints -= 2
-        console.log(this.enemyPokemon.lifePoints)
+        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
+        console.log(this.enemyPokemonLife)
       }
 
       if (attack === 'Pistola agua') {
-        this.enemyPokemon.lifePoints -= 3
-        console.log(this.enemyPokemon.lifePoints)
+        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
+        console.log(this.enemyPokemonLife)
       }
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
