@@ -78,10 +78,10 @@
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ataquePlacaje">{{ showAttack }}</div>
+                  <div class="attackButton" @click="ataquePlacaje">{{ showAttack01 }}</div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton"></div>
+                  <div class="attackButton">{{ showAttack02 }}</div>
                 </div>
               </div>
               <div class="gameboyScreen_down--center">
@@ -91,10 +91,10 @@
               </div>
               <div class="gameboyScreen_down--right">
                 <div class="attackButton__topBox">
-                  <div class="attackButton"></div>
+                  <div class="attackButton">{{ showAttack03 }}</div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton"></div>
+                  <div class="attackButton">{{ showAttack04 }}</div>
                 </div>
               </div>
             </div>
@@ -137,21 +137,45 @@ export default {
     showEnemyPokemon() {
       if (!this.enemyPokemon) {
         return ''
+      } else {
+        return this.route + this.enemyPokemon.name + '3.png'
       }
-      return this.route + this.enemyPokemon.name + '3.png'
     },
-    //computada para recargar el valor de enemyPokemon cuando lo encuentra undefined al cargar el DOM
+    //computada para recargar el valor de myPokemon cuando lo encuentra undefined al cargar el DOM
     showOwnPokemon() {
       if (!this.myPokemon) {
         return ''
+      } else {
+        return this.route + this.myPokemon.name + '5.png'
       }
-      return this.route + this.myPokemon.name + '5.png'
     },
-    showAttack() {
+    showAttack01() {
       if (!this.myPokemon.attacks) {
         return ''
+      } else {
+        return this.myPokemon.attacks[0]
       }
-      return this.myPokemon.attacks[0]
+    },
+    showAttack02() {
+      if (!this.myPokemon.attacks) {
+        return ''
+      } else {
+        return this.myPokemon.attacks[1]
+      }
+    },
+    showAttack03() {
+      if (!this.myPokemon.attacks) {
+        return ''
+      } else {
+        return this.myPokemon.attacks[2]
+      }
+    },
+    showAttack04() {
+      if (!this.myPokemon.attacks) {
+        return ''
+      } else {
+        return this.myPokemon.attacks[3]
+      }
     }
   },
   methods: {
@@ -185,8 +209,8 @@ export default {
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
     },
     ataquePlacaje() {
-      this.myPokemon.lifePoints -= 2
-      console.log(this.myPokemon.lifePoints)
+      this.enemyPokemon.lifePoints -= 2
+      console.log(this.enemyPokemon.lifePoints)
     },
     powerOffGameboy() {
       this.$router.push({ name: 'list' })
