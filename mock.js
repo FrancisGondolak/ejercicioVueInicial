@@ -98,7 +98,7 @@ app.get('/characters/getAll', (req, res) => {
         'Placaje, Látigo, Pistola agua, Refugio, Giro rápido, Mordisco, Hidropulso, Protección, Danza lluvia, Acua cola, Rompecoraza, Defensa férrea, Hidrobomba, Cabezazo',
       attacks: ['Placaje', 'Pistola agua', 'Refugio', 'Mordisco'],
       lifePoints: 25,
-      attackPoints: 1,
+      attackPoints: 2,
       defensePoints: 3
     },
     {
