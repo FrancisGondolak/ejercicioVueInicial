@@ -78,10 +78,10 @@
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ataquePlacaje">{{ showAttack01 }}</div>
+                  <div class="attackButton" @click="ownAttack(0)">{{ chooseAttackNumber(0) }}</div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton">{{ showAttack02 }}</div>
+                  <div class="attackButton" @click="ownAttack(1)">{{ chooseAttackNumber(1) }}</div>
                 </div>
               </div>
               <div class="gameboyScreen_down--center">
@@ -91,10 +91,10 @@
               </div>
               <div class="gameboyScreen_down--right">
                 <div class="attackButton__topBox">
-                  <div class="attackButton">{{ showAttack03 }}</div>
+                  <div class="attackButton" @click="ownAttack(2)">{{ chooseAttackNumber(2) }}</div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton">{{ showAttack04 }}</div>
+                  <div class="attackButton" @click="ownAttack(3)">{{ chooseAttackNumber(3) }}</div>
                 </div>
               </div>
             </div>
@@ -129,7 +129,9 @@ export default {
       pokemonTotal: '',
       enemyPokemon: '',
       myPokemonName: '',
-      enemyPokemonName: ''
+      enemyPokemonName: '',
+      ownPokemonAttacks: [],
+      enemyPokemonAttacks: []
     }
   },
   computed: {
@@ -148,43 +150,15 @@ export default {
       } else {
         return this.route + this.myPokemon.name + '5.png'
       }
-    },
-    showAttack01() {
-      if (!this.myPokemon.attacks) {
-        return ''
-      } else {
-        return this.myPokemon.attacks[0]
-      }
-    },
-    showAttack02() {
-      if (!this.myPokemon.attacks) {
-        return ''
-      } else {
-        return this.myPokemon.attacks[1]
-      }
-    },
-    showAttack03() {
-      if (!this.myPokemon.attacks) {
-        return ''
-      } else {
-        return this.myPokemon.attacks[2]
-      }
-    },
-    showAttack04() {
-      if (!this.myPokemon.attacks) {
-        return ''
-      } else {
-        return this.myPokemon.attacks[3]
-      }
     }
   },
   methods: {
-    async getAllCharacters(pokemonSelected) {
+    async getAllCharacters() {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
         this.fetched = true
-        this.getMyPokemon(pokemonSelected)
+        this.getMyPokemon(this.pokemonSelected)
       } catch (error) {
         this.error = true
       }
@@ -196,6 +170,8 @@ export default {
         }
       }
       this.myPokemonName = this.myPokemon.name.toUpperCase()
+      //recogemos los ataques del Pokémon que hemos elegido en la variable
+      this.ownPokemonAttacks = this.myPokemon.attacks
       this.choosePokemonEnemy()
     },
     choosePokemonEnemy() {
@@ -206,10 +182,27 @@ export default {
       this.enemyPokemon = Math.floor(Math.random() * this.pokemonTotal)
       //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
       this.enemyPokemon = this.characters[this.enemyPokemon]
+      //recogemos los ataques del Pokémon rival en la variable
+      this.enemyPokemonAttacks = this.enemyPokemon.attacks
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
     },
-    ataquePlacaje() {
-      this.enemyPokemon.lifePoints -= 2
+    chooseAttackNumber(number) {
+      if (!this.myPokemon.attacks) {
+        return ''
+      } else {
+        return this.myPokemon.attacks[number]
+      }
+    },
+    ownAttack(attack) {
+      console.log(this.ownPokemonAttacks)
+      for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
+        if (attack === i) {
+          console.log('hola' + this.ownPokemonAttacks[i])
+        }
+      }
+      if (attack === 'Placaje') {
+        this.enemyPokemon.lifePoints -= 2
+      }
       console.log(this.enemyPokemon.lifePoints)
     },
     powerOffGameboy() {
@@ -218,7 +211,7 @@ export default {
   },
 
   created() {
-    this.getAllCharacters(this.pokemonSelected)
+    this.getAllCharacters()
   }
 }
 </script>
