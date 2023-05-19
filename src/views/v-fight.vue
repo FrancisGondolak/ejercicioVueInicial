@@ -157,8 +157,8 @@ export default {
       try {
         const useCharactersStore = charactersStore()
         this.characters = await useCharactersStore.fetchCharacters()
-        this.fetched = true
         this.getMyPokemon(this.pokemonSelected)
+        this.fetched = true
       } catch (error) {
         this.error = true
       }
@@ -186,6 +186,7 @@ export default {
       this.enemyPokemonAttacks = this.enemyPokemon.attacks
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
     },
+    //método para asignar el numero del ataque a cada botón y al ownAttack de cada evento @click
     chooseAttackNumber(number) {
       if (!this.myPokemon.attacks) {
         return ''
@@ -193,18 +194,29 @@ export default {
         return this.myPokemon.attacks[number]
       }
     },
+    //método para el ataque del Pokémon propio
     ownAttack(attack) {
-      console.log(this.ownPokemonAttacks)
+      //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
+      //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
+        //cuando la encontramos, reasignamos a la variable attack el nombre de dicho ataque
         if (attack === i) {
-          console.log('hola' + this.ownPokemonAttacks[i])
+          attack = this.ownPokemonAttacks[i]
         }
       }
+
+      //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (attack === 'Placaje') {
         this.enemyPokemon.lifePoints -= 2
+        console.log(this.enemyPokemon.lifePoints)
       }
-      console.log(this.enemyPokemon.lifePoints)
+
+      if (attack === 'Pistola agua') {
+        this.enemyPokemon.lifePoints -= 3
+        console.log(this.enemyPokemon.lifePoints)
+      }
     },
+    //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
       this.$router.push({ name: 'list' })
     }
