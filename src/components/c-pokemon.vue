@@ -20,7 +20,7 @@
         @click="openPokeball"
       />
     </div>
-    <button class="pokedexButton" @click="redirigeme">Pokédex</button>
+    <button class="pokedexButton" @click="openPokedex">Pokédex</button>
   </div>
 </template>
 
@@ -36,16 +36,6 @@ export default {
   data() {
     return {
       selected: true,
-      pokemonselected: {
-        name: this.pokemon.name,
-        type: this.pokemon.type,
-        number: this.pokemon.number,
-        image: this.pokemon.image,
-        pixel: this.pokemon.pixel,
-        weight: this.pokemon.weight,
-        height: this.pokemon.height,
-        description: this.pokemon.description
-      },
       pokeball: true
     }
   },
@@ -53,22 +43,9 @@ export default {
     getColor(type) {
       return 'background-color: var(--color-PokemonType--' + type + ');'
     },
-    avisame(name) {
-      alert('Has pulsado sobre ' + name)
-    },
-    redirigeme() {
+    openPokedex() {
       this.$router.push({ name: 'pokedex', params: { pokemonNumber: this.pokemon.number } })
     },
-    //al pulsar sobre el botón Pokédex de cualquier caja de Pokemon invocamos esta función, la cual
-    //emite hacia el padre (v-list) un evento llamado pokemonSelected y le pasa
-    //un objeto pokemonselected con los datos (name, type, etc...) del Pokemon sobre el que se ha pulsado
-    //y un booleano (selected) con valor true
-    // showPokedex() {
-    //   this.$emit('pokemonSelected', {
-    //     pokemonselected: this.pokemonselected,
-    //     selected: this.selected
-    //   })
-    // },
     openPokeball() {
       this.pokeball = !this.pokeball
     }

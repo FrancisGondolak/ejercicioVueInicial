@@ -69,6 +69,6 @@ export default {
 
 <style lang="scss">
 .tituloPokedex {
-  width: 80%;
+  width: 50%;
 }
 </style>

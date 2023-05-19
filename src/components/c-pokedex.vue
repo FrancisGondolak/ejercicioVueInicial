@@ -6,6 +6,9 @@
       <div class="small_circle_red"></div>
       <div class="small_circle_orange"></div>
       <div class="small_circle_green"></div>
+      <div class="combatButton" @click="pokemonFight">
+        <img class="fightIcon" src="src/components/assets/icons/fightIcon.svg" alt="fightIcon" />
+      </div>
     </section>
     <section class="c-pokedex__middle">
       <section class="c-pokedex__middle--top">
@@ -59,10 +62,8 @@
         </div>
       </section>
       <section class="c-pokedex__bottom--bottom">
-        <div class="long_bar_yellow">
-          <p>
-            {{ pokemonshown.description }}
-          </p>
+        <div class="long_bar_green">
+          <p><b>Movimientos: </b>{{ pokemonshown.movements }}</p>
         </div>
         <div class="medium_circle_red" @click="closePokedex">
           <img
@@ -105,6 +106,9 @@ export default {
         this.playAudio = true
       }, 100)
       this.playAudio = false
+    },
+    pokemonFight() {
+      this.$router.push({ name: 'fight', params: { pokemonNumber: this.pokemonshown.number } })
     },
     imageAdvance() {
       this.imageNumber += 1
@@ -164,7 +168,7 @@ export default {
 }
 
 .big_circle_blue {
-  border: var(--color-border-elementsPokedex);
+  border: 4px solid rgb(255, 255, 255);
   background: rgb(50, 184, 224);
   border-radius: 50%;
   width: 15%;
@@ -229,6 +233,30 @@ export default {
   height: 50%;
   margin-top: 5px;
   margin-left: 5px;
+}
+
+.combatButton {
+  border: 5px solid black;
+  background: rgb(157, 235, 13);
+  box-shadow: var(--color-shadow-buttonPokedex);
+  border-radius: 15%;
+  width: 14%;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 34%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.combatButton:active {
+  transform: scale(0.9);
+}
+
+.fightIcon {
+  width: 120%;
+  height: 120%;
 }
 .c-pokedex__middle--top {
   display: flex;
@@ -358,22 +386,23 @@ export default {
   display: flex;
 }
 
-.long_bar_yellow {
+.long_bar_green {
   border: var(--color-border-elementsPokedex);
-  background: rgb(196, 199, 27);
+  background: rgb(122, 228, 136);
   border-radius: 20px;
   width: 75%;
   height: 60px;
   margin-top: 5px;
   margin-left: 15px;
-  color: white;
+  color: rgb(5, 2, 2);
   overflow: hidden;
   display: flex;
   align-items: center;
 }
-.long_bar_yellow p {
+.long_bar_green p {
   animation: textScrolling 30s linear infinite;
   white-space: nowrap;
+  font-size: 30px;
 }
 @keyframes textScrolling {
   0% {

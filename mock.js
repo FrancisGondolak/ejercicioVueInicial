@@ -59,7 +59,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: "6'9 kg",
       height: "0'7 m",
       description:
-        'Una rara semilla fue plantada en su espalda al nacer. La planta brota y crece con este Pokémon'
+        'Una rara semilla fue plantada en su espalda al nacer. La planta brota y crece con este Pokémon',
+      movements:
+        'Placaje, Gruñido, Látigo cepa, Desarrollo, Drenadoras, Hoja afilada, Polvo veneno, Somnífero, Bomba germen, Derribo, Dulce aroma, Síntesis, Abatidoras, Doble filo, Rayo solar',
+      attacks: ['Placaje', 'Látigo cepa', 'Drenadoras', 'Somnífero'],
+      lifePoints: 20,
+      attackPoints: 2,
+      defensePoints: 2
     },
     {
       name: 'Charmander',
@@ -70,7 +76,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: "8'5 kg",
       height: "0'6 m",
       description:
-        'Prefiere los sitios calientes. Dicen que cuando llueve sale vapor de la punta de su cola'
+        'Prefiere los sitios calientes. Dicen que cuando llueve sale vapor de la punta de su cola',
+      movements:
+        'Arañazo, Gruñido, Ascuas, Pantalla de humo, Dragoaliento, Colmillo ígneo, Cuchillada, Lanzallamas, Cara susto, Giro fuego, Infierno, Envite ígneo',
+      attacks: ['Arañazo', 'Ascuas', 'Dragoaliento', 'Cara susto'],
+      lifePoints: 15,
+      attackPoints: 3,
+      defensePoints: 1
     },
     {
       name: 'Squirtle',
@@ -81,7 +93,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: "9'0 kg",
       height: "0'5 m",
       description:
-        'Tras nacer, su espalda se hincha y endurece como una concha. Echa potente espuma por la boca'
+        'Tras nacer, su espalda se hincha y endurece como una concha. Echa potente espuma por la boca',
+      movements:
+        'Placaje, Látigo, Pistola agua, Refugio, Giro rápido, Mordisco, Hidropulso, Protección, Danza lluvia, Acua cola, Rompecoraza, Defensa férrea, Hidrobomba, Cabezazo',
+      attacks: ['Placaje', 'Pistola agua', 'Refugio', 'Mordisco'],
+      lifePoints: 25,
+      attackPoints: 1,
+      defensePoints: 3
     },
     {
       name: 'Pikachu',
@@ -92,7 +110,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: "6'0 kg",
       height: "0'4 m",
       description:
-        'Cuando varios de estos Pokémon se juntan, su energía puede causar fuertes tormentas'
+        'Cuando varios de estos Pokémon se juntan, su energía puede causar fuertes tormentas',
+      movements:
+        'Moflete estático, Encanto, Beso dulce, Ataque rápido, Impactrueno, Onda trueno, Doble equipo, Bola voltio, Chispa, Cola férrea, Chispazo, Rayo, Pantalla de luz, Trueno',
+      attacks: ['Impactrueno', 'Encanto', 'Cola férrea', 'Trueno'],
+      lifePoints: 30,
+      attackPoints: 3,
+      defensePoints: 2
     },
     {
       name: 'Psyduck',
@@ -103,7 +127,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: "19'6 kg",
       height: "0'8 m",
       description:
-        'Aunque calma al enemigo con su vacía mirada, este Pokémon usará poderes psicoquinéticos'
+        'Aunque calma al enemigo con su vacía mirada, este Pokémon usará poderes psicoquinéticos',
+      movements:
+        'Arañazo, Látigo, Pistola agua, Confusión, Golpes furia, Hidropulso, Anulación, Cabezazo zen, Chirrido, Acua cola, Empapar, Autosugestión, Amnesia, Zona extraña',
+      attacks: ['Arañazo', 'Pistola agua', 'Chirrido', 'Confusión'],
+      lifePoints: 30,
+      attackPoints: 2,
+      defensePoints: 3
     },
     {
       name: 'Mewtwo',
@@ -115,7 +145,13 @@ app.get('/characters/getAll', (req, res) => {
       weight: '122 kg',
       height: "2'0 m",
       description:
-        'Fue creado por un científico tras años de horribles experimentos de ingeniería genética'
+        'Fue creado por un científico tras años de horribles experimentos de ingeniería genética',
+      movements:
+        'Confusión, Meteoros, Gota vital, Poder pasado, Psicocorte, Amnesia, Esfera aural, Psíquico, Cambiafuerza, Cambiadefensa, Neblina, Onda mental, Recuperación, Premonición',
+      attacks: ['Confusión', 'Recuperación', 'Poder pasado', 'Psíquico'],
+      lifePoints: 40,
+      attackPoints: 3,
+      defensePoints: 1
     }
   ]
   res.send(response)

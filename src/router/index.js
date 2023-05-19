@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('@/views/v-pokedex.vue')
     },
     {
+      path: '/fight:pokemonNumber',
+      name: 'fight',
+      component: () => import('@/views/v-fight.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'unknow',
       component: () => import('@/views/v-error.vue')
