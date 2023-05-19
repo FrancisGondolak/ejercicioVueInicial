@@ -53,17 +53,13 @@
                     </div>
                   </div>
                   <div class="enemyPokemonImageBox">
-                    <img
-                      class="enemyPokemonImage"
-                      :src="route + enemyPokemon.name + '3.png'"
-                      alt=""
-                    />
+                    <img class="enemyPokemonImage" :src="showEnemyPokemon" alt="" />
                   </div>
                 </section>
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
                 <section class="ownPokemon__zone">
                   <div class="ownPokemonImageBox">
-                    <img class="ownPokemonImage" :src="route + myPokemon.name + '5.png'" alt="" />
+                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="" />
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ myPokemonName }}</div>
@@ -82,7 +78,7 @@
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
                 <div class="attackButton__topBox">
-                  <div class="attackButton"></div>
+                  <div class="attackButton" @click="ataquePlacaje">{{ showAttack }}</div>
                 </div>
                 <div class="attackButton__bottomBox">
                   <div class="attackButton"></div>
@@ -127,7 +123,7 @@ export default {
       characters: [],
       fetched: false,
       error: false,
-      myPokemon: {},
+      myPokemon: '',
       pokemonSelected: this.$route.params.pokemonNumber,
       route: 'src/components/assets/images/sprite',
       pokemonTotal: '',
@@ -136,7 +132,28 @@ export default {
       enemyPokemonName: ''
     }
   },
-
+  computed: {
+    //computada para recargar el valor de enemyPokemon cuando lo encuentra undefined al cargar el DOM
+    showEnemyPokemon() {
+      if (!this.enemyPokemon) {
+        return ''
+      }
+      return this.route + this.enemyPokemon.name + '3.png'
+    },
+    //computada para recargar el valor de enemyPokemon cuando lo encuentra undefined al cargar el DOM
+    showOwnPokemon() {
+      if (!this.myPokemon) {
+        return ''
+      }
+      return this.route + this.myPokemon.name + '5.png'
+    },
+    showAttack() {
+      if (!this.myPokemon.attacks) {
+        return ''
+      }
+      return this.myPokemon.attacks[0]
+    }
+  },
   methods: {
     async getAllCharacters(pokemonSelected) {
       try {
@@ -166,6 +183,10 @@ export default {
       //finalmente, reasignamos a enemyPokemon el objeto Pokemon elegido dentro del array
       this.enemyPokemon = this.characters[this.enemyPokemon]
       this.enemyPokemonName = this.enemyPokemon.name.toUpperCase()
+    },
+    ataquePlacaje() {
+      this.myPokemon.lifePoints -= 2
+      console.log(this.myPokemon.lifePoints)
     },
     powerOffGameboy() {
       this.$router.push({ name: 'list' })

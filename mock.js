@@ -61,7 +61,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Una rara semilla fue plantada en su espalda al nacer. La planta brota y crece con este Pokémon',
       movements:
-        'Placaje, Gruñido, Látigo cepa, Desarrollo, Drenadoras, Hoja afilada, Polvo veneno, Somnífero, Bomba germen, Derribo, Dulce aroma, Síntesis, Abatidoras, Doble filo, Rayo solar'
+        'Placaje, Gruñido, Látigo cepa, Desarrollo, Drenadoras, Hoja afilada, Polvo veneno, Somnífero, Bomba germen, Derribo, Dulce aroma, Síntesis, Abatidoras, Doble filo, Rayo solar',
+      attacks: ['Placaje', 'Látigo cepa', 'Drenadoras', 'Somnífero'],
+      lifePoints: 20,
+      attackPoints: 2,
+      defensePoints: 2
     },
     {
       name: 'Charmander',
@@ -74,7 +78,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Prefiere los sitios calientes. Dicen que cuando llueve sale vapor de la punta de su cola',
       movements:
-        'Arañazo, Gruñido, Ascuas, Pantalla de humo, Dragoaliento, Colmillo ígneo, Cuchillada, Lanzallamas, Cara susto, Giro fuego, Infierno, Envite ígneo'
+        'Arañazo, Gruñido, Ascuas, Pantalla de humo, Dragoaliento, Colmillo ígneo, Cuchillada, Lanzallamas, Cara susto, Giro fuego, Infierno, Envite ígneo',
+      attacks: ['Arañazo', 'Ascuas', 'Dragoaliento', 'Cara susto'],
+      lifePoints: 15,
+      attackPoints: 3,
+      defensePoints: 1
     },
     {
       name: 'Squirtle',
@@ -87,7 +95,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Tras nacer, su espalda se hincha y endurece como una concha. Echa potente espuma por la boca',
       movements:
-        'Placaje, Látigo, Pistola agua, Refugio, Giro rápido, Mordisco, Hidropulso, Protección, Danza lluvia, Acua cola, Rompecoraza, Defensa férrea, Hidrobomba, Cabezazo'
+        'Placaje, Látigo, Pistola agua, Refugio, Giro rápido, Mordisco, Hidropulso, Protección, Danza lluvia, Acua cola, Rompecoraza, Defensa férrea, Hidrobomba, Cabezazo',
+      attacks: ['Placaje', 'Pistola agua', 'Refugio', 'Mordisco'],
+      lifePoints: 25,
+      attackPoints: 1,
+      defensePoints: 3
     },
     {
       name: 'Pikachu',
@@ -100,7 +112,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Cuando varios de estos Pokémon se juntan, su energía puede causar fuertes tormentas',
       movements:
-        'Moflete estático, Encanto, Beso dulce, Ataque rápido, Impactrueno, Onda trueno, Doble equipo, Bola voltio, Chispa, Cola férrea, Chispazo, Rayo, Pantalla de luz, Trueno'
+        'Moflete estático, Encanto, Beso dulce, Ataque rápido, Impactrueno, Onda trueno, Doble equipo, Bola voltio, Chispa, Cola férrea, Chispazo, Rayo, Pantalla de luz, Trueno',
+      attacks: ['Impactrueno', 'Encanto', 'Cola férrea', 'Trueno'],
+      lifePoints: 30,
+      attackPoints: 3,
+      defensePoints: 2
     },
     {
       name: 'Psyduck',
@@ -113,7 +129,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Aunque calma al enemigo con su vacía mirada, este Pokémon usará poderes psicoquinéticos',
       movements:
-        'Arañazo, Látigo, Pistola agua, Confusión, Golpes furia, Hidropulso, Anulación, Cabezazo zen, Chirrido, Acua cola, Empapar, Autosugestión, Amnesia, Zona extraña'
+        'Arañazo, Látigo, Pistola agua, Confusión, Golpes furia, Hidropulso, Anulación, Cabezazo zen, Chirrido, Acua cola, Empapar, Autosugestión, Amnesia, Zona extraña',
+      attacks: ['Arañazo', 'Pistola agua', 'Chirrido', 'Confusión'],
+      lifePoints: 30,
+      attackPoints: 2,
+      defensePoints: 3
     },
     {
       name: 'Mewtwo',
@@ -127,7 +147,11 @@ app.get('/characters/getAll', (req, res) => {
       description:
         'Fue creado por un científico tras años de horribles experimentos de ingeniería genética',
       movements:
-        'Confusión, Meteoros, Gota vital, Poder pasado, Psicocorte, Amnesia, Esfera aural, Psíquico, Cambiafuerza, Cambiadefensa, Neblina, Onda mental, Recuperación, Premonición'
+        'Confusión, Meteoros, Gota vital, Poder pasado, Psicocorte, Amnesia, Esfera aural, Psíquico, Cambiafuerza, Cambiadefensa, Neblina, Onda mental, Recuperación, Premonición',
+      attacks: ['Confusión', 'Recuperación', 'Poder pasado', 'Psíquico'],
+      lifePoints: 40,
+      attackPoints: 3,
+      defensePoints: 1
     }
   ]
   res.send(response)
