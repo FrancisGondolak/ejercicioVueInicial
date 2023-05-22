@@ -234,10 +234,17 @@ export default {
         }
       }
 
+      console.log(this.ownPokemon.name + ' usó ' + attack)
+
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (attack === 'Placaje' || attack === 'Arañazo' || attack === 'Impactrueno') {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
-        console.log(this.enemyPokemonLife)
+        console.log(
+          'Los puntos de vida de ' +
+            this.enemyPokemon.name +
+            ' han bajado a ' +
+            this.enemyPokemonLife
+        )
       }
 
       if (
@@ -249,7 +256,12 @@ export default {
         attack === 'Confusión'
       ) {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
-        console.log(this.enemyPokemonLife)
+        console.log(
+          'Los puntos de vida de ' +
+            this.enemyPokemon.name +
+            ' han bajado a ' +
+            this.enemyPokemonLife
+        )
       }
 
       if (attack === 'Drenadoras') {
@@ -259,7 +271,7 @@ export default {
       //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
       if (this.enemyPokemon_turnDrain === 4) {
         this.enemyPokemon_drained = false
-        console.log('Rival se deshizo de drenadoras')
+        console.log(this.enemyPokemon.name + ' se deshizo de las Drenadoras')
         this.enemyPokemon_turnDrain = 0
       }
       //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
@@ -269,13 +281,22 @@ export default {
         this.enemyPokemon_turnDrain += 1
         this.enemyPokemon_hpDrained = this.ownPokemonPowerAttack / 2
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
-        console.log(this.enemyPokemonLife)
+        console.log(
+          'Los puntos de vida de ' +
+            this.enemyPokemon.name +
+            ' han bajado a ' +
+            this.enemyPokemonLife
+        )
         this.ownPokemonLife += this.enemyPokemon_hpDrained
+        console.log(
+          this.ownPokemon.name +
+            'ha recuperado ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida gracias a las Drenadoras'
+        )
         if (this.ownPokemonLife > 20) {
           this.ownPokemonLife = 20
         }
-
-        console.log('Rival drenándose')
       }
 
       if (attack === 'Recuperación') {
@@ -283,7 +304,8 @@ export default {
         if (this.ownPokemonLife > 40) {
           this.ownPokemonLife = 40
         }
-        console.log(this.ownPokemonLife)
+        console.log(this.ownPokemon.name + ' ha recuperado 5 puntos de vida')
+        console.log('Vida de Mewtwo: ' + this.ownPokemonLife)
       }
 
       if (
@@ -293,22 +315,29 @@ export default {
         attack === 'Psíquico'
       ) {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
-        console.log(this.enemyPokemonLife)
+        console.log(
+          'Los puntos de vida de ' +
+            this.enemyPokemon.name +
+            ' han bajado a ' +
+            this.enemyPokemonLife
+        )
       }
 
       if (attack === 'Cara susto' || attack === 'Chirrido') {
         if (this.enemyPokemonPowerDefense === 0) {
-          console.log('La defensa del Pokémon enemigo no puede bajar más')
+          console.log('La defensa de ' + this.enemyPokemon.name + ' no puede bajar más')
         } else {
           this.enemyPokemonPowerDefense -= 1
+          console.log('La defensa de ' + this.enemyPokemon.name + ' bajó')
         }
       }
 
       if (attack === 'Refugio' || attack === 'Encanto') {
         if (this.ownPokemonPowerDefense === 4) {
-          console.log('La defensa de tu Pokémon no puede subir más')
+          console.log('La defensa de ' + this.ownPokemon.name + ' no puede subir más')
         } else {
           this.ownPokemonPowerDefense += 1
+          console.log('La defensa de ' + this.ownPokemon.name + ' aumentó')
         }
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
@@ -318,15 +347,15 @@ export default {
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
       if (this.enemyPokemon_turnSleeping === 3) {
         this.enemyPokemon_sleeping = false
-        console.log('Rival se despertó')
+        console.log(this.enemyPokemon.name + ' se despertó')
         this.enemyPokemon_turnSleeping = 0
       }
       //si el rival está dormido, vamos sumando turnos
       if (this.enemyPokemon_sleeping === true) {
         this.enemyPokemon_turnSleeping += 1
-        console.log('Rival dormido')
+        console.log(this.enemyPokemon.name + ' está dormido')
       }
-      console.log(this.ownPokemon.name + ' usó ' + attack)
+
       this.enemyAttack()
     },
 
@@ -341,6 +370,8 @@ export default {
       //reasignamos a la misma variable el nombre del ataque de esa posición del array
       this.enemyPokemonChosenAttack = this.enemyPokemonAttacks[this.enemyPokemonChosenAttack]
 
+      console.log(this.enemyPokemon.name + ' usó ' + this.enemyPokemonChosenAttack)
+
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (
         this.enemyPokemonChosenAttack === 'Placaje' ||
@@ -348,7 +379,9 @@ export default {
         this.enemyPokemonChosenAttack === 'Impactrueno'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2 - this.ownPokemonPowerDefense
-        console.log(this.ownPokemonLife)
+        console.log(
+          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+        )
       }
 
       if (
@@ -360,7 +393,9 @@ export default {
         this.enemyPokemonChosenAttack === 'Confusión'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 3 - this.ownPokemonPowerDefense
-        console.log(this.ownPokemonLife)
+        console.log(
+          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+        )
       }
 
       if (this.enemyPokemonChosenAttack === 'Drenadoras') {
@@ -369,7 +404,7 @@ export default {
 
       if (this.ownPokemon_turnDrain === 4) {
         this.ownPokemon_drained = false
-        console.log('Mi Pokémon se deshizo de drenadoras')
+        console.log(this.ownPokemon.name + 'se deshizo de las Drenadoras')
         this.ownPokemon_turnDrain = 0
       }
 
@@ -377,13 +412,19 @@ export default {
         this.ownPokemon_turnDrain += 1
         this.ownPokemon_hpDrained = this.enemyPokemonPowerAttack / 2
         this.ownPokemonLife -= this.ownPokemon_hpDrained
-        console.log(this.ownPokemonLife)
+        console.log(
+          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+        )
         this.enemyPokemonLife += this.ownPokemon_hpDrained
+        console.log(
+          this.enemyPokemon.name +
+            'ha recuperado ' +
+            this.ownPokemon_hpDrained +
+            ' puntos de vida gracias a las Drenadoras'
+        )
         if (this.enemyPokemonLife > 20) {
           this.enemyPokemonLife = 20
         }
-
-        console.log('Mi Pokémon está drenándose')
       }
 
       if (this.enemyPokemonChosenAttack === 'Recuperación') {
@@ -391,7 +432,7 @@ export default {
         if (this.enemyPokemonLife > 40) {
           this.enemyPokemonLife = 40
         }
-        console.log(this.enemyPokemonLife)
+        console.log(this.enemyPokemon.name + ' ha recuperado 5 puntos de vida')
       }
 
       if (
@@ -401,7 +442,9 @@ export default {
         this.enemyPokemonChosenAttack === 'Psíquico'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2
-        console.log(this.ownPokemonLife)
+        console.log(
+          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+        )
       }
 
       if (
@@ -409,9 +452,10 @@ export default {
         this.enemyPokemonChosenAttack === 'Chirrido'
       ) {
         if (this.ownPokemonPowerDefense === 0) {
-          console.log('La defensa de tu Pokémon no puede bajar más')
+          console.log('La defensa de ' + this.ownPokemon.name + ' no puede bajar más')
         } else {
           this.ownPokemonPowerDefense -= 1
+          console.log('La defensa de ' + this.ownPokemon.name + ' bajó')
         }
       }
 
@@ -420,9 +464,10 @@ export default {
         this.enemyPokemonChosenAttack === 'Encanto'
       ) {
         if (this.enemyPokemonPowerDefense === 4) {
-          console.log('La defensa del Pokémon enemigo no puede subir más')
+          console.log('La defensa de ' + this.enemyPokemon.name + ' no puede subir más')
         } else {
           this.enemyPokemonPowerDefense += 1
+          console.log('La defensa de ' + this.enemyPokemon.name + ' aumentó')
         }
       }
 
@@ -432,15 +477,14 @@ export default {
 
       if (this.ownPokemon_turnSleeping === 3) {
         this.ownPokemon_sleeping = false
-        console.log('Mi Pokémon se despertó')
+        console.log(this.ownPokemon.name + ' se despertó')
         this.ownPokemon_turnSleeping = 0
       }
 
       if (this.ownPokemon_sleeping === true) {
         this.ownPokemon_turnSleeping += 1
-        console.log('Mi Pokémon se ha quedado dormido')
+        console.log(this.ownPokemon.name + ' está dormido')
       }
-      console.log(this.enemyPokemon.name + ' usó ' + this.enemyPokemonChosenAttack)
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
