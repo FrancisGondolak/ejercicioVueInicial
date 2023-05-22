@@ -330,27 +330,27 @@ export default {
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (
-        enemyPokemonChosenAttack === 'Placaje' ||
-        enemyPokemonChosenAttack === 'Arañazo' ||
-        enemyPokemonChosenAttack === 'Impactrueno'
+        this.enemyPokemonChosenAttack === 'Placaje' ||
+        this.enemyPokemonChosenAttack === 'Arañazo' ||
+        this.enemyPokemonChosenAttack === 'Impactrueno'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2 - this.ownPokemonPowerDefense
         console.log(this.ownPokemonLife)
       }
 
       if (
-        enemyPokemonChosenAttack === 'Látigo cepa' ||
-        enemyPokemonChosenAttack === 'Ascuas' ||
-        enemyPokemonChosenAttack === 'Pistola agua' ||
-        enemyPokemonChosenAttack === 'Cola férrea' ||
-        enemyPokemonChosenAttack === 'Poder pasado' ||
-        enemyPokemonChosenAttack === 'Confusión'
+        this.enemyPokemonChosenAttack === 'Látigo cepa' ||
+        this.enemyPokemonChosenAttack === 'Ascuas' ||
+        this.enemyPokemonChosenAttack === 'Pistola agua' ||
+        this.enemyPokemonChosenAttack === 'Cola férrea' ||
+        this.enemyPokemonChosenAttack === 'Poder pasado' ||
+        this.enemyPokemonChosenAttack === 'Confusión'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 3 - this.ownPokemonPowerDefense
         console.log(this.ownPokemonLife)
       }
 
-      if (enemyPokemonChosenAttack === 'Drenadoras') {
+      if (this.enemyPokemonChosenAttack === 'Drenadoras') {
         this.drained = true
       }
 
@@ -376,7 +376,7 @@ export default {
         console.log('Mi Pokémon está drenándose')
       }
 
-      if (enemyPokemonChosenAttack === 'Recuperación') {
+      if (this.enemyPokemonChosenAttack === 'Recuperación') {
         this.enemyPokemonLife += 5
         if (this.enemyPokemonLife > 40) {
           this.enemyPokemonLife = 40
@@ -385,24 +385,30 @@ export default {
       }
 
       if (
-        enemyPokemonChosenAttack === 'Dragoaliento' ||
-        enemyPokemonChosenAttack === 'Mordisco' ||
-        enemyPokemonChosenAttack === 'Trueno' ||
-        enemyPokemonChosenAttack === 'Psíquico'
+        this.enemyPokemonChosenAttack === 'Dragoaliento' ||
+        this.enemyPokemonChosenAttack === 'Mordisco' ||
+        this.enemyPokemonChosenAttack === 'Trueno' ||
+        this.enemyPokemonChosenAttack === 'Psíquico'
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2
         console.log(this.ownPokemonLife)
       }
 
-      if (enemyPokemonChosenAttack === 'Cara susto' || enemyPokemonChosenAttack === 'Chirrido') {
+      if (
+        this.enemyPokemonChosenAttack === 'Cara susto' ||
+        this.enemyPokemonChosenAttack === 'Chirrido'
+      ) {
         this.ownPokemonPowerDefense -= 1
       }
 
-      if (enemyPokemonChosenAttack === 'Refugio' || enemyPokemonChosenAttack === 'Encanto') {
+      if (
+        this.enemyPokemonChosenAttack === 'Refugio' ||
+        this.enemyPokemonChosenAttack === 'Encanto'
+      ) {
         this.enemyPokemonPowerDefense += 1
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
-      if (enemyPokemonChosenAttack === 'Somnífero') {
+      if (this.enemyPokemonChosenAttack === 'Somnífero') {
         this.sleeping = true
       }
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
