@@ -137,7 +137,8 @@ export default {
       enemyPokemonAttacks: [],
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
-      enemyPokemonPowerDefense: ''
+      enemyPokemonPowerDefense: '',
+      turn: 0
     }
   },
   computed: {
@@ -209,6 +210,8 @@ export default {
     },
     //método para el ataque del Pokémon propio
     ownAttack(attack) {
+      //controlamos los turnos con el aumento de esta variable, para ataques como Somnífero o Refugio
+      this.turn += 1
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
@@ -219,13 +222,45 @@ export default {
       }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
-      if (attack === 'Placaje') {
+      if (attack === 'Placaje' || attack === 'Arañazo' || attack === 'Impactrueno') {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
         console.log(this.enemyPokemonLife)
       }
 
-      if (attack === 'Pistola agua') {
+      if (
+        attack === 'Látigo cepa' ||
+        attack === 'Ascuas' ||
+        attack === 'Pistola agua' ||
+        attack === 'Cola férrea' ||
+        attack === 'Poder pasado'
+      ) {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
+        console.log(this.enemyPokemonLife)
+      }
+
+      if (attack === 'Drenadoras') {
+        this.ownPokemonLife += 5
+        if (this.ownPokemonLife > 20) {
+          this.ownPokemonLife = 20
+        }
+        console.log(this.ownPokemonLife)
+      }
+
+      if (attack === 'Recuperación') {
+        this.ownPokemonLife += 5
+        if (this.ownPokemonLife > 40) {
+          this.ownPokemonLife = 40
+        }
+        console.log(this.ownPokemonLife)
+      }
+
+      if (
+        attack === 'Dragoaliento' ||
+        attack === 'Mordisco' ||
+        attack === 'Trueno' ||
+        attack === 'Psíquico'
+      ) {
+        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
         console.log(this.enemyPokemonLife)
       }
     },
