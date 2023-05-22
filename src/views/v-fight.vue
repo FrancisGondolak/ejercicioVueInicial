@@ -135,6 +135,7 @@ export default {
       ownPokemonPowerAttack: '',
       ownPokemonPowerDefense: '',
       enemyPokemonAttacks: [],
+      enemyPokemonChosenAttack: '',
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
@@ -212,7 +213,12 @@ export default {
         return this.ownPokemon.attacks[number]
       }
     },
-    //método para el ataque del Pokémon propio
+
+    /**
+     *
+     * MÉTODO PARA EL ATAQUE DEL POKEMON PROPIO
+     *
+     */
     ownAttack(attack) {
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
@@ -308,7 +314,108 @@ export default {
         console.log('Rival dormido')
       }
 
-      //lo último que hay que hacer aquí es lanzar la función del ataque del rival, dentro de la cual controlaremos sus ataques hacia nuestro Pokémon
+      this.enemyAttack()
+    },
+
+    /**
+     *
+     * MÉTODO PARA EL ATAQUE DEL POKEMON ENEMIGO
+     *
+     */
+    enemyAttack() {
+      //asignamos a la variable un número aleatorio del total de ataques del Pokémon enemigo
+      this.enemyPokemonChosenAttack = Math.floor(Math.random() * this.enemyPokemonAttacks.length)
+      //reasignamos a la misma variable el nombre del ataque de esa posición del array
+      this.enemyPokemonChosenAttack = this.enemyPokemonAttacks[this.enemyPokemonChosenAttack]
+
+      //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
+      if (
+        enemyPokemonChosenAttack === 'Placaje' ||
+        enemyPokemonChosenAttack === 'Arañazo' ||
+        enemyPokemonChosenAttack === 'Impactrueno'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2 - this.ownPokemonPowerDefense
+        console.log(this.ownPokemonLife)
+      }
+
+      if (
+        enemyPokemonChosenAttack === 'Látigo cepa' ||
+        enemyPokemonChosenAttack === 'Ascuas' ||
+        enemyPokemonChosenAttack === 'Pistola agua' ||
+        enemyPokemonChosenAttack === 'Cola férrea' ||
+        enemyPokemonChosenAttack === 'Poder pasado' ||
+        enemyPokemonChosenAttack === 'Confusión'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 3 - this.ownPokemonPowerDefense
+        console.log(this.ownPokemonLife)
+      }
+
+      if (enemyPokemonChosenAttack === 'Drenadoras') {
+        this.drained = true
+      }
+
+      //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
+      if (this.turnDrain === 4) {
+        this.drained = false
+        console.log('Mi Pokémon se deshizo de drenadoras')
+        this.turnDrain = 0
+      }
+      //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
+      //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
+      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
+      if (this.drained === true) {
+        this.turnDrain += 1
+        this.hpDrained = this.enemyPokemonPowerAttack / 2
+        this.ownPokemonLife -= this.hpDrained
+        console.log(this.ownPokemonLife)
+        this.enemyPokemonLife += this.hpDrained
+        if (this.enemyPokemonLife > 20) {
+          this.enemyPokemonLife = 20
+        }
+
+        console.log('Mi Pokémon está drenándose')
+      }
+
+      if (enemyPokemonChosenAttack === 'Recuperación') {
+        this.enemyPokemonLife += 5
+        if (this.enemyPokemonLife > 40) {
+          this.enemyPokemonLife = 40
+        }
+        console.log(this.enemyPokemonLife)
+      }
+
+      if (
+        enemyPokemonChosenAttack === 'Dragoaliento' ||
+        enemyPokemonChosenAttack === 'Mordisco' ||
+        enemyPokemonChosenAttack === 'Trueno' ||
+        enemyPokemonChosenAttack === 'Psíquico'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2
+        console.log(this.ownPokemonLife)
+      }
+
+      if (enemyPokemonChosenAttack === 'Cara susto' || enemyPokemonChosenAttack === 'Chirrido') {
+        this.ownPokemonPowerDefense -= 1
+      }
+
+      if (enemyPokemonChosenAttack === 'Refugio' || enemyPokemonChosenAttack === 'Encanto') {
+        this.enemyPokemonPowerDefense += 1
+      }
+      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
+      if (enemyPokemonChosenAttack === 'Somnífero') {
+        this.sleeping = true
+      }
+      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
+      if (this.turnSleeping === 3) {
+        this.sleeping = false
+        console.log('Mi Pokémon se despertó')
+        this.turnSleeping = 0
+      }
+      //si el rival está dormido, vamos sumando turnos
+      if (this.sleeping === true) {
+        this.turnSleeping += 1
+        console.log('Mi Pokémon se ha quedado dormido')
+      }
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
