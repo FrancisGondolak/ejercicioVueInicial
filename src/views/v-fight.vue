@@ -138,6 +138,7 @@ export default {
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
+      sleeping: false,
       turn: 0
     }
   },
@@ -232,7 +233,8 @@ export default {
         attack === 'Ascuas' ||
         attack === 'Pistola agua' ||
         attack === 'Cola férrea' ||
-        attack === 'Poder pasado'
+        attack === 'Poder pasado' ||
+        attack === 'Confusión'
       ) {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
         console.log(this.enemyPokemonLife)
@@ -263,6 +265,20 @@ export default {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
         console.log(this.enemyPokemonLife)
       }
+
+      if (attack === 'Cara susto' || attack === 'Chirrido') {
+        this.enemyPokemonPowerDefense -= 1
+      }
+
+      if (attack === 'Refugio' || attack === 'Encanto') {
+        this.ownPokemonPowerDefense += 1
+      }
+
+      if (attack === 'Somnífero') {
+        this.sleeping = true
+      }
+
+      //lo último que hay que hacer aquí es lanzar la función del ataque del rival, dentro de la cual controlaremos sus ataques hacia nuestro Pokémon
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
