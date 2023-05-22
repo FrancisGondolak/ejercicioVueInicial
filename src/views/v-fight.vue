@@ -139,11 +139,16 @@ export default {
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
-      sleeping: false,
-      turnSleeping: 0,
-      drained: false,
-      hpDrained: '',
-      turnDrain: 0
+      ownPokemon_sleeping: false,
+      ownPokemon_turnSleeping: 0,
+      ownPokemon_drained: false,
+      ownPokemon_hpDrained: '',
+      ownPokemon_turnDrain: 0,
+      enemyPokemon_sleeping: false,
+      enemyPokemon_turnSleeping: 0,
+      enemyPokemon_drained: false,
+      enemyPokemon_hpDrained: '',
+      enemyPokemon_turnDrain: 0
     }
   },
   computed: {
@@ -248,24 +253,24 @@ export default {
       }
 
       if (attack === 'Drenadoras') {
-        this.drained = true
+        this.enemyPokemon_drained = true
       }
 
       //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
-      if (this.turnDrain === 4) {
-        this.drained = false
+      if (this.enemyPokemon_turnDrain === 4) {
+        this.enemyPokemon_drained = false
         console.log('Rival se deshizo de drenadoras')
-        this.turnDrain = 0
+        this.enemyPokemon_turnDrain = 0
       }
       //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
       //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
       //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
-      if (this.drained === true) {
-        this.turnDrain += 1
-        this.hpDrained = this.ownPokemonPowerAttack / 2
-        this.enemyPokemonLife -= this.hpDrained
+      if (this.enemyPokemon_drained === true) {
+        this.enemyPokemon_turnDrain += 1
+        this.enemyPokemon_hpDrained = this.ownPokemonPowerAttack / 2
+        this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         console.log(this.enemyPokemonLife)
-        this.ownPokemonLife += this.hpDrained
+        this.ownPokemonLife += this.enemyPokemon_hpDrained
         if (this.ownPokemonLife > 20) {
           this.ownPokemonLife = 20
         }
@@ -300,17 +305,17 @@ export default {
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
-        this.sleeping = true
+        this.enemyPokemon_sleeping = true
       }
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
-      if (this.turnSleeping === 3) {
-        this.sleeping = false
+      if (this.enemyPokemon_turnSleeping === 3) {
+        this.enemyPokemon_sleeping = false
         console.log('Rival se despertó')
-        this.turnSleeping = 0
+        this.enemyPokemon_turnSleeping = 0
       }
       //si el rival está dormido, vamos sumando turnos
-      if (this.sleeping === true) {
-        this.turnSleeping += 1
+      if (this.enemyPokemon_sleeping === true) {
+        this.enemyPokemon_turnSleeping += 1
         console.log('Rival dormido')
       }
 
@@ -351,24 +356,21 @@ export default {
       }
 
       if (this.enemyPokemonChosenAttack === 'Drenadoras') {
-        this.drained = true
+        this.ownPokemon_drained = true
       }
 
-      //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
-      if (this.turnDrain === 4) {
-        this.drained = false
+      if (this.ownPokemon_turnDrain === 4) {
+        this.ownPokemon_drained = false
         console.log('Mi Pokémon se deshizo de drenadoras')
-        this.turnDrain = 0
+        this.ownPokemon_turnDrain = 0
       }
-      //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
-      //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
-      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
-      if (this.drained === true) {
-        this.turnDrain += 1
-        this.hpDrained = this.enemyPokemonPowerAttack / 2
-        this.ownPokemonLife -= this.hpDrained
+
+      if (this.ownPokemon_drained === true) {
+        this.ownPokemon_turnDrain += 1
+        this.ownPokemon_hpDrained = this.enemyPokemonPowerAttack / 2
+        this.ownPokemonLife -= this.ownPokemon_hpDrained
         console.log(this.ownPokemonLife)
-        this.enemyPokemonLife += this.hpDrained
+        this.enemyPokemonLife += this.ownPokemon_hpDrained
         if (this.enemyPokemonLife > 20) {
           this.enemyPokemonLife = 20
         }
@@ -407,19 +409,19 @@ export default {
       ) {
         this.enemyPokemonPowerDefense += 1
       }
-      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
+
       if (this.enemyPokemonChosenAttack === 'Somnífero') {
-        this.sleeping = true
+        this.ownPokemon_sleeping = true
       }
-      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
-      if (this.turnSleeping === 3) {
-        this.sleeping = false
+
+      if (this.ownPokemon_turnSleeping === 3) {
+        this.ownPokemon_sleeping = false
         console.log('Mi Pokémon se despertó')
-        this.turnSleeping = 0
+        this.ownPokemon_turnSleeping = 0
       }
-      //si el rival está dormido, vamos sumando turnos
-      if (this.sleeping === true) {
-        this.turnSleeping += 1
+
+      if (this.ownPokemon_sleeping === true) {
+        this.ownPokemon_turnSleeping += 1
         console.log('Mi Pokémon se ha quedado dormido')
       }
     },
