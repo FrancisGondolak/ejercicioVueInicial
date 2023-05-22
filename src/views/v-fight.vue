@@ -297,11 +297,19 @@ export default {
       }
 
       if (attack === 'Cara susto' || attack === 'Chirrido') {
-        this.enemyPokemonPowerDefense -= 1
+        if (this.enemyPokemonPowerDefense === 0) {
+          console.log('La defensa del Pokémon enemigo no puede bajar más')
+        } else {
+          this.enemyPokemonPowerDefense -= 1
+        }
       }
 
       if (attack === 'Refugio' || attack === 'Encanto') {
-        this.ownPokemonPowerDefense += 1
+        if (this.ownPokemonPowerDefense === 4) {
+          console.log('La defensa de tu Pokémon no puede subir más')
+        } else {
+          this.ownPokemonPowerDefense += 1
+        }
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
@@ -318,7 +326,7 @@ export default {
         this.enemyPokemon_turnSleeping += 1
         console.log('Rival dormido')
       }
-
+      console.log(this.ownPokemon.name + ' usó ' + attack)
       this.enemyAttack()
     },
 
@@ -400,14 +408,22 @@ export default {
         this.enemyPokemonChosenAttack === 'Cara susto' ||
         this.enemyPokemonChosenAttack === 'Chirrido'
       ) {
-        this.ownPokemonPowerDefense -= 1
+        if (this.ownPokemonPowerDefense === 0) {
+          console.log('La defensa de tu Pokémon no puede bajar más')
+        } else {
+          this.ownPokemonPowerDefense -= 1
+        }
       }
 
       if (
         this.enemyPokemonChosenAttack === 'Refugio' ||
         this.enemyPokemonChosenAttack === 'Encanto'
       ) {
-        this.enemyPokemonPowerDefense += 1
+        if (this.enemyPokemonPowerDefense === 4) {
+          console.log('La defensa del Pokémon enemigo no puede subir más')
+        } else {
+          this.enemyPokemonPowerDefense += 1
+        }
       }
 
       if (this.enemyPokemonChosenAttack === 'Somnífero') {
@@ -424,6 +440,7 @@ export default {
         this.ownPokemon_turnSleeping += 1
         console.log('Mi Pokémon se ha quedado dormido')
       }
+      console.log(this.enemyPokemon.name + ' usó ' + this.enemyPokemonChosenAttack)
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
