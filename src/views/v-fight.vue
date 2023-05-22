@@ -139,7 +139,10 @@ export default {
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
       sleeping: false,
-      turn: 0
+      turnSleeping: 0,
+      drained: false,
+      hpDrained: '',
+      turnDrain: 0
     }
   },
   computed: {
@@ -211,8 +214,6 @@ export default {
     },
     //método para el ataque del Pokémon propio
     ownAttack(attack) {
-      //controlamos los turnos con el aumento de esta variable, para ataques como Somnífero o Refugio
-      this.turn += 1
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
@@ -241,11 +242,29 @@ export default {
       }
 
       if (attack === 'Drenadoras') {
-        this.ownPokemonLife += 5
+        this.drained = true
+      }
+
+      //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
+      if (this.turnDrain === 4) {
+        this.drained = false
+        console.log('Rival se deshizo de drenadoras')
+        this.turnDrain = 0
+      }
+      //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
+      //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
+      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
+      if (this.drained === true) {
+        this.turnDrain += 1
+        this.hpDrained = this.ownPokemonPowerAttack / 2
+        this.enemyPokemonLife -= this.hpDrained
+        console.log(this.enemyPokemonLife)
+        this.ownPokemonLife += this.hpDrained
         if (this.ownPokemonLife > 20) {
           this.ownPokemonLife = 20
         }
-        console.log(this.ownPokemonLife)
+
+        console.log('Rival drenándose')
       }
 
       if (attack === 'Recuperación') {
@@ -273,9 +292,20 @@ export default {
       if (attack === 'Refugio' || attack === 'Encanto') {
         this.ownPokemonPowerDefense += 1
       }
-
+      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
         this.sleeping = true
+      }
+      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
+      if (this.turnSleeping === 3) {
+        this.sleeping = false
+        console.log('Rival se despertó')
+        this.turnSleeping = 0
+      }
+      //si el rival está dormido, vamos sumando turnos
+      if (this.sleeping === true) {
+        this.turnSleeping += 1
+        console.log('Rival dormido')
       }
 
       //lo último que hay que hacer aquí es lanzar la función del ataque del rival, dentro de la cual controlaremos sus ataques hacia nuestro Pokémon
