@@ -72,7 +72,7 @@
               </div>
 
               <!-- DIV QUE CONTIENE LOS MENSAJES DEL COMBATE -->
-              <div class="gameboyScreen__top--log">{{ logMessages }}</div>
+              <div class="gameboyScreen__top--log">{{ totalLogMessages }}</div>
             </div>
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
@@ -149,7 +149,8 @@ export default {
       enemyPokemon_drained: false,
       enemyPokemon_hpDrained: '',
       enemyPokemon_turnDrain: 0,
-      logMessages: ''
+      logMessages: '',
+      totalLogMessages: ''
     }
   },
   computed: {
@@ -227,6 +228,7 @@ export default {
      */
     ownAttack(attack) {
       this.logMessages = []
+      this.totalLogMessages = ''
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
@@ -286,15 +288,16 @@ export default {
         this.enemyPokemon_hpDrained = this.ownPokemonPowerAttack / 2
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         this.logMessages.push(
-          'Los puntos de vida del ' +
+          'El ' +
             this.enemyPokemon.name +
-            ' enemigo han bajado a ' +
-            this.enemyPokemonLife
+            ' enemigo ha perdido ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida a causa de las Drenadoras'
         )
         this.ownPokemonLife += this.enemyPokemon_hpDrained
         this.logMessages.push(
           this.ownPokemon.name +
-            'ha recuperado ' +
+            ' ha recuperado ' +
             this.enemyPokemon_hpDrained +
             ' puntos de vida gracias a las Drenadoras'
         )
@@ -420,7 +423,10 @@ export default {
         this.ownPokemon_hpDrained = this.enemyPokemonPowerAttack / 2
         this.ownPokemonLife -= this.ownPokemon_hpDrained
         this.logMessages.push(
-          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+          this.ownPokemon.name +
+            ' ha perdido ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida a causa de las Drenadoras'
         )
         this.enemyPokemonLife += this.ownPokemon_hpDrained
         this.logMessages.push(
@@ -497,6 +503,14 @@ export default {
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemon.name + ' está dormido')
       }
+
+      this.showLogMessages(this.logMessages)
+    },
+    showLogMessages(logMessages) {
+      logMessages.forEach((message) => {
+        this.totalLogMessages += message + '\n'
+      })
+      return this.totalLogMessages
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
