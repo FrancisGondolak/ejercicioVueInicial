@@ -779,6 +779,14 @@ export default {
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+}
+
+.gameboyScreen__top--logMessage {
+  font-size: 18px;
+}
+
 .gameboyScreen_down {
   height: 20%;
   width: 100%;
