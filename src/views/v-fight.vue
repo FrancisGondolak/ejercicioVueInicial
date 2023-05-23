@@ -49,23 +49,27 @@
                     <div class="enemyPokemonData__name">{{ enemyPokemonName }}</div>
                     <div class="enemyPokemonData__life">
                       <div class="enemyPokemonData__life--HPIcon">HP:</div>
-                      <div class="enemyPokemonData__life--bar"></div>
+                      <div class="enemyPokemonData__life--bar" :style="getEnemyBarWidth()"></div>
                     </div>
                   </div>
                   <div class="enemyPokemonImageBox">
-                    <img class="enemyPokemonImage" :src="showEnemyPokemon" alt="" />
+                    <img
+                      class="enemyPokemonImage"
+                      :src="showEnemyPokemon"
+                      alt="enemyPokemonImage"
+                    />
                   </div>
                 </section>
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
                 <section class="ownPokemon__zone">
                   <div class="ownPokemonImageBox">
-                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="" />
+                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="ownPokemonImage" />
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ ownPokemonName }}</div>
                     <div class="ownPokemonData__life">
                       <div class="ownPokemonData__life--HPIcon">HP:</div>
-                      <div class="ownPokemonData__life--bar"></div>
+                      <div class="ownPokemonData__life--bar" :style="getOwnBarWidth()"></div>
                     </div>
                   </div>
                 </section>
@@ -137,11 +141,13 @@ export default {
       ownPokemonName: '',
       enemyPokemonName: '',
       ownPokemonAttacks: [],
+      ownPokemonTotalLife: '',
       ownPokemonLife: '',
       ownPokemonPowerAttack: '',
       ownPokemonPowerDefense: '',
       enemyPokemonAttacks: [],
       enemyPokemonChosenAttack: '',
+      enemyPokemonTotalLife: '',
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
@@ -196,6 +202,7 @@ export default {
       this.ownPokemonName = this.ownPokemon.name.toUpperCase()
       //recogemos los atributos del Pokémon que hemos elegido para hacerlos más manejables
       this.ownPokemonAttacks = this.ownPokemon.attacks
+      this.ownPokemonTotalLife = this.ownPokemon.lifePoints
       this.ownPokemonLife = this.ownPokemon.lifePoints
       this.ownPokemonPowerAttack = this.ownPokemon.attackPoints
       this.ownPokemonPowerDefense = this.ownPokemon.defensePoints
@@ -212,6 +219,7 @@ export default {
       this.enemyPokemon = this.characters[this.enemyPokemon]
       //recogemos los atributos del Pokémon enemigo en sus variables
       this.enemyPokemonAttacks = this.enemyPokemon.attacks
+      this.enemyPokemonTotalLife = this.enemyPokemon.lifePoints
       this.enemyPokemonLife = this.enemyPokemon.lifePoints
       this.enemyPokemonPowerAttack = this.enemyPokemon.attackPoints
       this.enemyPokemonPowerDefense = this.enemyPokemon.defensePoints
@@ -367,7 +375,6 @@ export default {
         this.enemyPokemon_turnSleeping += 1
         this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo está dormido')
       }
-
       this.enemyAttack()
     },
 
@@ -506,6 +513,22 @@ export default {
       if (this.ownPokemon_sleeping === true) {
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemon.name + ' está dormido')
+      }
+    },
+    //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
+    getEnemyBarWidth() {
+      if (this.enemyPokemonLife <= 0) {
+        return 'width: 0%'
+      } else {
+        return 'width: ' + (this.enemyPokemonLife * 100) / this.enemyPokemonTotalLife + '%'
+      }
+    },
+    //método para obtener la barra de vida del Pokémon propio y pintarla en la pantalla
+    getOwnBarWidth() {
+      if (this.ownPokemonLife <= 0) {
+        return 'width: 0%'
+      } else {
+        return 'width: ' + (this.ownPokemonLife * 100) / this.ownPokemonTotalLife + '%'
       }
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
@@ -691,7 +714,7 @@ export default {
 }
 
 .enemyPokemonData__life--bar {
-  width: 100%;
+  // width: 100%;
   height: 25%;
   margin: auto 0 auto 0;
   background-color: rgb(26, 201, 26);
