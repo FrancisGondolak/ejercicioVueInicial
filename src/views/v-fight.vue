@@ -72,7 +72,13 @@
               </div>
 
               <!-- DIV QUE CONTIENE LOS MENSAJES DEL COMBATE -->
-              <div class="gameboyScreen__top--log">{{ totalLogMessages }}</div>
+              <div class="gameboyScreen__top--log">
+                <ul>
+                  <li v-for="logMessage in logMessages" :key="logMessage">
+                    <span class="gameboyScreen__top--logMessage">{{ logMessage }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
@@ -149,8 +155,7 @@ export default {
       enemyPokemon_drained: false,
       enemyPokemon_hpDrained: '',
       enemyPokemon_turnDrain: 0,
-      logMessages: '',
-      totalLogMessages: ''
+      logMessages: ''
     }
   },
   computed: {
@@ -228,7 +233,6 @@ export default {
      */
     ownAttack(attack) {
       this.logMessages = []
-      this.totalLogMessages = ''
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
@@ -503,14 +507,6 @@ export default {
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemon.name + ' está dormido')
       }
-
-      this.showLogMessages(this.logMessages)
-    },
-    showLogMessages(logMessages) {
-      logMessages.forEach((message) => {
-        this.totalLogMessages += message + '\n'
-      })
-      return this.totalLogMessages
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
