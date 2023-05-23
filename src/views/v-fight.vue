@@ -517,18 +517,48 @@ export default {
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
     getEnemyBarWidth() {
+      let lifePercentage = (this.enemyPokemonLife * 100) / this.enemyPokemonTotalLife
+      let barColor
+
+      if (lifePercentage <= 100 && lifePercentage > 50) {
+        barColor = 'rgb(26, 201, 26)'
+      }
+
+      if (lifePercentage <= 50 && lifePercentage > 15) {
+        barColor = 'rgb(231, 154, 10)'
+      }
+
+      if (lifePercentage <= 15 && lifePercentage > 0) {
+        barColor = 'rgb(233, 7, 7)'
+      }
+
       if (this.enemyPokemonLife <= 0) {
         return 'width: 0%'
       } else {
-        return 'width: ' + (this.enemyPokemonLife * 100) / this.enemyPokemonTotalLife + '%'
+        return 'width: ' + lifePercentage + '%; background-color: ' + barColor
       }
     },
     //método para obtener la barra de vida del Pokémon propio y pintarla en la pantalla
     getOwnBarWidth() {
+      let lifePercentage = (this.ownPokemonLife * 100) / this.ownPokemonTotalLife
+      let barColor
+
+      if (lifePercentage <= 100 && lifePercentage > 50) {
+        barColor = 'rgb(26, 201, 26)'
+      }
+
+      if (lifePercentage <= 50 && lifePercentage > 15) {
+        barColor = 'rgb(231, 154, 10)'
+      }
+
+      if (lifePercentage <= 15 && lifePercentage > 0) {
+        barColor = 'rgb(233, 7, 7)'
+      }
+
       if (this.ownPokemonLife <= 0) {
         return 'width: 0%'
       } else {
-        return 'width: ' + (this.ownPokemonLife * 100) / this.ownPokemonTotalLife + '%'
+        return 'width: ' + lifePercentage + '%; background-color: ' + barColor
       }
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
@@ -714,10 +744,8 @@ export default {
 }
 
 .enemyPokemonData__life--bar {
-  // width: 100%;
   height: 25%;
   margin: auto 0 auto 0;
-  background-color: rgb(26, 201, 26);
 }
 
 .enemyPokemonImageBox {
@@ -788,10 +816,8 @@ export default {
 }
 
 .ownPokemonData__life--bar {
-  width: 100%;
   height: 15%;
   margin: auto 5px 130px 0;
-  background-color: rgb(26, 201, 26);
 }
 
 .gameboyScreen__top--log {
