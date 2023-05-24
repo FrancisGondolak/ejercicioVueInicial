@@ -259,7 +259,19 @@ export default {
         }
       }
 
-      this.logMessages.push(this.ownPokemon.name + ' usó ' + attack)
+      if (this.ownPokemon_turnSleeping === 3) {
+        this.ownPokemon_sleeping = false
+        this.logMessages.push(this.ownPokemon.name + ' se despertó')
+        this.ownPokemon_turnSleeping = 0
+      }
+
+      if (this.ownPokemon_sleeping === true) {
+        attack = ''
+        this.ownPokemon_turnSleeping += 1
+        this.logMessages.push(this.ownPokemon.name + ' está dormido')
+      } else {
+        this.logMessages.push(this.ownPokemon.name + ' usó ' + attack)
+      }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (attack === 'Placaje' || attack === 'Arañazo' || attack === 'Impactrueno') {
@@ -373,17 +385,7 @@ export default {
       if (attack === 'Somnífero') {
         this.enemyPokemon_sleeping = true
       }
-      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
-      if (this.enemyPokemon_turnSleeping === 3) {
-        this.enemyPokemon_sleeping = false
-        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo se despertó')
-        this.enemyPokemon_turnSleeping = 0
-      }
-      //si el rival está dormido, vamos sumando turnos
-      if (this.enemyPokemon_sleeping === true) {
-        this.enemyPokemon_turnSleeping += 1
-        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo está dormido')
-      }
+
       this.canUseButtons = false
       //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque
       setTimeout(this.enemyAttack, 2000)
@@ -402,9 +404,22 @@ export default {
       //reasignamos a la misma variable el nombre del ataque de esa posición del array
       this.enemyPokemonChosenAttack = this.enemyPokemonAttacks[this.enemyPokemonChosenAttack]
 
-      this.logMessages.push(
-        'El ' + this.enemyPokemon.name + ' enemigo usó ' + this.enemyPokemonChosenAttack
-      )
+      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
+      if (this.enemyPokemon_turnSleeping === 3) {
+        this.enemyPokemon_sleeping = false
+        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo se despertó')
+        this.enemyPokemon_turnSleeping = 0
+      }
+      //si el rival está dormido, vamos sumando turnos
+      if (this.enemyPokemon_sleeping === true) {
+        this.enemyPokemonChosenAttack = ''
+        this.enemyPokemon_turnSleeping += 1
+        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo está dormido')
+      } else {
+        this.logMessages.push(
+          'El ' + this.enemyPokemon.name + ' enemigo usó ' + this.enemyPokemonChosenAttack
+        )
+      }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (
@@ -517,16 +532,6 @@ export default {
         this.ownPokemon_sleeping = true
       }
 
-      if (this.ownPokemon_turnSleeping === 3) {
-        this.ownPokemon_sleeping = false
-        this.logMessages.push(this.ownPokemon.name + ' se despertó')
-        this.ownPokemon_turnSleeping = 0
-      }
-
-      if (this.ownPokemon_sleeping === true) {
-        this.ownPokemon_turnSleeping += 1
-        this.logMessages.push(this.ownPokemon.name + ' está dormido')
-      }
       //tras 2 segundos desde que finaliza el ataque, se ejecutra la función setcanUseButtons para que
       //aparezcan de nuevo los botones de ataque
       setTimeout(this.setcanUseButtons, 2000)
