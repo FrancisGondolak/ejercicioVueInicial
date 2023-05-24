@@ -88,10 +88,14 @@
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ownAttack(0)">{{ chooseAttackNumber(0) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(0)">
+                    {{ chooseAttackNumber(0) }}
+                  </div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton" @click="ownAttack(1)">{{ chooseAttackNumber(1) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(1)">
+                    {{ chooseAttackNumber(1) }}
+                  </div>
                 </div>
               </div>
               <div class="gameboyScreen_down--center">
@@ -101,10 +105,14 @@
               </div>
               <div class="gameboyScreen_down--right">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ownAttack(2)">{{ chooseAttackNumber(2) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(2)">
+                    {{ chooseAttackNumber(2) }}
+                  </div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton" @click="ownAttack(3)">{{ chooseAttackNumber(3) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(3)">
+                    {{ chooseAttackNumber(3) }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,7 +169,8 @@ export default {
       enemyPokemon_drained: false,
       enemyPokemon_hpDrained: '',
       enemyPokemon_turnDrain: 0,
-      logMessages: ''
+      logMessages: '',
+      canUseButtons: true
     }
   },
   computed: {
@@ -375,7 +384,9 @@ export default {
         this.enemyPokemon_turnSleeping += 1
         this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo está dormido')
       }
-      this.enemyAttack()
+      this.canUseButtons = false
+      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque
+      setTimeout(this.enemyAttack, 2000)
     },
 
     /**
@@ -384,6 +395,8 @@ export default {
      *
      */
     enemyAttack() {
+      //limpiamos el combat log antes de lanzar el ataque del enemigo
+      this.logMessages = []
       //asignamos a la variable un número aleatorio del total de ataques del Pokémon enemigo
       this.enemyPokemonChosenAttack = Math.floor(Math.random() * this.enemyPokemonAttacks.length)
       //reasignamos a la misma variable el nombre del ataque de esa posición del array
@@ -514,6 +527,7 @@ export default {
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemon.name + ' está dormido')
       }
+      this.canUseButtons = true
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
     getEnemyBarWidth() {
