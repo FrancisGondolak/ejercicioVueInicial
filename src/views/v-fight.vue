@@ -177,13 +177,19 @@ export default {
     //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos
     ownPokemonLife() {
       if (this.ownPokemonLife <= 0) {
-        this.logMessages = this.ownPokemonName
+        this.logMessages = []
+        this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
+        this.canUseButtons = false
       }
     },
     //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos
     enemyPokemonLife() {
       if (this.enemyPokemonLife <= 0) {
-        console.log('Ganador: ' + this.ownPokemonName)
+        this.logMessages = []
+        this.logMessages.push(
+          'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
+        )
+        this.canUseButtons = false
       }
     }
   },
@@ -407,8 +413,11 @@ export default {
       }
 
       this.canUseButtons = false
-      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque
-      setTimeout(this.enemyAttack, 2000)
+      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque, siempre que su vida sea
+      // mayor a 0
+      if (this.enemyPokemonLife > 0) {
+        setTimeout(this.enemyAttack, 2000)
+      }
     },
 
     /**
@@ -556,9 +565,11 @@ export default {
         }
       }
 
-      //tras 2 segundos desde que finaliza el ataque, se ejecutra la función setcanUseButtons para que
-      //aparezcan de nuevo los botones de ataque
-      setTimeout(this.setcanUseButtons, 2000)
+      //tras 2 segundos desde que finaliza el ataque, si la vida del Pokémon propio es mayor que 0, se
+      //ejecuta la función setcanUseButtons para que aparezcan de nuevo los botones de ataque
+      if (this.ownPokemonLife > 0) {
+        setTimeout(this.setcanUseButtons, 2000)
+      }
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
     getEnemyBarWidth() {
