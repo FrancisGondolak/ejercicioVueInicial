@@ -527,7 +527,9 @@ export default {
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemon.name + ' está dormido')
       }
-      this.canUseButtons = true
+      //tras 2 segundos desde que finaliza el ataque, se ejecutra la función setcanUseButtons para que
+      //aparezcan de nuevo los botones de ataque
+      setTimeout(this.setcanUseButtons, 2000)
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
     getEnemyBarWidth() {
@@ -554,7 +556,7 @@ export default {
           lifePercentage +
           '%; background-color: ' +
           barColor +
-          ';transition: width 1s linear;'
+          ';transition: width 0.5s linear;'
         )
       }
     },
@@ -583,9 +585,13 @@ export default {
           lifePercentage +
           '%; background-color: ' +
           barColor +
-          ';transition: width 1s linear;'
+          ';transition: width 0.5s linear;'
         )
       }
+    },
+    //método para cambiar el valor de canUseButtons a true
+    setcanUseButtons() {
+      this.canUseButtons = true
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
