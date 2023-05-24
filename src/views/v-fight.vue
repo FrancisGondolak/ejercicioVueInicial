@@ -535,7 +535,13 @@ export default {
       if (this.enemyPokemonLife <= 0) {
         return 'width: 0%'
       } else {
-        return 'width: ' + lifePercentage + '%; background-color: ' + barColor
+        return (
+          'width: ' +
+          lifePercentage +
+          '%; background-color: ' +
+          barColor +
+          ';transition: width 1s linear;'
+        )
       }
     },
     //método para obtener la barra de vida del Pokémon propio y pintarla en la pantalla
@@ -558,7 +564,13 @@ export default {
       if (this.ownPokemonLife <= 0) {
         return 'width: 0%'
       } else {
-        return 'width: ' + lifePercentage + '%; background-color: ' + barColor
+        return (
+          'width: ' +
+          lifePercentage +
+          '%; background-color: ' +
+          barColor +
+          ';transition: width 1s linear;'
+        )
       }
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
@@ -722,8 +734,10 @@ export default {
 
 .enemyPokemonData__name {
   height: 30%;
-  font-size: 50px;
+  font-size: 40px;
+  padding-top: 5px;
   padding-left: 10px;
+  font-family: 'pokemon';
   // border: 5px solid green;
 }
 
@@ -791,11 +805,13 @@ export default {
 
 .ownPokemonData__name {
   height: 30%;
-  font-size: 55px;
+  font-size: 40px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  padding-top: 5px;
   padding-right: 10px;
+  font-family: 'pokemon';
   // border: 5px solid green;
 }
 
@@ -833,7 +849,8 @@ ul {
 }
 
 .gameboyScreen__top--logMessage {
-  font-size: 18px;
+  font-size: 20px;
+  font-family: 'pokemon';
 }
 
 .gameboyScreen_down {
