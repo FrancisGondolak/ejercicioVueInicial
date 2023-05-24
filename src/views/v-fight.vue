@@ -173,6 +173,20 @@ export default {
       canUseButtons: true
     }
   },
+  watch: {
+    //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos
+    ownPokemonLife() {
+      if (this.ownPokemonLife <= 0) {
+        console.log('Ganador: ' + this.enemyPokemonName)
+      }
+    },
+    //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos
+    enemyPokemonLife() {
+      if (this.enemyPokemonLife <= 0) {
+        console.log('Ganador: ' + this.ownPokemonName)
+      }
+    }
+  },
   computed: {
     //computada para recargar el valor de enemyPokemon cuando lo encuentra undefined al cargar el DOM
     showEnemyPokemon() {
@@ -258,13 +272,15 @@ export default {
           attack = this.ownPokemonAttacks[i]
         }
       }
-
+      //cuando el Pokémon lleva 3 turnos dormidos, se despierta y reseteamos el contador a 0
       if (this.ownPokemon_turnSleeping === 3) {
         this.ownPokemon_sleeping = false
         this.logMessages.push(this.ownPokemon.name + ' se despertó')
         this.ownPokemon_turnSleeping = 0
       }
-
+      //si el Pokémon está dormido, attack va a ser vacío para evitar que ataque mientras esté dormido. Si
+      //no está dormido, agregaremos al log el mensaje del ataque que usa y seguiremos la lógica de dicho
+      //ataque en su if correspondiente
       if (this.ownPokemon_sleeping === true) {
         attack = ''
         this.ownPokemon_turnSleeping += 1
@@ -383,7 +399,11 @@ export default {
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
-        this.enemyPokemon_sleeping = true
+        if (this.enemyPokemon_sleeping === true) {
+          this.logMessages.push('El ' + this.enemyPokemon.name + ' ya está dormido')
+        } else {
+          this.enemyPokemon_sleeping = true
+        }
       }
 
       this.canUseButtons = false
@@ -410,7 +430,7 @@ export default {
         this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo se despertó')
         this.enemyPokemon_turnSleeping = 0
       }
-      //si el rival está dormido, vamos sumando turnos
+      //si el rival está dormido, vamos sumando turnos y no puede atacar
       if (this.enemyPokemon_sleeping === true) {
         this.enemyPokemonChosenAttack = ''
         this.enemyPokemon_turnSleeping += 1
@@ -453,7 +473,7 @@ export default {
 
       if (this.ownPokemon_turnDrain === 4) {
         this.ownPokemon_drained = false
-        this.logMessages.push(this.ownPokemon.name + 'se deshizo de las Drenadoras')
+        this.logMessages.push(this.ownPokemon.name + ' se deshizo de las Drenadoras')
         this.ownPokemon_turnDrain = 0
       }
 
@@ -529,7 +549,11 @@ export default {
       }
 
       if (this.enemyPokemonChosenAttack === 'Somnífero') {
-        this.ownPokemon_sleeping = true
+        if (this.ownPokemon_sleeping === true) {
+          this.logMessages.push(this.ownPokemon.name + ' ya está dormido')
+        } else {
+          this.ownPokemon_sleeping = true
+        }
       }
 
       //tras 2 segundos desde que finaliza el ataque, se ejecutra la función setcanUseButtons para que
