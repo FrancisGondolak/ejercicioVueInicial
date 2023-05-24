@@ -322,9 +322,14 @@ export default {
             this.enemyPokemonLife
         )
       }
-
+      //si elegimos Drenadoras pero el enemigo ya está infectado, perderemos el turno y nos saldrá
+      //un aviso de que ya está infectado, evitando que las "recarguemos" desde 0
       if (attack === 'Drenadoras') {
-        this.enemyPokemon_drained = true
+        if (this.enemyPokemon_drained === true) {
+          this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está infectado')
+        } else {
+          this.enemyPokemon_drained = true
+        }
       }
 
       //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
@@ -477,7 +482,11 @@ export default {
       }
 
       if (this.enemyPokemonChosenAttack === 'Drenadoras') {
-        this.ownPokemon_drained = true
+        if (this.ownPokemon_drained === true) {
+          this.logMessages.push(this.ownPokemonName + ' ya está infectado')
+        } else {
+          this.ownPokemon_drained = true
+        }
       }
 
       if (this.ownPokemon_turnDrain === 4) {
