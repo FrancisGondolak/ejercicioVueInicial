@@ -177,7 +177,7 @@ export default {
     //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos
     ownPokemonLife() {
       if (this.ownPokemonLife <= 0) {
-        console.log('Ganador: ' + this.enemyPokemonName)
+        this.logMessages = this.ownPokemonName
       }
     },
     //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos
@@ -275,7 +275,7 @@ export default {
       //cuando el Pokémon lleva 3 turnos dormidos, se despierta y reseteamos el contador a 0
       if (this.ownPokemon_turnSleeping === 3) {
         this.ownPokemon_sleeping = false
-        this.logMessages.push(this.ownPokemon.name + ' se despertó')
+        this.logMessages.push(this.ownPokemonName + ' se despertó')
         this.ownPokemon_turnSleeping = 0
       }
       //si el Pokémon está dormido, attack va a ser vacío para evitar que ataque mientras esté dormido. Si
@@ -284,9 +284,9 @@ export default {
       if (this.ownPokemon_sleeping === true) {
         attack = ''
         this.ownPokemon_turnSleeping += 1
-        this.logMessages.push(this.ownPokemon.name + ' está dormido')
+        this.logMessages.push(this.ownPokemonName + ' está dormido')
       } else {
-        this.logMessages.push(this.ownPokemon.name + ' usó ' + attack)
+        this.logMessages.push(this.ownPokemonName + ' usó ' + attack)
       }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
@@ -294,7 +294,7 @@ export default {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
         this.logMessages.push(
           'Los puntos de vida del ' +
-            this.enemyPokemon.name +
+            this.enemyPokemonName +
             ' enemigo han bajado a ' +
             this.enemyPokemonLife
         )
@@ -311,7 +311,7 @@ export default {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
         this.logMessages.push(
           'Los puntos de vida del ' +
-            this.enemyPokemon.name +
+            this.enemyPokemonName +
             ' enemigo han bajado a ' +
             this.enemyPokemonLife
         )
@@ -325,7 +325,7 @@ export default {
       if (this.enemyPokemon_turnDrain === 4) {
         this.enemyPokemon_drained = false
         this.logMessages.push(
-          'El ' + this.enemyPokemon.name + ' enemigo se deshizo de las Drenadoras'
+          'El ' + this.enemyPokemonName + ' enemigo se deshizo de las Drenadoras'
         )
         this.enemyPokemon_turnDrain = 0
       }
@@ -338,14 +338,14 @@ export default {
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         this.logMessages.push(
           'El ' +
-            this.enemyPokemon.name +
+            this.enemyPokemonName +
             ' enemigo ha perdido ' +
             this.enemyPokemon_hpDrained +
             ' puntos de vida a causa de las Drenadoras'
         )
         this.ownPokemonLife += this.enemyPokemon_hpDrained
         this.logMessages.push(
-          this.ownPokemon.name +
+          this.ownPokemonName +
             ' ha recuperado ' +
             this.enemyPokemon_hpDrained +
             ' puntos de vida gracias a las Drenadoras'
@@ -360,7 +360,7 @@ export default {
         if (this.ownPokemonLife > 40) {
           this.ownPokemonLife = 40
         }
-        this.logMessages.push(this.ownPokemon.name + ' ha recuperado 5 puntos de vida')
+        this.logMessages.push(this.ownPokemonName + ' ha recuperado 5 puntos de vida')
       }
 
       if (
@@ -372,7 +372,7 @@ export default {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
         this.logMessages.push(
           'Los puntos de vida del ' +
-            this.enemyPokemon.name +
+            this.enemyPokemonName +
             ' enemigo han bajado a ' +
             this.enemyPokemonLife
         )
@@ -381,26 +381,26 @@ export default {
       if (attack === 'Cara susto' || attack === 'Chirrido') {
         if (this.enemyPokemonPowerDefense === 0) {
           this.logMessages.push(
-            'La defensa del ' + this.enemyPokemon.name + ' enemigo no puede bajar más'
+            'La defensa del ' + this.enemyPokemonName + ' enemigo no puede bajar más'
           )
         } else {
           this.enemyPokemonPowerDefense -= 1
-          this.logMessages.push('La defensa del ' + this.enemyPokemon.name + ' enemigo bajó')
+          this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo bajó')
         }
       }
 
       if (attack === 'Refugio' || attack === 'Encanto') {
         if (this.ownPokemonPowerDefense === 4) {
-          this.logMessages.push('La defensa de ' + this.ownPokemon.name + ' no puede subir más')
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede subir más')
         } else {
           this.ownPokemonPowerDefense += 1
-          this.logMessages.push('La defensa de ' + this.ownPokemon.name + ' aumentó')
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' aumentó')
         }
       }
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
         if (this.enemyPokemon_sleeping === true) {
-          this.logMessages.push('El ' + this.enemyPokemon.name + ' ya está dormido')
+          this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está dormido')
         } else {
           this.enemyPokemon_sleeping = true
         }
@@ -427,17 +427,17 @@ export default {
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
       if (this.enemyPokemon_turnSleeping === 3) {
         this.enemyPokemon_sleeping = false
-        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo se despertó')
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo se despertó')
         this.enemyPokemon_turnSleeping = 0
       }
       //si el rival está dormido, vamos sumando turnos y no puede atacar
       if (this.enemyPokemon_sleeping === true) {
         this.enemyPokemonChosenAttack = ''
         this.enemyPokemon_turnSleeping += 1
-        this.logMessages.push('El ' + this.enemyPokemon.name + ' enemigo está dormido')
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo está dormido')
       } else {
         this.logMessages.push(
-          'El ' + this.enemyPokemon.name + ' enemigo usó ' + this.enemyPokemonChosenAttack
+          'El ' + this.enemyPokemonName + ' enemigo usó ' + this.enemyPokemonChosenAttack
         )
       }
 
@@ -449,7 +449,7 @@ export default {
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2 - this.ownPokemonPowerDefense
         this.logMessages.push(
-          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
         )
       }
 
@@ -463,7 +463,7 @@ export default {
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 3 - this.ownPokemonPowerDefense
         this.logMessages.push(
-          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
         )
       }
 
@@ -473,7 +473,7 @@ export default {
 
       if (this.ownPokemon_turnDrain === 4) {
         this.ownPokemon_drained = false
-        this.logMessages.push(this.ownPokemon.name + ' se deshizo de las Drenadoras')
+        this.logMessages.push(this.ownPokemonName + ' se deshizo de las Drenadoras')
         this.ownPokemon_turnDrain = 0
       }
 
@@ -482,7 +482,7 @@ export default {
         this.ownPokemon_hpDrained = this.enemyPokemonPowerAttack / 2
         this.ownPokemonLife -= this.ownPokemon_hpDrained
         this.logMessages.push(
-          this.ownPokemon.name +
+          this.ownPokemonName +
             ' ha perdido ' +
             this.enemyPokemon_hpDrained +
             ' puntos de vida a causa de las Drenadoras'
@@ -490,7 +490,7 @@ export default {
         this.enemyPokemonLife += this.ownPokemon_hpDrained
         this.logMessages.push(
           'El ' +
-            this.enemyPokemon.name +
+            this.enemyPokemonName +
             ' enemigo ha recuperado ' +
             this.ownPokemon_hpDrained +
             ' puntos de vida gracias a las Drenadoras'
@@ -506,7 +506,7 @@ export default {
           this.enemyPokemonLife = 40
         }
         this.logMessages.push(
-          'El ' + this.enemyPokemon.name + ' enemigo ha recuperado 5 puntos de vida'
+          'El ' + this.enemyPokemonName + ' enemigo ha recuperado 5 puntos de vida'
         )
       }
 
@@ -518,7 +518,7 @@ export default {
       ) {
         this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2
         this.logMessages.push(
-          'Los puntos de vida de ' + this.ownPokemon.name + ' han bajado a ' + this.ownPokemonLife
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
         )
       }
 
@@ -527,10 +527,10 @@ export default {
         this.enemyPokemonChosenAttack === 'Chirrido'
       ) {
         if (this.ownPokemonPowerDefense === 0) {
-          this.logMessages.push('La defensa de ' + this.ownPokemon.name + ' no puede bajar más')
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede bajar más')
         } else {
           this.ownPokemonPowerDefense -= 1
-          this.logMessages.push('La defensa de ' + this.ownPokemon.name + ' bajó')
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' bajó')
         }
       }
 
@@ -540,17 +540,17 @@ export default {
       ) {
         if (this.enemyPokemonPowerDefense === 4) {
           this.logMessages.push(
-            'La defensa del ' + this.enemyPokemon.name + ' enemigo no puede subir más'
+            'La defensa del ' + this.enemyPokemonName + ' enemigo no puede subir más'
           )
         } else {
           this.enemyPokemonPowerDefense += 1
-          this.logMessages.push('La defensa del ' + this.enemyPokemon.name + ' enemigo aumentó')
+          this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo aumentó')
         }
       }
 
       if (this.enemyPokemonChosenAttack === 'Somnífero') {
         if (this.ownPokemon_sleeping === true) {
-          this.logMessages.push(this.ownPokemon.name + ' ya está dormido')
+          this.logMessages.push(this.ownPokemonName + ' ya está dormido')
         } else {
           this.ownPokemon_sleeping = true
         }
