@@ -263,8 +263,10 @@ export default {
   height: 6%;
   margin-left: auto;
   margin-right: auto;
-  font-size: 28px;
+  margin-top: 10px;
+  font-size: 25px;
   font-weight: bold;
+  font-family: 'pokemon';
   cursor: default;
 }
 
@@ -305,6 +307,8 @@ export default {
   align-items: left;
   justify-content: space-evenly;
   margin-right: 2px;
+  font-size: 12px;
+  font-family: 'pokemon';
   cursor: default;
 }
 

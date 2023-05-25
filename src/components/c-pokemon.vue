@@ -71,9 +71,9 @@ export default {
   flex-direction: column;
   text-align: center;
   height: 6%;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: bold;
-  font-family: 'papyrus';
+  font-family: 'pokemon';
   cursor: default;
 }
 

@@ -49,39 +49,53 @@
                     <div class="enemyPokemonData__name">{{ enemyPokemonName }}</div>
                     <div class="enemyPokemonData__life">
                       <div class="enemyPokemonData__life--HPIcon">HP:</div>
-                      <div class="enemyPokemonData__life--bar"></div>
+                      <div class="enemyPokemonData__life--bar" :style="getEnemyBarWidth()"></div>
                     </div>
                   </div>
                   <div class="enemyPokemonImageBox">
-                    <img class="enemyPokemonImage" :src="showEnemyPokemon" alt="" />
+                    <img
+                      class="enemyPokemonImage"
+                      :src="showEnemyPokemon"
+                      alt="enemyPokemonImage"
+                    />
                   </div>
                 </section>
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
                 <section class="ownPokemon__zone">
                   <div class="ownPokemonImageBox">
-                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="" />
+                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="ownPokemonImage" />
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ ownPokemonName }}</div>
                     <div class="ownPokemonData__life">
                       <div class="ownPokemonData__life--HPIcon">HP:</div>
-                      <div class="ownPokemonData__life--bar"></div>
+                      <div class="ownPokemonData__life--bar" :style="getOwnBarWidth()"></div>
                     </div>
                   </div>
                 </section>
               </div>
 
               <!-- DIV QUE CONTIENE LOS MENSAJES DEL COMBATE -->
-              <div class="gameboyScreen__top--log"></div>
+              <div class="gameboyScreen__top--log">
+                <ul>
+                  <li v-for="logMessage in logMessages" :key="logMessage">
+                    <span class="gameboyScreen__top--logMessage">{{ logMessage }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- DIV QUE CONTIENE LOS BOTONES PARA ELEGIR ATAQUE-->
             <div class="gameboyScreen_down">
               <div class="gameboyScreen_down--left">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ownAttack(0)">{{ chooseAttackNumber(0) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(0)">
+                    {{ chooseAttackNumber(0) }}
+                  </div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton" @click="ownAttack(1)">{{ chooseAttackNumber(1) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(1)">
+                    {{ chooseAttackNumber(1) }}
+                  </div>
                 </div>
               </div>
               <div class="gameboyScreen_down--center">
@@ -91,10 +105,14 @@
               </div>
               <div class="gameboyScreen_down--right">
                 <div class="attackButton__topBox">
-                  <div class="attackButton" @click="ownAttack(2)">{{ chooseAttackNumber(2) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(2)">
+                    {{ chooseAttackNumber(2) }}
+                  </div>
                 </div>
                 <div class="attackButton__bottomBox">
-                  <div class="attackButton" @click="ownAttack(3)">{{ chooseAttackNumber(3) }}</div>
+                  <div class="attackButton" v-if="canUseButtons" @click="ownAttack(3)">
+                    {{ chooseAttackNumber(3) }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,13 +149,48 @@ export default {
       ownPokemonName: '',
       enemyPokemonName: '',
       ownPokemonAttacks: [],
+      ownPokemonTotalLife: '',
       ownPokemonLife: '',
       ownPokemonPowerAttack: '',
       ownPokemonPowerDefense: '',
       enemyPokemonAttacks: [],
+      enemyPokemonChosenAttack: '',
+      enemyPokemonTotalLife: '',
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
-      enemyPokemonPowerDefense: ''
+      enemyPokemonPowerDefense: '',
+      ownPokemon_sleeping: false,
+      ownPokemon_turnSleeping: 0,
+      ownPokemon_drained: false,
+      ownPokemon_hpDrained: '',
+      ownPokemon_turnDrain: 0,
+      enemyPokemon_sleeping: false,
+      enemyPokemon_turnSleeping: 0,
+      enemyPokemon_drained: false,
+      enemyPokemon_hpDrained: '',
+      enemyPokemon_turnDrain: 0,
+      logMessages: '',
+      canUseButtons: true
+    }
+  },
+  watch: {
+    //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos
+    ownPokemonLife() {
+      if (this.ownPokemonLife <= 0) {
+        this.logMessages = []
+        this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
+        this.canUseButtons = false
+      }
+    },
+    //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos
+    enemyPokemonLife() {
+      if (this.enemyPokemonLife <= 0) {
+        this.logMessages = []
+        this.logMessages.push(
+          'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
+        )
+        this.canUseButtons = false
+      }
     }
   },
   computed: {
@@ -178,6 +231,7 @@ export default {
       this.ownPokemonName = this.ownPokemon.name.toUpperCase()
       //recogemos los atributos del Pokémon que hemos elegido para hacerlos más manejables
       this.ownPokemonAttacks = this.ownPokemon.attacks
+      this.ownPokemonTotalLife = this.ownPokemon.lifePoints
       this.ownPokemonLife = this.ownPokemon.lifePoints
       this.ownPokemonPowerAttack = this.ownPokemon.attackPoints
       this.ownPokemonPowerDefense = this.ownPokemon.defensePoints
@@ -194,6 +248,7 @@ export default {
       this.enemyPokemon = this.characters[this.enemyPokemon]
       //recogemos los atributos del Pokémon enemigo en sus variables
       this.enemyPokemonAttacks = this.enemyPokemon.attacks
+      this.enemyPokemonTotalLife = this.enemyPokemon.lifePoints
       this.enemyPokemonLife = this.enemyPokemon.lifePoints
       this.enemyPokemonPowerAttack = this.enemyPokemon.attackPoints
       this.enemyPokemonPowerDefense = this.enemyPokemon.defensePoints
@@ -207,8 +262,14 @@ export default {
         return this.ownPokemon.attacks[number]
       }
     },
-    //método para el ataque del Pokémon propio
+
+    /**
+     *
+     * MÉTODO PARA EL ATAQUE DEL POKEMON PROPIO
+     *
+     */
     ownAttack(attack) {
+      this.logMessages = []
       //recorremos el array de ataques del Pokémon propio para encontrar la posición igual a la
       //que le pasamos como argumento (variable attack)
       for (let i = 0; i < this.ownPokemonAttacks.length; i++) {
@@ -217,17 +278,373 @@ export default {
           attack = this.ownPokemonAttacks[i]
         }
       }
+      //cuando el Pokémon lleva 3 turnos dormidos, se despierta y reseteamos el contador a 0
+      if (this.ownPokemon_turnSleeping === 3) {
+        this.ownPokemon_sleeping = false
+        this.logMessages.push(this.ownPokemonName + ' se despertó')
+        this.ownPokemon_turnSleeping = 0
+      }
+      //si el Pokémon está dormido, attack va a ser vacío para evitar que ataque mientras esté dormido. Si
+      //no está dormido, agregaremos al log el mensaje del ataque que usa y seguiremos la lógica de dicho
+      //ataque en su if correspondiente
+      if (this.ownPokemon_sleeping === true) {
+        attack = ''
+        this.ownPokemon_turnSleeping += 1
+        this.logMessages.push(this.ownPokemonName + ' está dormido')
+      } else {
+        this.logMessages.push(this.ownPokemonName + ' usó ' + attack)
+      }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
-      if (attack === 'Placaje') {
+      if (attack === 'Placaje' || attack === 'Arañazo' || attack === 'Impactrueno') {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
-        console.log(this.enemyPokemonLife)
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
       }
 
-      if (attack === 'Pistola agua') {
+      if (
+        attack === 'Látigo cepa' ||
+        attack === 'Ascuas' ||
+        attack === 'Pistola agua' ||
+        attack === 'Cola férrea' ||
+        attack === 'Poder pasado' ||
+        attack === 'Confusión'
+      ) {
         this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
-        console.log(this.enemyPokemonLife)
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
       }
+      //si elegimos Drenadoras pero el enemigo ya está infectado, perderemos el turno y nos saldrá
+      //un aviso de que ya está infectado, evitando que las "recarguemos" desde 0
+      if (attack === 'Drenadoras') {
+        if (this.enemyPokemon_drained === true) {
+          this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está infectado')
+        } else {
+          this.enemyPokemon_drained = true
+        }
+      }
+
+      //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
+      if (this.enemyPokemon_turnDrain === 4) {
+        this.enemyPokemon_drained = false
+        this.logMessages.push(
+          'El ' + this.enemyPokemonName + ' enemigo se deshizo de las Drenadoras'
+        )
+        this.enemyPokemon_turnDrain = 0
+      }
+      //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
+      //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
+      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
+      if (this.enemyPokemon_drained === true) {
+        this.enemyPokemon_turnDrain += 1
+        this.enemyPokemon_hpDrained = this.ownPokemonPowerAttack / 2
+        this.enemyPokemonLife -= this.enemyPokemon_hpDrained
+        this.logMessages.push(
+          'El ' +
+            this.enemyPokemonName +
+            ' enemigo ha perdido ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida a causa de las Drenadoras'
+        )
+        this.ownPokemonLife += this.enemyPokemon_hpDrained
+        this.logMessages.push(
+          this.ownPokemonName +
+            ' ha recuperado ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida gracias a las Drenadoras'
+        )
+        if (this.ownPokemonLife > 20) {
+          this.ownPokemonLife = 20
+        }
+      }
+
+      if (attack === 'Recuperación') {
+        this.ownPokemonLife += 5
+        if (this.ownPokemonLife > 40) {
+          this.ownPokemonLife = 40
+        }
+        this.logMessages.push(this.ownPokemonName + ' ha recuperado 5 puntos de vida')
+      }
+
+      if (
+        attack === 'Dragoaliento' ||
+        attack === 'Mordisco' ||
+        attack === 'Trueno' ||
+        attack === 'Psíquico'
+      ) {
+        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
+      }
+
+      if (attack === 'Cara susto' || attack === 'Chirrido') {
+        if (this.enemyPokemonPowerDefense === 0) {
+          this.logMessages.push(
+            'La defensa del ' + this.enemyPokemonName + ' enemigo no puede bajar más'
+          )
+        } else {
+          this.enemyPokemonPowerDefense -= 1
+          this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo bajó')
+        }
+      }
+
+      if (attack === 'Refugio' || attack === 'Encanto') {
+        if (this.ownPokemonPowerDefense === 4) {
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede subir más')
+        } else {
+          this.ownPokemonPowerDefense += 1
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' aumentó')
+        }
+      }
+      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
+      if (attack === 'Somnífero') {
+        if (this.enemyPokemon_sleeping === true) {
+          this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está dormido')
+        } else {
+          this.enemyPokemon_sleeping = true
+        }
+      }
+
+      this.canUseButtons = false
+      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque, siempre que su vida sea
+      // mayor a 0
+      if (this.enemyPokemonLife > 0) {
+        setTimeout(this.enemyAttack, 2000)
+      }
+    },
+
+    /**
+     *
+     * MÉTODO PARA EL ATAQUE DEL POKEMON ENEMIGO
+     *
+     */
+    enemyAttack() {
+      //limpiamos el combat log antes de lanzar el ataque del enemigo
+      this.logMessages = []
+      //asignamos a la variable un número aleatorio del total de ataques del Pokémon enemigo
+      this.enemyPokemonChosenAttack = Math.floor(Math.random() * this.enemyPokemonAttacks.length)
+      //reasignamos a la misma variable el nombre del ataque de esa posición del array
+      this.enemyPokemonChosenAttack = this.enemyPokemonAttacks[this.enemyPokemonChosenAttack]
+
+      //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
+      if (this.enemyPokemon_turnSleeping === 3) {
+        this.enemyPokemon_sleeping = false
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo se despertó')
+        this.enemyPokemon_turnSleeping = 0
+      }
+      //si el rival está dormido, vamos sumando turnos y no puede atacar
+      if (this.enemyPokemon_sleeping === true) {
+        this.enemyPokemonChosenAttack = ''
+        this.enemyPokemon_turnSleeping += 1
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo está dormido')
+      } else {
+        this.logMessages.push(
+          'El ' + this.enemyPokemonName + ' enemigo usó ' + this.enemyPokemonChosenAttack
+        )
+      }
+
+      //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
+      if (
+        this.enemyPokemonChosenAttack === 'Placaje' ||
+        this.enemyPokemonChosenAttack === 'Arañazo' ||
+        this.enemyPokemonChosenAttack === 'Impactrueno'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2 - this.ownPokemonPowerDefense
+        this.logMessages.push(
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
+        )
+      }
+
+      if (
+        this.enemyPokemonChosenAttack === 'Látigo cepa' ||
+        this.enemyPokemonChosenAttack === 'Ascuas' ||
+        this.enemyPokemonChosenAttack === 'Pistola agua' ||
+        this.enemyPokemonChosenAttack === 'Cola férrea' ||
+        this.enemyPokemonChosenAttack === 'Poder pasado' ||
+        this.enemyPokemonChosenAttack === 'Confusión'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 3 - this.ownPokemonPowerDefense
+        this.logMessages.push(
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
+        )
+      }
+
+      if (this.enemyPokemonChosenAttack === 'Drenadoras') {
+        if (this.ownPokemon_drained === true) {
+          this.logMessages.push(this.ownPokemonName + ' ya está infectado')
+        } else {
+          this.ownPokemon_drained = true
+        }
+      }
+
+      if (this.ownPokemon_turnDrain === 4) {
+        this.ownPokemon_drained = false
+        this.logMessages.push(this.ownPokemonName + ' se deshizo de las Drenadoras')
+        this.ownPokemon_turnDrain = 0
+      }
+
+      if (this.ownPokemon_drained === true) {
+        this.ownPokemon_turnDrain += 1
+        this.ownPokemon_hpDrained = this.enemyPokemonPowerAttack / 2
+        this.ownPokemonLife -= this.ownPokemon_hpDrained
+        this.logMessages.push(
+          this.ownPokemonName +
+            ' ha perdido ' +
+            this.enemyPokemon_hpDrained +
+            ' puntos de vida a causa de las Drenadoras'
+        )
+        this.enemyPokemonLife += this.ownPokemon_hpDrained
+        this.logMessages.push(
+          'El ' +
+            this.enemyPokemonName +
+            ' enemigo ha recuperado ' +
+            this.ownPokemon_hpDrained +
+            ' puntos de vida gracias a las Drenadoras'
+        )
+        if (this.enemyPokemonLife > 20) {
+          this.enemyPokemonLife = 20
+        }
+      }
+
+      if (this.enemyPokemonChosenAttack === 'Recuperación') {
+        this.enemyPokemonLife += 5
+        if (this.enemyPokemonLife > 40) {
+          this.enemyPokemonLife = 40
+        }
+        this.logMessages.push(
+          'El ' + this.enemyPokemonName + ' enemigo ha recuperado 5 puntos de vida'
+        )
+      }
+
+      if (
+        this.enemyPokemonChosenAttack === 'Dragoaliento' ||
+        this.enemyPokemonChosenAttack === 'Mordisco' ||
+        this.enemyPokemonChosenAttack === 'Trueno' ||
+        this.enemyPokemonChosenAttack === 'Psíquico'
+      ) {
+        this.ownPokemonLife -= this.enemyPokemonPowerAttack * 2
+        this.logMessages.push(
+          'Los puntos de vida de ' + this.ownPokemonName + ' han bajado a ' + this.ownPokemonLife
+        )
+      }
+
+      if (
+        this.enemyPokemonChosenAttack === 'Cara susto' ||
+        this.enemyPokemonChosenAttack === 'Chirrido'
+      ) {
+        if (this.ownPokemonPowerDefense === 0) {
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede bajar más')
+        } else {
+          this.ownPokemonPowerDefense -= 1
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' bajó')
+        }
+      }
+
+      if (
+        this.enemyPokemonChosenAttack === 'Refugio' ||
+        this.enemyPokemonChosenAttack === 'Encanto'
+      ) {
+        if (this.enemyPokemonPowerDefense === 4) {
+          this.logMessages.push(
+            'La defensa del ' + this.enemyPokemonName + ' enemigo no puede subir más'
+          )
+        } else {
+          this.enemyPokemonPowerDefense += 1
+          this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo aumentó')
+        }
+      }
+
+      if (this.enemyPokemonChosenAttack === 'Somnífero') {
+        if (this.ownPokemon_sleeping === true) {
+          this.logMessages.push(this.ownPokemonName + ' ya está dormido')
+        } else {
+          this.ownPokemon_sleeping = true
+        }
+      }
+
+      //tras 2 segundos desde que finaliza el ataque, si la vida del Pokémon propio es mayor que 0, se
+      //ejecuta la función setcanUseButtons para que aparezcan de nuevo los botones de ataque
+      if (this.ownPokemonLife > 0) {
+        setTimeout(this.setcanUseButtons, 2000)
+      }
+    },
+    //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
+    getEnemyBarWidth() {
+      //la multiplicamos por 85 para que la barra ocupe el 85% del espacio, dado que si ocupa el 100%
+      //se aplasta con la cajita de HP: y en el primer ataque no se ve que baje la vida
+      let lifePercentage = (this.enemyPokemonLife * 85) / this.enemyPokemonTotalLife
+      let barColor
+
+      if (lifePercentage <= 100 && lifePercentage > 50) {
+        barColor = 'rgb(26, 201, 26)'
+      }
+
+      if (lifePercentage <= 50 && lifePercentage > 15) {
+        barColor = 'rgb(231, 154, 10)'
+      }
+
+      if (lifePercentage <= 15 && lifePercentage > 0) {
+        barColor = 'rgb(233, 7, 7)'
+      }
+
+      if (this.enemyPokemonLife <= 0) {
+        return 'width: 0%'
+      } else {
+        return (
+          'width: ' +
+          lifePercentage +
+          '%; background-color: ' +
+          barColor +
+          ';transition: width 0.5s linear;'
+        )
+      }
+    },
+    //método para obtener la barra de vida del Pokémon propio y pintarla en la pantalla
+    getOwnBarWidth() {
+      //la multiplicamos por 85 para que la barra ocupe el 85% del espacio, dado que si ocupa el 100%
+      //se aplasta con la cajita de HP: y en el primer ataque no se ve que baje la vida
+      let lifePercentage = (this.ownPokemonLife * 85) / this.ownPokemonTotalLife
+      let barColor
+
+      if (lifePercentage <= 100 && lifePercentage > 50) {
+        barColor = 'rgb(26, 201, 26)'
+      }
+
+      if (lifePercentage <= 50 && lifePercentage > 15) {
+        barColor = 'rgb(231, 154, 10)'
+      }
+
+      if (lifePercentage <= 15 && lifePercentage > 0) {
+        barColor = 'rgb(233, 7, 7)'
+      }
+
+      if (this.ownPokemonLife <= 0) {
+        return 'width: 0%'
+      } else {
+        return (
+          'width: ' +
+          lifePercentage +
+          '%; background-color: ' +
+          barColor +
+          ';transition: width 0.5s linear;'
+        )
+      }
+    },
+    //método para cambiar el valor de canUseButtons a true
+    setcanUseButtons() {
+      this.canUseButtons = true
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
@@ -390,8 +807,10 @@ export default {
 
 .enemyPokemonData__name {
   height: 30%;
-  font-size: 50px;
+  font-size: 40px;
+  padding-top: 5px;
   padding-left: 10px;
+  font-family: 'pokemon';
   // border: 5px solid green;
 }
 
@@ -412,10 +831,8 @@ export default {
 }
 
 .enemyPokemonData__life--bar {
-  width: 100%;
   height: 25%;
   margin: auto 0 auto 0;
-  background-color: rgb(26, 201, 26);
 }
 
 .enemyPokemonImageBox {
@@ -461,11 +878,13 @@ export default {
 
 .ownPokemonData__name {
   height: 30%;
-  font-size: 55px;
+  font-size: 40px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  padding-top: 5px;
   padding-right: 10px;
+  font-family: 'pokemon';
   // border: 5px solid green;
 }
 
@@ -486,10 +905,8 @@ export default {
 }
 
 .ownPokemonData__life--bar {
-  width: 100%;
   height: 15%;
   margin: auto 5px 130px 0;
-  background-color: rgb(26, 201, 26);
 }
 
 .gameboyScreen__top--log {
@@ -498,6 +915,15 @@ export default {
   margin: 0px auto 10px auto;
   border: 5px solid rgb(0, 0, 0);
   box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+.gameboyScreen__top--logMessage {
+  font-size: 20px;
+  font-family: 'pokemon';
 }
 
 .gameboyScreen_down {
@@ -582,6 +1008,9 @@ export default {
   width: 40%;
   height: 60%;
   display: flex;
+  font-family: 'pokemon';
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
