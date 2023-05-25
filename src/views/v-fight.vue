@@ -174,23 +174,29 @@ export default {
     }
   },
   watch: {
-    //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos
+    //watch para controlar qué pasa cuando la vida del Pokémon propio llega a 0 o menos. Le ponemos un
+    //setTimeout para que espere 2 segundos antes de mostrar el mensaje de victoria o derrota
     ownPokemonLife() {
       if (this.ownPokemonLife <= 0) {
-        this.logMessages = []
-        this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
-        this.canUseButtons = false
+        setTimeout(() => {
+          this.logMessages = []
+          this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
+          this.canUseButtons = false
+        }, 2000)
       }
     },
-    //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos
+    //watch para controlar qué pasa cuando la vida del Pokémon enemigo llega a 0 o menos. Le ponemos un
+    //setTimeout para que espere 2 segundos antes de mostrar el mensaje de victoria o derrota
     enemyPokemonLife() {
-      if (this.enemyPokemonLife <= 0) {
-        this.logMessages = []
-        this.logMessages.push(
-          'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
-        )
-        this.canUseButtons = false
-      }
+      setTimeout(() => {
+        if (this.enemyPokemonLife <= 0) {
+          this.logMessages = []
+          this.logMessages.push(
+            'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
+          )
+          this.canUseButtons = false
+        }
+      }, 2000)
     }
   },
   computed: {
