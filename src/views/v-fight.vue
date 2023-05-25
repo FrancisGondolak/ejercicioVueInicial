@@ -582,7 +582,9 @@ export default {
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
     getEnemyBarWidth() {
-      let lifePercentage = (this.enemyPokemonLife * 100) / this.enemyPokemonTotalLife
+      //la multiplicamos por 85 para que la barra ocupe el 85% del espacio, dado que si ocupa el 100%
+      //se aplasta con la cajita de HP: y en el primer ataque no se ve que baje la vida
+      let lifePercentage = (this.enemyPokemonLife * 85) / this.enemyPokemonTotalLife
       let barColor
 
       if (lifePercentage <= 100 && lifePercentage > 50) {
@@ -611,7 +613,9 @@ export default {
     },
     //método para obtener la barra de vida del Pokémon propio y pintarla en la pantalla
     getOwnBarWidth() {
-      let lifePercentage = (this.ownPokemonLife * 100) / this.ownPokemonTotalLife
+      //la multiplicamos por 85 para que la barra ocupe el 85% del espacio, dado que si ocupa el 100%
+      //se aplasta con la cajita de HP: y en el primer ataque no se ve que baje la vida
+      let lifePercentage = (this.ownPokemonLife * 85) / this.ownPokemonTotalLife
       let barColor
 
       if (lifePercentage <= 100 && lifePercentage > 50) {
