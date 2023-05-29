@@ -153,12 +153,16 @@ export default {
       ownPokemonLife: '',
       ownPokemonPowerAttack: '',
       ownPokemonPowerDefense: '',
+      ownPokemonAttackModifier: 0,
+      ownPokemonDefenseModifier: 0,
       enemyPokemonAttacks: [],
       enemyPokemonChosenAttack: '',
       enemyPokemonTotalLife: '',
       enemyPokemonLife: '',
       enemyPokemonPowerAttack: '',
       enemyPokemonPowerDefense: '',
+      enemyPokemonAttackModifier: 0,
+      enemyPokemonDefenseModifier: 0,
       ownPokemon_sleeping: false,
       ownPokemon_turnSleeping: 0,
       ownPokemon_drained: false,
@@ -303,7 +307,11 @@ export default {
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
       if (attack === 'Placaje' || attack === 'Arañazo' || attack === 'Impactrueno') {
-        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
+        // this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2 - this.enemyPokemonPowerDefense
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 40) /
+          this.enemyPokemon.defensePoints /
+          50
         this.logMessages.push(
           'Los puntos de vida del ' +
             this.enemyPokemonName +
@@ -312,15 +320,12 @@ export default {
         )
       }
 
-      if (
-        attack === 'Látigo cepa' ||
-        attack === 'Ascuas' ||
-        attack === 'Pistola agua' ||
-        attack === 'Cola férrea' ||
-        attack === 'Poder pasado' ||
-        attack === 'Confusión'
-      ) {
-        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
+      if (attack === 'Látigo cepa' || attack === 'Ascuas' || attack === 'Pistola agua') {
+        // this.enemyPokemonLife -= this.ownPokemonPowerAttack * 3 - this.enemyPokemonPowerDefense
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 45) /
+          this.enemyPokemon.defensePoints /
+          50
         this.logMessages.push(
           'Los puntos de vida del ' +
             this.enemyPokemonName +
@@ -328,6 +333,46 @@ export default {
             this.enemyPokemonLife
         )
       }
+
+      if (attack === 'Cola férrea') {
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 50) /
+          this.enemyPokemon.defensePoints /
+          50
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
+      }
+
+      if (attack === 'Confusión' || attack === 'Trueno') {
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 65) /
+          this.enemyPokemon.defensePoints /
+          50
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
+      }
+
+      if (attack === 'Poder pasado') {
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 70) /
+          this.enemyPokemon.defensePoints /
+          50
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
+      }
+
       //si elegimos Drenadoras pero el enemigo ya está infectado, perderemos el turno y nos saldrá
       //un aviso de que ya está infectado, evitando que las "recarguemos" desde 0
       if (attack === 'Drenadoras') {
@@ -346,12 +391,14 @@ export default {
         )
         this.enemyPokemon_turnDrain = 0
       }
+
       //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
-      //las drenadoras otorgándoles la mitad del poder de ataque y se lo restamos cada turno mientras
-      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar el total (20)
+      //las drenadoras otorgándoles 1/8 de su vida total y se lo restamos cada turno mientras
+      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar
+      //el total (this.ownPokemonTotalLife), en cuyo caso lo igualamos
       if (this.enemyPokemon_drained === true) {
         this.enemyPokemon_turnDrain += 1
-        this.enemyPokemon_hpDrained = this.ownPokemonPowerAttack / 2
+        this.enemyPokemon_hpDrained = this.enemyPokemonTotalLife / 8
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         this.logMessages.push(
           'El ' +
@@ -367,26 +414,25 @@ export default {
             this.enemyPokemon_hpDrained +
             ' puntos de vida gracias a las Drenadoras'
         )
-        if (this.ownPokemonLife > 20) {
-          this.ownPokemonLife = 20
+        if (this.ownPokemonLife > this.ownPokemonTotalLife) {
+          this.ownPokemonLife = this.ownPokemonTotalLife
         }
       }
 
+      //con Recuperación, recuperamos 1/3 de la vida total, sin sobrepasar el límite
       if (attack === 'Recuperación') {
-        this.ownPokemonLife += 5
-        if (this.ownPokemonLife > 40) {
-          this.ownPokemonLife = 40
+        this.ownPokemonLife += this.ownPokemonTotalLife / 3
+        if (this.ownPokemonLife > this.ownPokemonTotalLife) {
+          this.ownPokemonLife = this.ownPokemonTotalLife
         }
-        this.logMessages.push(this.ownPokemonName + ' ha recuperado 5 puntos de vida')
+        this.logMessages.push(this.ownPokemonName + ' ha recuperado vida')
       }
 
-      if (
-        attack === 'Dragoaliento' ||
-        attack === 'Mordisco' ||
-        attack === 'Trueno' ||
-        attack === 'Psíquico'
-      ) {
-        this.enemyPokemonLife -= this.ownPokemonPowerAttack * 2
+      if (attack === 'Dragoaliento' || attack === 'Mordisco') {
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 60) /
+          this.enemyPokemon.defensePoints /
+          50
         this.logMessages.push(
           'Los puntos de vida del ' +
             this.enemyPokemonName +
@@ -395,25 +441,251 @@ export default {
         )
       }
 
+      if (attack === 'Psíquico') {
+        this.enemyPokemonLife -=
+          (((2 * 50) / 5 + 2) * this.ownPokemon.attackPoints * 75) /
+          this.enemyPokemon.defensePoints /
+          50
+        this.logMessages.push(
+          'Los puntos de vida del ' +
+            this.enemyPokemonName +
+            ' enemigo han bajado a ' +
+            this.enemyPokemonLife
+        )
+      }
+
+      //Cuando usamos Cara susto o Chirrido, bajamos un punto el modificador de defensa seteado a 0 según
+      //comienza el combate. Cada posibilidad va modificando el valor de su defensa entre dividendos más
+      //grandes hasta llegar a -6, momento en el que no se puede bajar más. Si el enemigo usa un ataque que
+      //aumente su defensa, se la vamos a ir restando para dejársela al valor normal antes de comenzar a
+      //afectarla negativamente por debajo de dicho valor
       if (attack === 'Cara susto' || attack === 'Chirrido') {
-        if (this.enemyPokemonPowerDefense === 0) {
+        if (this.enemyPokemonDefenseModifier === -6) {
           this.logMessages.push(
             'La defensa del ' + this.enemyPokemonName + ' enemigo no puede bajar más'
           )
         } else {
-          this.enemyPokemonPowerDefense -= 1
           this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo bajó')
+        }
+
+        if (this.enemyPokemonDefenseModifier === 6) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 7
+        }
+
+        if (this.enemyPokemonDefenseModifier === 5) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 6
+        }
+
+        if (this.enemyPokemonDefenseModifier === 4) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 5
+        }
+
+        if (this.enemyPokemonDefenseModifier === 3) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 4
+        }
+
+        if (this.enemyPokemonDefenseModifier === 2) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 3
+        }
+
+        //Aquí ya hemos regresado el modificador a 0, haciendo que el enemigo recupere su defensa total,
+        //perdiendo su aumento
+
+        if (this.enemyPokemonDefenseModifier === 1) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = this.enemyPokemonPowerDefense
+        }
+
+        //A partir de aquí le vamos bajando la defensa al enemigo con cada ataque que le asestemos
+
+        if (this.enemyPokemonDefenseModifier === 0) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 3) * 2
+        }
+
+        if (this.enemyPokemonDefenseModifier === -1) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 4) * 2
+        }
+
+        if (this.enemyPokemonDefenseModifier === -2) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 5) * 2
+        }
+
+        if (this.enemyPokemonDefenseModifier === -3) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 6) * 2
+        }
+
+        if (this.enemyPokemonDefenseModifier === -4) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 7) * 2
+        }
+
+        if (this.enemyPokemonDefenseModifier === -5) {
+          this.enemyPokemonDefenseModifier -= 1
+          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 8) * 2
         }
       }
 
-      if (attack === 'Refugio' || attack === 'Encanto') {
-        if (this.ownPokemonPowerDefense === 4) {
-          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede subir más')
+      //Encanto es igual que Cara susto o Chirrido pero afectando al ataque del enemigo en lugar de a
+      //la defensa
+      if (attack === 'Encanto') {
+        if (this.enemyPokemonAttackModifier === -6) {
+          this.logMessages.push(
+            'El ataque del ' + this.enemyPokemonName + ' enemigo no puede bajar más'
+          )
         } else {
-          this.ownPokemonPowerDefense += 1
-          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' aumentó')
+          this.logMessages.push('El ataque del ' + this.enemyPokemonName + ' enemigo bajó')
+        }
+
+        if (this.enemyPokemonAttackModifier === 6) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 7
+        }
+
+        if (this.enemyPokemonAttackModifier === 5) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 6
+        }
+
+        if (this.enemyPokemonAttackModifier === 4) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 5
+        }
+
+        if (this.enemyPokemonAttackModifier === 3) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 4
+        }
+
+        if (this.enemyPokemonAttackModifier === 2) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 3
+        }
+
+        //Aquí ya hemos regresado el modificador a 0, haciendo que el enemigo recupere su defensa total,
+        //perdiendo su aumento
+
+        if (this.enemyPokemonAttackModifier === 1) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = this.enemyPokemonPowerAttack
+        }
+
+        //A partir de aquí le vamos bajando la defensa al enemigo con cada ataque que le asestemos
+
+        if (this.enemyPokemonAttackModifier === 0) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 3) * 2
+        }
+
+        if (this.enemyPokemonAttackModifier === -1) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 4) * 2
+        }
+
+        if (this.enemyPokemonAttackModifier === -2) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 5) * 2
+        }
+
+        if (this.enemyPokemonAttackModifier === -3) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 6) * 2
+        }
+
+        if (this.enemyPokemonAttackModifier === -4) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 7) * 2
+        }
+
+        if (this.enemyPokemonAttackModifier === -5) {
+          this.enemyPokemonAttackModifier -= 1
+          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 8) * 2
         }
       }
+
+      //Refugio va a jugar con el aumento del índice de defensa del Pokemon que lo usa
+      if (attack === 'Refugio') {
+        if (this.ownPokemonDefenseModifier === 6) {
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede subir más')
+        } else {
+          this.logMessages.push('La defensa de ' + this.ownPokemonName + ' aumentó')
+        }
+
+        //si estamos con el modificador en negativo, empezamos a recuperar la defensa poco a poco
+
+        if (this.ownPokemonDefenseModifier === -6) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 7) * 2
+        }
+
+        if (this.ownPokemonDefenseModifier === -5) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 6) * 2
+        }
+
+        if (this.ownPokemonDefenseModifier === -4) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 5) * 2
+        }
+
+        if (this.ownPokemonDefenseModifier === -3) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 4) * 2
+        }
+
+        if (this.ownPokemonDefenseModifier === -2) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 3) * 2
+        }
+
+        //Aquí ya hemos regresado al modificador a 0, recuperando nuestra defensa total
+
+        if (this.ownPokemonDefenseModifier === -1) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = this.ownPokemonPowerDefense
+        }
+
+        //Aquí empezamos a aumentar la defensa
+
+        if (this.ownPokemonDefenseModifier === 0) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 3
+        }
+
+        if (this.ownPokemonDefenseModifier === 1) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 4
+        }
+
+        if (this.ownPokemonDefenseModifier === 2) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 5
+        }
+
+        if (this.ownPokemonDefenseModifier === 3) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 6
+        }
+
+        if (this.ownPokemonDefenseModifier === 4) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 7
+        }
+
+        if (this.ownPokemonDefenseModifier === 5) {
+          this.ownPokemonDefenseModifier += 1
+          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 8
+        }
+      }
+
       //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
       if (attack === 'Somnífero') {
         if (this.enemyPokemon_sleeping === true) {
