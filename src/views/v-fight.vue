@@ -923,6 +923,8 @@ export default {
   margin: 0px auto 10px auto;
   border: 5px solid rgb(0, 0, 0);
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 ul {
@@ -930,7 +932,7 @@ ul {
 }
 
 .gameboyScreen__top--logMessage {
-  font-size: 20px;
+  font-size: 0.7vw;
   font-family: 'pokemon';
 }
 
