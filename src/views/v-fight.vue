@@ -813,7 +813,7 @@ export default {
 
 .enemyPokemonData__name {
   height: 30%;
-  font-size: 40px;
+  font-size: 1.9vw;
   padding-top: 5px;
   padding-left: 10px;
   font-family: 'pokemon';
@@ -830,7 +830,7 @@ export default {
   width: 10%;
   height: 40%;
   color: rgb(206, 206, 32);
-  font-size: 35px;
+  font-size: 1.8vw;
   text-align: center;
   background-color: black;
   margin: auto 0 auto 5px;
@@ -884,35 +884,37 @@ export default {
 
 .ownPokemonData__name {
   height: 30%;
-  font-size: 40px;
+  font-size: 1.9vw;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   padding-top: 5px;
   padding-right: 10px;
+  margin-bottom: 10px;
   font-family: 'pokemon';
   // border: 5px solid green;
 }
 
 .ownPokemonData__life {
-  height: 70%;
+  height: 65%;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   // border: 5px solid blue;
 }
 
 .ownPokemonData__life--HPIcon {
   width: 10%;
-  height: 25%;
+  height: 28%;
   color: rgb(206, 206, 32);
-  font-size: 35px;
+  font-size: 1.8vw;
   text-align: center;
   background-color: black;
-  margin: auto 0 120px 0;
 }
 
 .ownPokemonData__life--bar {
   height: 15%;
-  margin: auto 5px 130px 0;
+  margin-top: 1vh;
 }
 
 .gameboyScreen__top--log {
