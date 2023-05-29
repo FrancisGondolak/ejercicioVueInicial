@@ -687,24 +687,26 @@ export default {
   width: 55%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .longStripe__red {
-  width: 97%;
+  width: 36.5vw;
   height: 15%;
-  margin: 20px 5px 5px 20px;
+  margin: 2vh 5px 0.8vh 20px;
   background-color: rgb(168, 12, 12);
 }
 
 .longStripe__blue {
-  width: 97%;
+  width: 36.5vw;
   height: 15%;
-  margin: 0px 5px 0px 20px;
+  margin: 0 5px auto 20px;
   background-color: rgb(27, 27, 170);
 }
 
 .gameboy__top--letters {
   width: auto;
+  padding-left: auto;
 }
 
 .gameboy__top--letters > p {
@@ -714,19 +716,22 @@ export default {
 
 .gameboy__top--rightStripes {
   width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .shortStripe__red {
-  width: 95%;
+  width: 14vw;
   height: 15%;
-  margin: 20px 20px 5px 5px;
+  margin: 2vh 20px 0.8vh 5px;
   background-color: rgb(168, 12, 12);
 }
 
 .shortStripe__blue {
-  width: 95%;
+  width: 14vw;
   height: 15%;
-  margin: 0px 20px 0px 5px;
+  margin: 0 20px auto 5px;
   background-color: rgb(27, 27, 170);
 }
 
