@@ -1024,6 +1024,7 @@ ul {
   height: 60%;
   display: flex;
   font-family: 'pokemon';
+  font-size: 0.7vw;
   align-items: center;
   justify-content: center;
   cursor: pointer;
