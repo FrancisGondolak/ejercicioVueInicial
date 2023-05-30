@@ -1149,7 +1149,7 @@ export default {
 
 .ownPokemonImage {
   width: 60%;
-  height: 100%;
+  height: 99%;
 }
 
 .ownPokemonData {
