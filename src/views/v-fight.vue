@@ -459,6 +459,7 @@ export default {
       //grandes hasta llegar a -6, momento en el que no se puede bajar más. Si el enemigo usa un ataque que
       //aumente su defensa, se la vamos a ir restando para dejársela al valor normal antes de comenzar a
       //afectarla negativamente por debajo de dicho valor
+
       if (attack === 'Cara susto' || attack === 'Chirrido') {
         if (this.enemyPokemonDefenseModifier === -6) {
           this.logMessages.push(
@@ -469,62 +470,30 @@ export default {
           this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo bajó')
         }
 
-        if (this.enemyPokemonDefenseModifier === 5) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 7
-        }
-
-        if (this.enemyPokemonDefenseModifier === 4) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 6
-        }
-
-        if (this.enemyPokemonDefenseModifier === 3) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 5
-        }
-
-        if (this.enemyPokemonDefenseModifier === 2) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 4
-        }
-
-        if (this.enemyPokemonDefenseModifier === 1) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 3
+        // Cuando el modificador está entre 5 y 1, aplica la siguiente fórmula para calcular la defensa
+        //del enemigo
+        if (this.enemyPokemonDefenseModifier < 6 && this.enemyPokemonDefenseModifier > 0) {
+          this.enemyPokemon.defensePoints =
+            (this.enemyPokemonPowerDefense / 2) * (this.enemyPokemonDefenseModifier + 2)
         }
 
         //Aquí ya hemos regresado el modificador a 0, haciendo que el enemigo recupere su defensa total,
         //perdiendo su aumento
-
         if (this.enemyPokemonDefenseModifier === 0) {
           this.enemyPokemon.defensePoints = this.enemyPokemonPowerDefense
         }
 
-        //A partir de aquí le vamos bajando la defensa al enemigo con cada ataque que reciba
-
-        if (this.enemyPokemonDefenseModifier === -1) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 3) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -2) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 4) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -3) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 5) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -4) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 6) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -5) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 7) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -6) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 8) * 2
+        // Cuando el modificador está entre -1 y -6, aplica la siguiente fórmula para calcular la defensa
+        //del enemigo
+        if (this.enemyPokemonDefenseModifier < 0 && this.enemyPokemonDefenseModifier > -7) {
+          this.enemyPokemon.defensePoints =
+            (this.enemyPokemonPowerDefense / (-this.enemyPokemonDefenseModifier + 2)) * 2
         }
       }
 
       //Encanto es igual que Cara susto o Chirrido pero afectando al ataque del enemigo en lugar de a
       //la defensa
+
       if (attack === 'Encanto') {
         if (this.enemyPokemonAttackModifier === -6) {
           this.logMessages.push(
@@ -535,61 +504,23 @@ export default {
           this.logMessages.push('El ataque del ' + this.enemyPokemonName + ' enemigo bajó')
         }
 
-        if (this.enemyPokemonAttackModifier === 5) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 7
+        if (this.enemyPokemonAttackModifier < 6 && this.enemyPokemonAttackModifier > 0) {
+          this.enemyPokemon.attackPoints =
+            (this.enemyPokemonPowerAttack / 2) * (this.enemyPokemonAttackModifier + 2)
         }
-
-        if (this.enemyPokemonAttackModifier === 4) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 6
-        }
-
-        if (this.enemyPokemonAttackModifier === 3) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 5
-        }
-
-        if (this.enemyPokemonAttackModifier === 2) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 4
-        }
-
-        if (this.enemyPokemonAttackModifier === 1) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 2) * 3
-        }
-
-        //Aquí ya hemos regresado el modificador a 0, haciendo que el enemigo recupere su defensa total,
-        //perdiendo su aumento
 
         if (this.enemyPokemonAttackModifier === 0) {
           this.enemyPokemon.attackPoints = this.enemyPokemonPowerAttack
         }
 
-        //A partir de aquí le vamos bajando la defensa al enemigo con cada ataque que le asestemos
-
-        if (this.enemyPokemonAttackModifier === -1) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 3) * 2
-        }
-
-        if (this.enemyPokemonAttackModifier === -2) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 4) * 2
-        }
-
-        if (this.enemyPokemonAttackModifier === -3) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 5) * 2
-        }
-
-        if (this.enemyPokemonAttackModifier === -4) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 6) * 2
-        }
-
-        if (this.enemyPokemonAttackModifier === -5) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 7) * 2
-        }
-
-        if (this.enemyPokemonAttackModifier === -6) {
-          this.enemyPokemon.attackPoints = (this.enemyPokemonPowerAttack / 8) * 2
+        if (this.enemyPokemonAttackModifier < 0 && this.enemyPokemonAttackModifier > -7) {
+          this.enemyPokemon.attackPoints =
+            (this.enemyPokemonPowerAttack / (-this.enemyPokemonAttackModifier + 2)) * 2
         }
       }
 
       //Refugio va a jugar con el aumento del índice de defensa del Pokemon que lo usa
+
       if (attack === 'Refugio') {
         if (this.ownPokemonDefenseModifier === 6) {
           this.logMessages.push('La defensa de ' + this.ownPokemonName + ' no puede subir más')
@@ -599,57 +530,20 @@ export default {
         }
 
         //si estamos con el modificador en negativo, empezamos a recuperar la defensa poco a poco
-
-        if (this.ownPokemonDefenseModifier === -5) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 7) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -4) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 6) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -3) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 5) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -2) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 4) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -1) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 3) * 2
+        if (this.ownPokemonDefenseModifier < 0 && this.ownPokemonDefenseModifier > -6) {
+          this.ownPokemon.defensePoints =
+            (this.ownPokemonPowerDefense / (-this.ownPokemonDefenseModifier + 2)) * 2
         }
 
         //Aquí ya hemos regresado al modificador a 0, recuperando nuestra defensa total
-
         if (this.ownPokemonDefenseModifier === 0) {
           this.ownPokemon.defensePoints = this.ownPokemonPowerDefense
         }
 
         //Aquí empezamos a aumentar la defensa
-
-        if (this.ownPokemonDefenseModifier === 1) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 3
-        }
-
-        if (this.ownPokemonDefenseModifier === 2) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 4
-        }
-
-        if (this.ownPokemonDefenseModifier === 3) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 5
-        }
-
-        if (this.ownPokemonDefenseModifier === 4) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 6
-        }
-
-        if (this.ownPokemonDefenseModifier === 5) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 7
-        }
-
-        if (this.ownPokemonDefenseModifier === 6) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 8
+        if (this.ownPokemonDefenseModifier < 7 && this.ownPokemonDefenseModifier > 0) {
+          this.ownPokemon.defensePoints =
+            (this.ownPokemonPowerDefense / 2) * (this.ownPokemonDefenseModifier + 2)
         }
       }
 
@@ -842,52 +736,18 @@ export default {
           this.logMessages.push('La defensa de ' + this.ownPokemonName + ' bajó')
         }
 
-        if (this.ownPokemonDefenseModifier === 5) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 7
-        }
-
-        if (this.ownPokemonDefenseModifier === 4) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 6
-        }
-
-        if (this.ownPokemonDefenseModifier === 3) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 5
-        }
-
-        if (this.ownPokemonDefenseModifier === 2) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 4
-        }
-
-        if (this.ownPokemonDefenseModifier === 1) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 2) * 3
+        if (this.ownPokemonDefenseModifier < 6 && this.ownPokemonDefenseModifier > 0) {
+          this.ownPokemon.defensePoints =
+            (this.ownPokemonPowerDefense / 2) * (this.ownPokemonDefenseModifier + 2)
         }
 
         if (this.ownPokemonDefenseModifier === 0) {
           this.ownPokemon.defensePoints = this.ownPokemonPowerDefense
         }
 
-        if (this.ownPokemonDefenseModifier === -1) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 3) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -2) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 4) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -3) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 5) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -4) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 6) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -5) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 7) * 2
-        }
-
-        if (this.ownPokemonDefenseModifier === -6) {
-          this.ownPokemon.defensePoints = (this.ownPokemonPowerDefense / 8) * 2
+        if (this.ownPokemonDefenseModifier < 0 && this.ownPokemonDefenseModifier > -7) {
+          this.ownPokemon.defensePoints =
+            (this.ownPokemonPowerDefense / (-this.ownPokemonDefenseModifier + 2)) * 2
         }
       }
 
@@ -899,52 +759,18 @@ export default {
           this.logMessages.push('El ataque de ' + this.ownPokemonName + ' bajó')
         }
 
-        if (this.ownPokemonAttackModifier === 5) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 2) * 7
-        }
-
-        if (this.ownPokemonAttackModifier === 4) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 2) * 6
-        }
-
-        if (this.ownPokemonAttackModifier === 3) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 2) * 5
-        }
-
-        if (this.ownPokemonAttackModifier === 2) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 2) * 4
-        }
-
-        if (this.ownPokemonAttackModifier === 1) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 2) * 3
+        if (this.ownPokemonAttackModifier < 6 && this.ownPokemonAttackModifier > 0) {
+          this.ownPokemon.attackPoints =
+            (this.ownPokemonPowerAttack / 2) * (this.ownPokemonAttackModifier + 2)
         }
 
         if (this.ownPokemonAttackModifier === 0) {
           this.ownPokemon.attackPoints = this.ownPokemonPowerAttack
         }
 
-        if (this.ownPokemonAttackModifier === -1) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 3) * 2
-        }
-
-        if (this.ownPokemonAttackModifier === -2) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 4) * 2
-        }
-
-        if (this.ownPokemonAttackModifier === -3) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 5) * 2
-        }
-
-        if (this.ownPokemonAttackModifier === -4) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 6) * 2
-        }
-
-        if (this.ownPokemonAttackModifier === -5) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 7) * 2
-        }
-
-        if (this.ownPokemonAttackModifier === -6) {
-          this.ownPokemon.attackPoints = (this.ownPokemonPowerAttack / 8) * 2
+        if (this.ownPokemonAttackModifier < 0 && this.ownPokemonAttackModifier > -7) {
+          this.ownPokemon.attackPoints =
+            (this.ownPokemonPowerAttack / (-this.ownPokemonAttackModifier + 2)) * 2
         }
       }
 
@@ -958,52 +784,18 @@ export default {
           this.logMessages.push('La defensa del ' + this.enemyPokemonName + ' enemigo aumentó')
         }
 
-        if (this.enemyPokemonDefenseModifier === -5) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 7) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -4) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 6) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -3) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 5) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -2) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 4) * 2
-        }
-
-        if (this.enemyPokemonDefenseModifier === -1) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 3) * 2
+        if (this.enemyPokemonDefenseModifier < 0 && this.enemyPokemonDefenseModifier > -6) {
+          this.enemyPokemon.defensePoints =
+            (this.enemyPokemonPowerDefense / (-this.enemyPokemonDefenseModifier + 2)) * 2
         }
 
         if (this.enemyPokemonDefenseModifier === 0) {
           this.enemyPokemon.defensePoints = this.enemyPokemonPowerDefense
         }
 
-        if (this.enemyPokemonDefenseModifier === 1) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 3
-        }
-
-        if (this.enemyPokemonDefenseModifier === 2) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 4
-        }
-
-        if (this.enemyPokemonDefenseModifier === 3) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 5
-        }
-
-        if (this.enemyPokemonDefenseModifier === 4) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 6
-        }
-
-        if (this.enemyPokemonDefenseModifier === 5) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 7
-        }
-
-        if (this.enemyPokemonDefenseModifier === 6) {
-          this.enemyPokemon.defensePoints = (this.enemyPokemonPowerDefense / 2) * 8
+        if (this.enemyPokemonDefenseModifier < 7 && this.enemyPokemonDefenseModifier > 0) {
+          this.enemyPokemon.defensePoints =
+            (this.enemyPokemonPowerDefense / 2) * (this.enemyPokemonDefenseModifier + 2)
         }
       }
 
