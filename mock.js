@@ -63,9 +63,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Placaje, Gruñido, Látigo cepa, Desarrollo, Drenadoras, Hoja afilada, Polvo veneno, Somnífero, Bomba germen, Derribo, Dulce aroma, Síntesis, Abatidoras, Doble filo, Rayo solar',
       attacks: ['Placaje', 'Látigo cepa', 'Drenadoras', 'Somnífero'],
-      lifePoints: 20,
-      attackPoints: 2,
-      defensePoints: 2
+      lifePoints: 152,
+      attackPoints: 111,
+      defensePoints: 111
     },
     {
       name: 'Charmander',
@@ -80,9 +80,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Arañazo, Gruñido, Ascuas, Pantalla de humo, Dragoaliento, Colmillo ígneo, Cuchillada, Lanzallamas, Cara susto, Giro fuego, Infierno, Envite ígneo',
       attacks: ['Arañazo', 'Ascuas', 'Dragoaliento', 'Cara susto'],
-      lifePoints: 15,
-      attackPoints: 3,
-      defensePoints: 1
+      lifePoints: 146,
+      attackPoints: 114,
+      defensePoints: 104
     },
     {
       name: 'Squirtle',
@@ -97,9 +97,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Placaje, Látigo, Pistola agua, Refugio, Giro rápido, Mordisco, Hidropulso, Protección, Danza lluvia, Acua cola, Rompecoraza, Defensa férrea, Hidrobomba, Cabezazo',
       attacks: ['Placaje', 'Pistola agua', 'Refugio', 'Mordisco'],
-      lifePoints: 25,
-      attackPoints: 2,
-      defensePoints: 3
+      lifePoints: 151,
+      attackPoints: 110,
+      defensePoints: 128
     },
     {
       name: 'Pikachu',
@@ -114,9 +114,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Moflete estático, Encanto, Beso dulce, Ataque rápido, Impactrueno, Onda trueno, Doble equipo, Bola voltio, Chispa, Cola férrea, Chispazo, Rayo, Pantalla de luz, Trueno',
       attacks: ['Impactrueno', 'Encanto', 'Cola férrea', 'Trueno'],
-      lifePoints: 30,
-      attackPoints: 3,
-      defensePoints: 2
+      lifePoints: 142,
+      attackPoints: 117,
+      defensePoints: 101
     },
     {
       name: 'Psyduck',
@@ -131,9 +131,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Arañazo, Látigo, Pistola agua, Confusión, Golpes furia, Hidropulso, Anulación, Cabezazo zen, Chirrido, Acua cola, Empapar, Autosugestión, Amnesia, Zona extraña',
       attacks: ['Arañazo', 'Pistola agua', 'Chirrido', 'Confusión'],
-      lifePoints: 30,
-      attackPoints: 2,
-      defensePoints: 3
+      lifePoints: 157,
+      attackPoints: 114,
+      defensePoints: 110
     },
     {
       name: 'Mewtwo',
@@ -149,9 +149,9 @@ app.get('/characters/getAll', (req, res) => {
       movements:
         'Confusión, Meteoros, Gota vital, Poder pasado, Psicocorte, Amnesia, Esfera aural, Psíquico, Cambiafuerza, Cambiadefensa, Neblina, Onda mental, Recuperación, Premonición',
       attacks: ['Confusión', 'Recuperación', 'Poder pasado', 'Psíquico'],
-      lifePoints: 40,
-      attackPoints: 3,
-      defensePoints: 1
+      lifePoints: 166,
+      attackPoints: 139,
+      defensePoints: 115
     }
   ]
   res.send(response)
