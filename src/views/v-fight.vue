@@ -14,6 +14,7 @@
 
     <template #gameboy>
       <div class="gameboy">
+        <audio autoplay src="src/components/assets/audio/battleMusic.mp3" />
         <section class="gameboy__top">
           <div class="gameboy__top--leftStripes">
             <div class="longStripe__red"></div>
