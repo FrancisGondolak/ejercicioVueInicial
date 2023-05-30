@@ -939,7 +939,7 @@ export default {
 <style lang="scss" scoped>
 //ESTILOS DEL ENCABEZADO DE LA PÁGINA
 .tituloCombate {
-  width: 60%;
+  width: 20vw;
 }
 
 //ESTILOS DE LA PARTE SUPERIOR DE LA GAME BOY

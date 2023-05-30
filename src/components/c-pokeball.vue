@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss">
 img {
-  width: 18%;
-  height: 100px;
+  width: 5.5vw;
+  height: 11vh;
 }
 </style>
