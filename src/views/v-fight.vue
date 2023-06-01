@@ -175,7 +175,9 @@ export default {
       enemyPokemon_turnDrain: 0,
       logMessages: '',
       canUseButtons: true,
-      battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3')
+      battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3'),
+      gameOver: new Audio('src/components/assets/audio/gameoverMusic.wav'),
+      victory: new Audio('src/components/assets/audio/victoryMusic.mp3')
     }
   },
   watch: {
@@ -185,6 +187,8 @@ export default {
       if (this.ownPokemonLife <= 0) {
         setTimeout(() => {
           this.logMessages = []
+          this.battleMusic.pause()
+          this.gameOver.play()
           this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
           this.canUseButtons = false
         }, 2000)
@@ -196,6 +200,8 @@ export default {
       setTimeout(() => {
         if (this.enemyPokemonLife <= 0) {
           this.logMessages = []
+          this.battleMusic.pause()
+          this.victory.play()
           this.logMessages.push(
             'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
           )
@@ -498,7 +504,7 @@ export default {
       //si el enemigo está afectado por las Drenadoras, espera dos segundos y lanza el método enemyDrainEffect
       if (this.enemyPokemon_drained === true) {
         setTimeout(this.enemyDrainEffect, 2000)
-      } else {
+      } else if (this.enemyPokemonLife > 0) {
         setTimeout(this.enemyAttack, 2000)
       }
     },
@@ -835,7 +841,8 @@ export default {
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
-      this.battleMusic.pause()
+      this.gameOver.pause()
+      this.victory.pause()
       this.$router.push({ name: 'list' })
     }
   },
