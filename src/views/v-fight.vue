@@ -175,7 +175,9 @@ export default {
       enemyPokemon_turnDrain: 0,
       logMessages: '',
       canUseButtons: true,
-      battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3')
+      battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3'),
+      gameOver: new Audio('src/components/assets/audio/gameoverMusic.wav'),
+      victory: new Audio('src/components/assets/audio/victoryMusic.mp3')
     }
   },
   watch: {
@@ -185,6 +187,8 @@ export default {
       if (this.ownPokemonLife <= 0) {
         setTimeout(() => {
           this.logMessages = []
+          this.battleMusic.pause()
+          this.gameOver.play()
           this.logMessages.push(this.ownPokemonName + ' se ha desmayado. Has perdido el combate')
           this.canUseButtons = false
         }, 2000)
@@ -196,6 +200,8 @@ export default {
       setTimeout(() => {
         if (this.enemyPokemonLife <= 0) {
           this.logMessages = []
+          this.battleMusic.pause()
+          this.victory.play()
           this.logMessages.push(
             'Has derrotado al ' + this.enemyPokemonName + ' enemigo. ¡¡Enhorabuena!!'
           )
@@ -493,30 +499,22 @@ export default {
         }
       }
 
+      this.canUseButtons = false
+
       //si el enemigo está afectado por las Drenadoras, espera dos segundos y lanza el método enemyDrainEffect
       if (this.enemyPokemon_drained === true) {
         setTimeout(this.enemyDrainEffect, 2000)
-      }
-
-      this.canUseButtons = false
-
-      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque, siempre que su vida sea
-      // mayor a 0. Pero si está afectado por las Drenadoras, espera 4 segundos para que de tiempo a que
-      //el método enemyDrainEffect actúe
-      if (this.enemyPokemonLife > 0) {
-        if (this.enemyPokemon_drained === true) {
-          setTimeout(this.enemyAttack, 4000)
-        } else {
-          setTimeout(this.enemyAttack, 2000)
-        }
+      } else if (this.enemyPokemonLife > 0) {
+        setTimeout(this.enemyAttack, 2000)
       }
     },
-    //Método para la actuación de las Drenadoras. Pone el combat-log vacío para solamente mostrar el mensaje
-    //del drenado. Si el enemigo lleva 4 turnos afectado por ellas, se libera y resetea el contador de estos
-    //turno a 0; si no, pierde 1/8 de vida que se suma a la vida de nuestro Pokémon sin sobrepasar
-    //el límite del máximo de vida
+    //Método para la actuación de las Drenadoras hacia el enemigo. Pone el combat-log vacío para solamente
+    //mostrar el mensaje del drenado. Si el enemigo lleva 4 turnos afectado por ellas, se libera y
+    //resetea el contador de estos turno a 0; si no, pierde 1/8 de vida que se suma a la vida de
+    // nuestro Pokémon sin sobrepasar el límite del máximo de vida
     enemyDrainEffect() {
       this.logMessages = []
+      let attackSound = new Audio('src/components/assets/audio/attacks/DrenadorasDañoSound.mp3')
       if (this.enemyPokemon_turnDrain === 4) {
         this.enemyPokemon_drained = false
         this.logMessages.push(
@@ -528,10 +526,14 @@ export default {
         this.enemyPokemon_hpDrained = this.enemyPokemonTotalLife / 8
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         this.logMessages.push('Las DRENADORAS roban vida al ' + this.enemyPokemonName + ' enemigo')
+        attackSound.play()
         this.ownPokemonLife += this.enemyPokemon_hpDrained
         if (this.ownPokemonLife > this.ownPokemonTotalLife) {
           this.ownPokemonLife = this.ownPokemonTotalLife
         }
+      }
+      if (this.enemyPokemonLife > 0) {
+        setTimeout(this.enemyAttack, 3000)
       }
     },
 
@@ -629,23 +631,6 @@ export default {
           this.logMessages.push(this.ownPokemonName + ' ya está infectado')
         } else {
           this.ownPokemon_drained = true
-        }
-      }
-
-      if (this.ownPokemon_turnDrain === 4) {
-        this.ownPokemon_drained = false
-        this.logMessages.push(this.ownPokemonName + ' se deshizo de las DRENADORAS')
-        this.ownPokemon_turnDrain = 0
-      }
-
-      if (this.ownPokemon_drained === true) {
-        this.ownPokemon_turnDrain += 1
-        this.ownPokemon_hpDrained = this.ownPokemonTotalLife / 8
-        this.ownPokemonLife -= this.ownPokemon_hpDrained
-        this.logMessages.push('Las DRENADORAS roban vida a ' + this.ownPokemonName)
-        this.enemyPokemonLife += this.ownPokemon_hpDrained
-        if (this.enemyPokemonLife > this.enemyPokemonTotalLife) {
-          this.enemyPokemonLife = this.enemyPokemonTotalLife
         }
       }
 
@@ -756,10 +741,36 @@ export default {
         }
       }
 
-      //tras 2 segundos desde que finaliza el ataque, si la vida del Pokémon propio es mayor que 0, se
-      //ejecuta la función setcanUseButtons para que aparezcan de nuevo los botones de ataque
-      if (this.ownPokemonLife > 0) {
+      //tras 2 segundos desde que finaliza el ataque, si la vida del Pokémon propio es mayor que 0 y
+      //no está perdiendo vida por las drenadoras, setea en true los botones de ataque para volver a usarlos
+      if (this.ownPokemon_drained === true) {
+        setTimeout(this.ownDrainEffect, 2000)
+      } else {
         setTimeout(this.setcanUseButtons, 2000)
+      }
+    },
+
+    //método para actúar si el Pokémon propio está afectado por las Drenadoras
+    ownDrainEffect() {
+      this.logMessages = []
+      let attackSound = new Audio('src/components/assets/audio/attacks/DrenadorasDañoSound.mp3')
+      if (this.enemyPokemon_turnDrain === 4) {
+        this.ownPokemon_drained = false
+        this.logMessages.push(this.ownPokemonName + ' se deshizo de las DRENADORAS')
+        this.ownPokemon_turnDrain = 0
+      } else {
+        this.ownPokemon_turnDrain += 1
+        this.ownPokemon_hpDrained = this.ownPokemonTotalLife / 8
+        this.ownPokemonLife -= this.ownPokemon_hpDrained
+        this.logMessages.push('Las DRENADORAS roban vida a ' + this.ownPokemonName)
+        attackSound.play()
+        this.enemyPokemonLife += this.ownPokemon_hpDrained
+        if (this.enemyPokemonLife > this.enemyPokemonTotalLife) {
+          this.enemyPokemonLife = this.enemyPokemonTotalLife
+        }
+      }
+      if (this.ownPokemonLife > 0) {
+        setTimeout(this.setcanUseButtons, 3000)
       }
     },
     //método para obtener el porcentaje de la barra de vida del Pokémon enemigo y pintarla en la pantalla
@@ -830,7 +841,8 @@ export default {
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
-      this.battleMusic.pause()
+      this.gameOver.pause()
+      this.victory.pause()
       this.$router.push({ name: 'list' })
     }
   },
