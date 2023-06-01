@@ -493,22 +493,13 @@ export default {
         }
       }
 
+      this.canUseButtons = false
+
       //si el enemigo está afectado por las Drenadoras, espera dos segundos y lanza el método enemyDrainEffect
       if (this.enemyPokemon_drained === true) {
         setTimeout(this.enemyDrainEffect, 2000)
-      }
-
-      this.canUseButtons = false
-
-      //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque, siempre que su vida sea
-      // mayor a 0. Pero si está afectado por las Drenadoras, espera 4 segundos para que de tiempo a que
-      //el método enemyDrainEffect actúe
-      if (this.enemyPokemonLife > 0) {
-        if (this.enemyPokemon_drained === true) {
-          setTimeout(this.enemyAttack, 4000)
-        } else {
-          setTimeout(this.enemyAttack, 2000)
-        }
+      } else {
+        setTimeout(this.enemyAttack, 2000)
       }
     },
     //Método para la actuación de las Drenadoras. Pone el combat-log vacío para solamente mostrar el mensaje
@@ -517,6 +508,7 @@ export default {
     //el límite del máximo de vida
     enemyDrainEffect() {
       this.logMessages = []
+      let attackSound = new Audio('src/components/assets/audio/attacks/DrenadorasDañoSound.mp3')
       if (this.enemyPokemon_turnDrain === 4) {
         this.enemyPokemon_drained = false
         this.logMessages.push(
@@ -528,10 +520,14 @@ export default {
         this.enemyPokemon_hpDrained = this.enemyPokemonTotalLife / 8
         this.enemyPokemonLife -= this.enemyPokemon_hpDrained
         this.logMessages.push('Las DRENADORAS roban vida al ' + this.enemyPokemonName + ' enemigo')
+        attackSound.play()
         this.ownPokemonLife += this.enemyPokemon_hpDrained
         if (this.ownPokemonLife > this.ownPokemonTotalLife) {
           this.ownPokemonLife = this.ownPokemonTotalLife
         }
+      }
+      if (this.enemyPokemonLife > 0) {
+        setTimeout(this.enemyAttack, 3000)
       }
     },
 
