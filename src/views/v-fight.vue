@@ -298,7 +298,7 @@ export default {
 
       //creamos la variable del sonido del ataque elegido y lo reproducimos al pulsar el botón
       let attackSound = new Audio('src/components/assets/audio/attacks/' + attack + 'Sound.mp3')
-      attackSound.play()
+
       //ponemos el nombre del ataque en mayúsculas para que salga en el combat-log así
       attack = attack.toUpperCase()
 
@@ -309,14 +309,17 @@ export default {
         this.ownPokemon_turnSleeping = 0
       }
       //si el Pokémon está dormido, attack va a ser vacío para evitar que ataque mientras esté dormido. Si
-      //no está dormido, agregaremos al log el mensaje del ataque que usa y seguiremos la lógica de dicho
-      //ataque en su if correspondiente
+      //no está dormido, agregaremos al log el mensaje del ataque que usa, reproduciremos el sonido de dicho
+      //ataque y seguiremos la lógica en su if correspondiente
       if (this.ownPokemon_sleeping === true) {
         attack = ''
         this.ownPokemon_turnSleeping += 1
         this.logMessages.push(this.ownPokemonName + ' está dormido')
+        attackSound = new Audio('src/components/assets/audio/attacks/DormidoSound.mp3')
+        attackSound.play()
       } else {
         this.logMessages.push(this.ownPokemonName + ' usó ' + attack)
+        attackSound.play()
       }
 
       //a partir de aquí toca hacer un condicional para que cada ataque cumpla su función
@@ -362,30 +365,6 @@ export default {
           this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está infectado')
         } else {
           this.enemyPokemon_drained = true
-        }
-      }
-
-      //cuando el rival lleva 4 turnos con drenadoras, se deshace de ellas y devolvemos los turnos a 0
-      if (this.enemyPokemon_turnDrain === 4) {
-        this.enemyPokemon_drained = false
-        this.logMessages.push(
-          'El ' + this.enemyPokemonName + ' enemigo se deshizo de las DRENADORAS'
-        )
-        this.enemyPokemon_turnDrain = 0
-      }
-
-      //si el rival está afectado por drenadoras, vamos sumando turnos. Calculamos la vida que le quitan
-      //las drenadoras otorgándoles 1/8 de su vida total y se lo restamos cada turno mientras
-      //le afecten. Esos mismos puntos los sumamos a nuestra vida pero sin sobrepasar
-      //el total (this.ownPokemonTotalLife), en cuyo caso lo igualamos
-      if (this.enemyPokemon_drained === true) {
-        this.enemyPokemon_turnDrain += 1
-        this.enemyPokemon_hpDrained = this.enemyPokemonTotalLife / 8
-        this.enemyPokemonLife -= this.enemyPokemon_hpDrained
-        this.logMessages.push('Las DRENADORAS roban vida al ' + this.enemyPokemonName + ' enemigo')
-        this.ownPokemonLife += this.enemyPokemon_hpDrained
-        if (this.ownPokemonLife > this.ownPokemonTotalLife) {
-          this.ownPokemonLife = this.ownPokemonTotalLife
         }
       }
 
@@ -514,11 +493,45 @@ export default {
         }
       }
 
+      //si el enemigo está afectado por las Drenadoras, espera dos segundos y lanza el método enemyDrainEffect
+      if (this.enemyPokemon_drained === true) {
+        setTimeout(this.enemyDrainEffect, 2000)
+      }
+
       this.canUseButtons = false
+
       //el setTimeout hace que espere 2 segundos antes de que el enemigo ataque, siempre que su vida sea
-      // mayor a 0
+      // mayor a 0. Pero si está afectado por las Drenadoras, espera 4 segundos para que de tiempo a que
+      //el método enemyDrainEffect actúe
       if (this.enemyPokemonLife > 0) {
-        setTimeout(this.enemyAttack, 2000)
+        if (this.enemyPokemon_drained === true) {
+          setTimeout(this.enemyAttack, 4000)
+        } else {
+          setTimeout(this.enemyAttack, 2000)
+        }
+      }
+    },
+    //Método para la actuación de las Drenadoras. Pone el combat-log vacío para solamente mostrar el mensaje
+    //del drenado. Si el enemigo lleva 4 turnos afectado por ellas, se libera y resetea el contador de estos
+    //turno a 0; si no, pierde 1/8 de vida que se suma a la vida de nuestro Pokémon sin sobrepasar
+    //el límite del máximo de vida
+    enemyDrainEffect() {
+      this.logMessages = []
+      if (this.enemyPokemon_turnDrain === 4) {
+        this.enemyPokemon_drained = false
+        this.logMessages.push(
+          'El ' + this.enemyPokemonName + ' enemigo se deshizo de las DRENADORAS'
+        )
+        this.enemyPokemon_turnDrain = 0
+      } else {
+        this.enemyPokemon_turnDrain += 1
+        this.enemyPokemon_hpDrained = this.enemyPokemonTotalLife / 8
+        this.enemyPokemonLife -= this.enemyPokemon_hpDrained
+        this.logMessages.push('Las DRENADORAS roban vida al ' + this.enemyPokemonName + ' enemigo')
+        this.ownPokemonLife += this.enemyPokemon_hpDrained
+        if (this.ownPokemonLife > this.ownPokemonTotalLife) {
+          this.ownPokemonLife = this.ownPokemonTotalLife
+        }
       }
     },
 
@@ -535,11 +548,10 @@ export default {
       //reasignamos a la misma variable el nombre del ataque de esa posición del array
       this.enemyPokemonChosenAttack = this.enemyPokemonAttacks[this.enemyPokemonChosenAttack]
 
-      //reproducimos el sonido del ataque del enemigo
+      //guardamos en una variable local el sonido del ataque del enemigo
       let attackSound = new Audio(
         'src/components/assets/audio/attacks/' + this.enemyPokemonChosenAttack + 'Sound.mp3'
       )
-      attackSound.play()
 
       //ponemos el nombre del ataque del enemigo en mayúsculas para reflejarlo así en el combat-log
       this.enemyPokemonChosenAttack = this.enemyPokemonChosenAttack.toUpperCase()
@@ -547,18 +559,21 @@ export default {
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
       if (this.enemyPokemon_turnSleeping === 3) {
         this.enemyPokemon_sleeping = false
-        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo se empalmo')
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo se despertó')
         this.enemyPokemon_turnSleeping = 0
       }
       //si el rival está dormido, vamos sumando turnos y no puede atacar
       if (this.enemyPokemon_sleeping === true) {
         this.enemyPokemonChosenAttack = ''
         this.enemyPokemon_turnSleeping += 1
-        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo está vagueando')
+        this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo está dormido')
+        attackSound = new Audio('src/components/assets/audio/attacks/DormidoSound.mp3')
+        attackSound.play()
       } else {
         this.logMessages.push(
           'El ' + this.enemyPokemonName + ' enemigo usó ' + this.enemyPokemonChosenAttack
         )
+        attackSound.play()
       }
 
       //A PARTIR DE AQUÍ TOCA HACER UN CONDICIONAL PARA CADA TIPO DE ATAQUE
