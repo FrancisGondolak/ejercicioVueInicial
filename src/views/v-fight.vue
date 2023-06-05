@@ -52,9 +52,10 @@
                       <div class="enemyPokemonData__life--bar" :style="getEnemyBarWidth()"></div>
                     </div>
                   </div>
-                  <div class="enemyPokemonImageBox">
+                  <div class="enemyPokemonImageBox" v-if="!enemyPokemonFainted">
                     <img
                       class="enemyPokemonImage"
+                      :style="getEnemyPokemonVisibility()"
                       :src="showEnemyPokemon"
                       alt="enemyPokemonImage"
                     />
@@ -63,7 +64,12 @@
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
                 <section class="ownPokemon__zone">
                   <div class="ownPokemonImageBox">
-                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="ownPokemonImage" />
+                    <img
+                      class="ownPokemonImage"
+                      :style="getOwnPokemonVisibility()"
+                      :src="showOwnPokemon"
+                      alt="ownPokemonImage"
+                    />
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ ownPokemonName }}</div>
@@ -165,18 +171,22 @@ export default {
       enemyPokemonDefenseModifier: 0,
       ownPokemon_sleeping: false,
       ownPokemon_turnSleeping: 0,
+      ownPokemon_randomSleepingNumber: '',
       ownPokemon_drained: false,
       ownPokemon_hpDrained: '',
       ownPokemon_turnDrain: 0,
+      ownPokemonFainted: false,
       enemyPokemon_sleeping: false,
       enemyPokemon_turnSleeping: 0,
+      enemyPokemon_randomSleepingNumber: '',
       enemyPokemon_drained: false,
       enemyPokemon_hpDrained: '',
       enemyPokemon_turnDrain: 0,
+      enemyPokemonFainted: false,
       logMessages: '',
       canUseButtons: true,
       battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3'),
-      gameOver: new Audio('src/components/assets/audio/gameoverMusic.wav'),
+      gameOver: new Audio('src/components/assets/audio/gameoverMusic.mp3'),
       victory: new Audio('src/components/assets/audio/victoryMusic.mp3')
     }
   },
@@ -186,6 +196,7 @@ export default {
     ownPokemonLife() {
       if (this.ownPokemonLife <= 0) {
         setTimeout(() => {
+          this.ownPokemonFainted = true
           this.logMessages = []
           this.battleMusic.pause()
           this.gameOver.play()
@@ -199,6 +210,7 @@ export default {
     enemyPokemonLife() {
       setTimeout(() => {
         if (this.enemyPokemonLife <= 0) {
+          this.enemyPokemonFainted = true
           this.logMessages = []
           this.battleMusic.pause()
           this.victory.play()
@@ -308,8 +320,9 @@ export default {
       //ponemos el nombre del ataque en mayúsculas para que salga en el combat-log así
       attack = attack.toUpperCase()
 
-      //cuando el Pokémon lleva 3 turnos dormidos, se despierta y reseteamos el contador a 0
-      if (this.ownPokemon_turnSleeping === 3) {
+      //cuando el Pokémon lleva los turnos que dicta randomSleepingNumber dormido,
+      //se despierta y reseteamos el contador a 0
+      if (this.ownPokemon_turnSleeping === this.ownPokemon_randomSleepingNumber) {
         this.ownPokemon_sleeping = false
         this.logMessages.push(this.ownPokemonName + ' se despertó')
         this.ownPokemon_turnSleeping = 0
@@ -490,12 +503,14 @@ export default {
         }
       }
 
-      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido
+      //si atacamos con Somnífero, ponemos el booleano sleeping en true, el rival está dormido. Además
+      //calculamos un número aleatorio entre 1 y 4 para ver cuantos turnos permanecerá dormido el rival
       if (attack === 'SOMNÍFERO') {
         if (this.enemyPokemon_sleeping === true) {
           this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo ya está dormido')
         } else {
           this.enemyPokemon_sleeping = true
+          this.enemyPokemon_randomSleepingNumber = Math.floor(Math.random() * 4 + 1)
         }
       }
 
@@ -559,7 +574,7 @@ export default {
       this.enemyPokemonChosenAttack = this.enemyPokemonChosenAttack.toUpperCase()
 
       //cuando el rival lleva 3 turnos dormido, se despierta y devolvemos los turnos a 0
-      if (this.enemyPokemon_turnSleeping === 3) {
+      if (this.enemyPokemon_turnSleeping === this.enemyPokemon_randomSleepingNumber) {
         this.enemyPokemon_sleeping = false
         this.logMessages.push('El ' + this.enemyPokemonName + ' enemigo se despertó')
         this.enemyPokemon_turnSleeping = 0
@@ -738,6 +753,7 @@ export default {
           this.logMessages.push(this.ownPokemonName + ' ya está dormido')
         } else {
           this.ownPokemon_sleeping = true
+          this.ownPokemon_randomSleepingNumber = Math.floor(Math.random() * 4 + 1)
         }
       }
 
@@ -835,15 +851,33 @@ export default {
         )
       }
     },
+    //si el watch sobre la vida del Pokémon propio actúa (cuando la vida llega a 0 o menos), pone en true
+    //el boolean ownPokemonFainted que se llama desde el html, en la imagen del Pokémon, haciendo que
+    //desaparezca pero siga ocupando su espacio visual para que no se descoloquen los demás elementos visuales
+    getOwnPokemonVisibility() {
+      if (this.ownPokemonFainted) {
+        return 'visibility: hidden'
+      }
+    },
+    getEnemyPokemonVisibility() {
+      if (this.enemyPokemonFainted) {
+        return 'visibility: hidden'
+      }
+    },
     //método para cambiar el valor de canUseButtons a true
     setcanUseButtons() {
       this.canUseButtons = true
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
-      this.gameOver.pause()
-      this.victory.pause()
-      this.$router.push({ name: 'list' })
+      if (this.ownPokemonFainted || this.enemyPokemonFainted) {
+        location.reload()
+      } else {
+        this.battleMusic.pause()
+        this.gameOver.pause()
+        this.victory.pause()
+        this.$router.push({ name: 'list' })
+      }
     }
   },
 
