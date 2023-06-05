@@ -52,9 +52,10 @@
                       <div class="enemyPokemonData__life--bar" :style="getEnemyBarWidth()"></div>
                     </div>
                   </div>
-                  <div class="enemyPokemonImageBox">
+                  <div class="enemyPokemonImageBox" v-if="!enemyPokemonFainted">
                     <img
                       class="enemyPokemonImage"
+                      :style="getEnemyPokemonVisibility()"
                       :src="showEnemyPokemon"
                       alt="enemyPokemonImage"
                     />
@@ -63,7 +64,12 @@
                 <!-- SECTION QUE CONTIENE LA ZONA DEL POKÉMON DEL JUGADOR -->
                 <section class="ownPokemon__zone">
                   <div class="ownPokemonImageBox">
-                    <img class="ownPokemonImage" :src="showOwnPokemon" alt="ownPokemonImage" />
+                    <img
+                      class="ownPokemonImage"
+                      :style="getOwnPokemonVisibility()"
+                      :src="showOwnPokemon"
+                      alt="ownPokemonImage"
+                    />
                   </div>
                   <div class="ownPokemonData">
                     <div class="ownPokemonData__name">{{ ownPokemonName }}</div>
@@ -169,12 +175,14 @@ export default {
       ownPokemon_drained: false,
       ownPokemon_hpDrained: '',
       ownPokemon_turnDrain: 0,
+      ownPokemonFainted: false,
       enemyPokemon_sleeping: false,
       enemyPokemon_turnSleeping: 0,
       enemyPokemon_randomSleepingNumber: '',
       enemyPokemon_drained: false,
       enemyPokemon_hpDrained: '',
       enemyPokemon_turnDrain: 0,
+      enemyPokemonFainted: false,
       logMessages: '',
       canUseButtons: true,
       battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3'),
@@ -188,6 +196,7 @@ export default {
     ownPokemonLife() {
       if (this.ownPokemonLife <= 0) {
         setTimeout(() => {
+          this.ownPokemonFainted = true
           this.logMessages = []
           this.battleMusic.pause()
           this.gameOver.play()
@@ -201,6 +210,7 @@ export default {
     enemyPokemonLife() {
       setTimeout(() => {
         if (this.enemyPokemonLife <= 0) {
+          this.enemyPokemonFainted = true
           this.logMessages = []
           this.battleMusic.pause()
           this.victory.play()
@@ -839,6 +849,19 @@ export default {
           barColor +
           ';transition: width 0.5s linear;'
         )
+      }
+    },
+    //si el watch sobre la vida del Pokémon propio actúa (cuando la vida llega a 0 o menos), pone en true
+    //el boolean ownPokemonFainted que se llama desde el html, en la imagen del Pokémon, haciendo que
+    //desaparezca pero siga ocupando su espacio visual para que no se descoloquen los demás elementos visuales
+    getOwnPokemonVisibility() {
+      if (this.ownPokemonFainted) {
+        return 'visibility: hidden'
+      }
+    },
+    getEnemyPokemonVisibility() {
+      if (this.enemyPokemonFainted) {
+        return 'visibility: hidden'
       }
     },
     //método para cambiar el valor de canUseButtons a true
