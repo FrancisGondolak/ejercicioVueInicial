@@ -186,7 +186,7 @@ export default {
       logMessages: '',
       canUseButtons: true,
       battleMusic: new Audio('src/components/assets/audio/battleMusic.mp3'),
-      gameOver: new Audio('src/components/assets/audio/gameoverMusic.wav'),
+      gameOver: new Audio('src/components/assets/audio/gameoverMusic.mp3'),
       victory: new Audio('src/components/assets/audio/victoryMusic.mp3')
     }
   },
@@ -870,9 +870,14 @@ export default {
     },
     //método para apagar la Game Boy y regresar al listado de los Pokémon
     powerOffGameboy() {
-      this.gameOver.pause()
-      this.victory.pause()
-      this.$router.push({ name: 'list' })
+      if (this.ownPokemonFainted || this.enemyPokemonFainted) {
+        location.reload()
+      } else {
+        this.battleMusic.pause()
+        this.gameOver.pause()
+        this.victory.pause()
+        this.$router.push({ name: 'list' })
+      }
     }
   },
 
